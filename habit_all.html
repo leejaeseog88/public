@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="title" content="습관의 원리 (전 7편 합본)">
+<meta name="category" content="lifestyle">
+<meta name="target" content="all">
+<meta name="hashtags" content="습관,행동변화,습관설계,아주작은습관의힘,습관의원리">
+<title>습관의 원리</title>
+<style>
+.hb, .hb * { box-sizing: border-box; }
+.hb { width: 100%; padding: 20px 16px; color: #2B2F36; font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; font-size: 1rem; line-height: 1.75; word-break: keep-all; }
+.hb p { margin: 0 0 14px; }
+.hb strong { color: #23395B; }
+
+/* 표지 */
+.hb-hero { background-color: #EEF3FA; background-image: linear-gradient(#DCE5F2 1px, transparent 1px), linear-gradient(90deg, #DCE5F2 1px, transparent 1px); background-size: 22px 22px; border: 1px solid #C9D6EA; border-radius: 14px; padding: 26px 18px 22px; margin-bottom: 28px; }
+.hb-series { display: inline-block; font-size: 0.8125rem; font-weight: 700; color: #23395B; background: #FFFFFF; border: 1px solid #23395B; border-radius: 20px; padding: 3px 12px; margin-bottom: 14px; }
+.hb-title { font-size: 1.6875rem; font-weight: 800; line-height: 1.35; color: #1C2C47; margin: 0 0 10px; letter-spacing: -0.5px; }
+.hb-sub { font-size: 0.9375rem; color: #4A5A73; margin: 0; }
+
+/* 질문 말풍선 */
+.hb-ask { background: #FFFFFF; border: 2px solid #23395B; border-radius: 16px 16px 16px 4px; padding: 16px 18px; margin: 0 0 22px; }
+.hb-ask-who { font-size: 0.8125rem; color: #6B7A90; margin-bottom: 4px; }
+.hb-ask-text { font-size: 1.125rem; font-weight: 700; color: #1C2C47; line-height: 1.5; }
+
+/* 소제목 */
+.hb-h2 { font-size: 1.3125rem; font-weight: 800; color: #1C2C47; margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 3px solid #23395B; line-height: 1.4; }
+
+/* 근거 상자 */
+.hb-research { background: #F4F6F9; border-left: 4px solid #23395B; border-radius: 0 10px 10px 0; padding: 14px 16px; margin: 0 0 18px; font-size: 0.9375rem; }
+.hb-research-label { font-size: 0.8125rem; font-weight: 700; color: #23395B; margin-bottom: 4px; }
+
+/* 1% 표 */
+.hb-compound { width: 100%; border-collapse: separate; border-spacing: 8px; margin: 0 0 6px; }
+.hb-compound td { vertical-align: middle; text-align: center; border-radius: 12px; padding: 12px 6px; }
+.hb-day { font-size: 0.8125rem; color: #6B7A90; background: transparent; }
+.hb-up { background: #E3F2EA; color: #2C6E50; }
+.hb-down { background: #F7E9E6; color: #9A4234; }
+.hb-num { font-size: 1.375rem; font-weight: 800; line-height: 1.2; }
+.hb-numbig { font-size: 1.875rem; font-weight: 900; line-height: 1.1; }
+.hb-cap { font-size: 0.75rem; margin-top: 2px; }
+.hb-note { font-size: 0.8125rem; color: #6B7A90; margin: 0 0 18px; }
+
+/* 얼음 */
+.hb-ice { width: 100%; border-collapse: separate; border-spacing: 6px; margin: 0 0 16px; }
+.hb-ice td { width: 25%; text-align: center; vertical-align: top; background: #EEF3FA; border-radius: 10px; padding: 12px 4px; }
+.hb-ice td.hb-melt { background: #23395B; color: #FFFFFF; }
+.hb-ice-emoji { font-size: 1.625rem; line-height: 1.2; margin-bottom: 4px; }
+.hb-ice-temp { font-size: 1rem; font-weight: 800; }
+.hb-ice-txt { font-size: 0.75rem; }
+
+/* 비교표 */
+.hb-vs { width: 100%; border-collapse: separate; border-spacing: 10px; margin: 0 0 16px; }
+.hb-vs td { width: 50%; vertical-align: top; border-radius: 14px; padding: 16px 14px; }
+.hb-vs-a { background: #F4F6F9; border: 1px solid #DDE2EA; }
+.hb-vs-b { background: #EEF3FA; border: 2px solid #23395B; }
+.hb-vs-emoji { font-size: 1.625rem; text-align: center; margin-bottom: 6px; }
+.hb-vs-head { font-size: 1rem; font-weight: 800; text-align: center; margin-bottom: 10px; }
+.hb-vs-a .hb-vs-head { color: #5A6578; }
+.hb-vs-b .hb-vs-head { color: #1C2C47; }
+.hb-vs-item { font-size: 0.875rem; line-height: 1.6; padding: 7px 0; border-top: 1px dashed #C9D3E1; }
+
+/* 질문 바꾸기 */
+.hb-reframe { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin: 0 0 16px; }
+.hb-reframe td { vertical-align: middle; padding: 12px 12px; font-size: 0.9375rem; }
+.hb-rf-old { background: #F7E9E6; color: #7E3A2E; border-radius: 10px 0 0 10px; width: 44%; }
+.hb-rf-arrow { background: #FFFFFF; text-align: center; width: 12%; color: #23395B; font-weight: 800; }
+.hb-rf-new { background: #E3F2EA; color: #245A42; border-radius: 0 10px 10px 0; width: 44%; font-weight: 700; }
+
+/* 마음 상자 */
+.hb-care { background: #FFFFFF; border: 1px solid #C9D6EA; border-radius: 14px; padding: 16px; margin: 0 0 18px; }
+.hb-care-emoji { font-size: 1.625rem; margin-bottom: 4px; }
+.hb-care-title { font-size: 1rem; font-weight: 800; color: #1C2C47; margin-bottom: 6px; }
+
+/* 해보기 */
+.hb-try { background: #FFF6D9; border: 1px solid #F0D98A; border-radius: 14px; padding: 18px 16px; margin: 0 0 22px; }
+.hb-try-emoji { font-size: 1.625rem; margin-bottom: 2px; }
+.hb-try-title { font-size: 1.125rem; font-weight: 800; color: #5C4A10; margin-bottom: 12px; }
+.hb-steps { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+.hb-steps td { vertical-align: top; }
+.hb-step-n { width: 38px; }
+.hb-step-dot { width: 30px; height: 30px; line-height: 30px; border-radius: 50%; background: #23395B; color: #FFFFFF; font-weight: 800; font-size: 0.9375rem; text-align: center; }
+.hb-step-q { font-size: 0.9375rem; font-weight: 700; color: #3D3210; line-height: 1.5; }
+.hb-step-ex { font-size: 0.8125rem; color: #7A6A33; margin-top: 2px; }
+.hb-step-line { border-bottom: 1px solid #D8C37A; height: 26px; margin-top: 4px; }
+
+/* 요약 */
+.hb-sum { background: #23395B; color: #FFFFFF; border-radius: 14px; padding: 20px 18px; margin: 0 0 18px; text-align: center; }
+.hb-sum-label { font-size: 0.8125rem; color: #B9C8E0; margin-bottom: 6px; }
+.hb-sum-text { font-size: 1.1875rem; font-weight: 800; line-height: 1.55; }
+
+/* 다음 편 */
+.hb-next { border: 1px dashed #8FA3C2; border-radius: 12px; padding: 14px 16px; margin: 0 0 26px; font-size: 0.9375rem; }
+.hb-next-label { font-size: 0.8125rem; color: #6B7A90; margin-bottom: 2px; }
+.hb-next-title { font-weight: 800; color: #1C2C47; }
+
+/* 참고문헌 */
+.hb-ref { border-top: 1px solid #DDE2EA; padding-top: 12px; }
+.hb-ref summary { cursor: pointer; font-size: 0.875rem; font-weight: 700; color: #4A5A73; padding: 8px 0; }
+.hb-ref ol { margin: 8px 0 0; padding-left: 20px; font-size: 0.8125rem; color: #5A6578; line-height: 1.65; }
+.hb-ref li { margin-bottom: 8px; }
+.hb-ref-note { font-size: 0.75rem; color: #8A95A6; margin-top: 10px; }
+
+/* 2편: 세 층위 동심원 */
+.hb-ring1 { background: #F4F6F9; border: 1px solid #C9D3E1; border-radius: 22px; padding: 14px 12px 12px; margin: 0 0 8px; text-align: center; }
+.hb-ring2 { background: #DCE6F3; border: 1px solid #A9BCD8; border-radius: 18px; padding: 12px 12px 12px; margin-top: 10px; }
+.hb-ring3 { background: #23395B; color: #FFFFFF; border-radius: 14px; padding: 16px 10px; margin-top: 10px; }
+.hb-ring-name { font-size: 1.0625rem; font-weight: 800; color: #1C2C47; }
+.hb-ring3 .hb-ring-name { color: #FFFFFF; }
+.hb-ring-desc { font-size: 0.8125rem; color: #5A6578; }
+.hb-ring3 .hb-ring-desc { color: #C9D6EA; }
+
+/* 층위 카드 */
+.hb-layer { border-radius: 14px; padding: 16px; margin: 0 0 12px; border: 1px solid #DDE2EA; background: #FFFFFF; }
+.hb-layer-top { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+.hb-layer-top td { vertical-align: middle; }
+.hb-layer-emoji { width: 44px; font-size: 1.75rem; }
+.hb-layer-name { font-size: 1.125rem; font-weight: 800; color: #1C2C47; }
+.hb-layer-q { font-size: 0.8125rem; color: #6B7A90; }
+.hb-layer-ex { width: 100%; border-collapse: separate; border-spacing: 0 6px; }
+.hb-layer-ex td { font-size: 0.875rem; padding: 8px 10px; background: #F4F6F9; vertical-align: top; }
+.hb-layer-ex td.hb-ex-k { width: 64px; font-weight: 700; color: #23395B; border-radius: 8px 0 0 8px; }
+.hb-layer-ex td.hb-ex-v { border-radius: 0 8px 8px 0; }
+.hb-layer.hb-core { border: 2px solid #23395B; background: #EEF3FA; }
+.hb-layer.hb-core .hb-layer-ex td { background: #FFFFFF; }
+
+/* 말 비교 */
+.hb-say { width: 100%; border-collapse: separate; border-spacing: 10px; margin: 0 0 14px; }
+.hb-say td { width: 50%; vertical-align: top; border-radius: 14px; padding: 14px 12px; font-size: 0.875rem; }
+.hb-say-a { background: #F4F6F9; border: 1px solid #DDE2EA; }
+.hb-say-b { background: #E3F2EA; border: 1px solid #A8D2BB; }
+.hb-say-who { font-size: 0.75rem; color: #6B7A90; margin-bottom: 6px; }
+.hb-say-line { font-size: 1rem; font-weight: 800; line-height: 1.5; margin-bottom: 8px; }
+.hb-say-a .hb-say-line { color: #4A5568; }
+.hb-say-b .hb-say-line { color: #245A42; }
+
+/* 투표 */
+.hb-vote { background: #FFFFFF; border: 1px solid #C9D6EA; border-radius: 14px; padding: 16px 12px; margin: 0 0 16px; }
+.hb-vote-title { font-size: 0.9375rem; font-weight: 800; color: #1C2C47; text-align: center; margin-bottom: 10px; }
+.hb-vote-row { width: 100%; border-collapse: separate; border-spacing: 4px; }
+.hb-vote-row td { text-align: center; vertical-align: top; width: 14%; }
+.hb-vote-day { font-size: 0.75rem; color: #6B7A90; margin-bottom: 4px; }
+.hb-vote-box { height: 38px; line-height: 38px; border-radius: 8px; font-size: 1.125rem; font-weight: 800; }
+.hb-vote-yes { background: #3E8E6B; color: #FFFFFF; }
+.hb-vote-no { background: #EEF1F5; color: #A3ADBB; }
+.hb-vote-result { font-size: 0.875rem; color: #2C6E50; font-weight: 700; text-align: center; margin-top: 10px; }
+
+/* 순환 */
+.hb-cycle { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin: 0 0 6px; }
+.hb-cycle td { vertical-align: top; }
+.hb-cycle-n { width: 40px; }
+.hb-cycle-body { background: #F4F6F9; border-radius: 10px; padding: 10px 12px; }
+.hb-cycle-t { font-size: 0.9375rem; font-weight: 800; color: #1C2C47; }
+.hb-cycle-d { font-size: 0.875rem; color: #4A5A73; }
+.hb-cycle-back { text-align: center; font-size: 0.8125rem; color: #23395B; font-weight: 700; background: #EEF3FA; border-radius: 10px; padding: 8px; margin: 0 0 18px; }
+
+/* 글쓰기 예시 표 */
+.hb-case { width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 0.875rem; }
+.hb-case td { padding: 10px 10px; border-bottom: 1px solid #E3E8EF; vertical-align: top; }
+.hb-case td.hb-case-k { width: 34%; font-weight: 700; color: #23395B; background: #F4F6F9; }
+.hb-case tr.hb-case-hl td { background: #E3F2EA; color: #245A42; font-weight: 700; }
+
+/* 3편: 습관 루프 */
+.hb-loop { width: 100%; border-collapse: separate; border-spacing: 0; margin: 0 0 8px; }
+.hb-loop td { text-align: center; vertical-align: middle; }
+.hb-loop-cell { width: 42%; border-radius: 16px; padding: 14px 8px; }
+.hb-loop-arrow { width: 16%; font-size: 1.25rem; font-weight: 800; color: #23395B; }
+.hb-loop-varrow { font-size: 1.25rem; font-weight: 800; color: #23395B; padding: 4px 0; }
+.hb-c1 { background: #EEF3FA; border: 1px solid #A9BCD8; }
+.hb-c2 { background: #FFF6D9; border: 1px solid #F0D98A; }
+.hb-c3 { background: #23395B; color: #FFFFFF; }
+.hb-c4 { background: #E3F2EA; border: 1px solid #A8D2BB; }
+.hb-loop-emoji { font-size: 1.625rem; line-height: 1.2; }
+.hb-loop-n { font-size: 0.75rem; font-weight: 700; color: #6B7A90; }
+.hb-c3 .hb-loop-n { color: #B9C8E0; }
+.hb-loop-name { font-size: 1.0625rem; font-weight: 800; color: #1C2C47; }
+.hb-c3 .hb-loop-name { color: #FFFFFF; }
+.hb-loop-desc { font-size: 0.75rem; color: #5A6578; line-height: 1.5; }
+.hb-c3 .hb-loop-desc { color: #C9D6EA; }
+
+/* 신호 다섯 가지 */
+.hb-cues { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin: 0 0 14px; }
+.hb-cues td { vertical-align: middle; background: #F4F6F9; padding: 10px 12px; font-size: 0.875rem; }
+.hb-cue-emoji { width: 50px; text-align: center; font-size: 1.5rem; border-radius: 10px 0 0 10px; }
+.hb-cue-k { width: 92px; font-weight: 800; color: #23395B; font-size: 0.9375rem; }
+.hb-cue-v { border-radius: 0 10px 10px 0; color: #4A5A73; }
+.hb-cues tr.hb-cue-hl td { background: #FFF6D9; }
+
+/* 분석 표 */
+.hb-anal { width: 100%; border-collapse: separate; border-spacing: 0 6px; margin: 0 0 8px; font-size: 0.875rem; }
+.hb-anal td { padding: 10px 12px; vertical-align: top; }
+.hb-anal td.hb-anal-k { width: 30%; font-weight: 800; border-radius: 10px 0 0 10px; }
+.hb-anal td.hb-anal-v { border-radius: 0 10px 10px 0; }
+.hb-anal tr.r1 td { background: #EEF3FA; color: #23395B; }
+.hb-anal tr.r2 td { background: #FFF6D9; color: #5C4A10; }
+.hb-anal tr.r3 td { background: #DCE2EC; color: #1C2C47; }
+.hb-anal tr.r4 td { background: #E3F2EA; color: #245A42; }
+.hb-anal tr.r5 td { background: #F7E9E6; color: #7E3A2E; }
+
+/* 황금률 */
+.hb-golden { width: 100%; border-collapse: separate; border-spacing: 6px; margin: 0 0 16px; }
+.hb-golden td { width: 25%; text-align: center; vertical-align: top; border-radius: 10px; padding: 10px 4px; font-size: 0.8125rem; }
+.hb-g-keep { background: #EEF3FA; color: #23395B; }
+.hb-g-change { background: #23395B; color: #FFFFFF; }
+.hb-g-label { font-size: 0.6875rem; margin-bottom: 4px; }
+.hb-g-name { font-size: 0.9375rem; font-weight: 800; }
+.hb-g-ex { font-size: 0.75rem; margin-top: 4px; line-height: 1.45; }
+
+/* 4편: 네 법칙 로드맵 */
+.hb-road { width: 100%; border-collapse: separate; border-spacing: 5px; margin: 0 0 6px; }
+.hb-road td { width: 25%; text-align: center; vertical-align: top; border-radius: 10px; padding: 10px 3px; font-size: 0.75rem; background: #F4F6F9; color: #6B7A90; }
+.hb-road td.hb-road-on { background: #23395B; color: #FFFFFF; }
+.hb-road-stage { font-size: 0.6875rem; margin-bottom: 2px; }
+.hb-road-law { font-size: 0.875rem; font-weight: 800; color: #1C2C47; line-height: 1.35; }
+.hb-road td.hb-road-on .hb-road-law { color: #FFFFFF; }
+.hb-road-ep { font-size: 0.6875rem; margin-top: 3px; }
+
+/* 공식 카드 */
+.hb-formula { background: #FFFFFF; border: 2px dashed #23395B; border-radius: 14px; padding: 16px 14px; margin: 0 0 16px; text-align: center; }
+.hb-formula-label { font-size: 0.8125rem; color: #6B7A90; margin-bottom: 8px; }
+.hb-formula-line { font-size: 1.0625rem; font-weight: 800; color: #1C2C47; line-height: 2; }
+.hb-slot { display: inline-block; background: #FFF6D9; border-bottom: 2px solid #D8B94A; border-radius: 6px; padding: 0 8px; margin: 0 2px; color: #5C4A10; }
+.hb-formula-ex { font-size: 0.875rem; color: #4A5A73; margin-top: 8px; }
+
+/* 막대 */
+.hb-bars { width: 100%; border-collapse: separate; border-spacing: 0 10px; margin: 0 0 6px; }
+.hb-bars td { vertical-align: middle; font-size: 0.8125rem; }
+.hb-bar-k { width: 34%; color: #4A5A73; padding-right: 8px; line-height: 1.4; }
+.hb-bar-track { background: #EEF1F5; border-radius: 8px; height: 30px; }
+.hb-bar-fill { height: 30px; line-height: 30px; border-radius: 8px; color: #FFFFFF; font-weight: 800; font-size: 0.875rem; text-align: right; padding-right: 8px; background: #A3ADBB; }
+.hb-bar-fill.hb-bar-win { background: #3E8E6B; }
+
+/* 블록 쌓기 */
+.hb-stack { margin: 0 0 8px; }
+.hb-block { border-radius: 10px; padding: 11px 14px; margin-bottom: 4px; font-size: 0.9375rem; text-align: center; }
+.hb-block-old { background: #DCE2EC; color: #1C2C47; }
+.hb-block-new { background: #3E8E6B; color: #FFFFFF; font-weight: 800; }
+.hb-block-tag { font-size: 0.6875rem; display: block; opacity: .8; font-weight: 400; }
+.hb-stack-arrow { text-align: center; font-size: 0.875rem; color: #6B7A90; margin: 0 0 4px; }
+
+/* 환경 */
+.hb-env { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin: 0 0 14px; }
+.hb-env td { vertical-align: middle; padding: 11px 10px; font-size: 0.875rem; }
+.hb-env-goal { width: 30%; background: #23395B; color: #FFFFFF; font-weight: 700; border-radius: 10px 0 0 10px; text-align: center; }
+.hb-env-emoji { width: 44px; background: #FFF6D9; text-align: center; font-size: 1.375rem; }
+.hb-env-do { background: #FFF6D9; color: #5C4A10; border-radius: 0 10px 10px 0; }
+
+.hb-bar-in { width: 100%; border-collapse: collapse; }
+.hb-bar-in td { height: 30px; padding: 0; }
+.hb-bar-on { background: #A3ADBB; color: #FFFFFF; font-weight: 800; font-size: 0.875rem; text-align: right; padding-right: 8px !important; border-radius: 8px 0 0 8px; }
+.hb-bar-on.hb-bar-win { background: #3E8E6B; }
+.hb-bar-off { background: #EEF1F5; border-radius: 0 8px 8px 0; }
+
+/* 5편: 축소 사다리 */
+.hb-shrink { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin: 0 0 14px; }
+.hb-shrink td { vertical-align: middle; padding: 11px 10px; font-size: 0.875rem; }
+.hb-sh-big { width: 44%; background: #F4F6F9; color: #5A6578; border-radius: 10px 0 0 10px; text-decoration: line-through; text-decoration-color: #C9A0A0; }
+.hb-sh-arrow { width: 12%; text-align: center; background: #FFFFFF; color: #3E8E6B; font-weight: 800; }
+.hb-sh-small { width: 44%; background: #E3F2EA; color: #245A42; font-weight: 800; border-radius: 0 10px 10px 0; }
+.hb-sh-head td { padding: 0 10px 2px; font-size: 0.75rem; color: #6B7A90; background: transparent; text-decoration: none; font-weight: 400; }
+
+/* 계단 */
+.hb-stairs { margin: 0 0 8px; }
+.hb-stair { border-radius: 10px; padding: 10px 12px; margin-bottom: 6px; font-size: 0.875rem; color: #FFFFFF; }
+.hb-stair-w { font-size: 0.6875rem; opacity: .85; display: block; }
+.hb-s1 { margin-right: 60%; background: #8DBFA6; }
+.hb-s2 { margin-left: 13%; margin-right: 45%; background: #6EAA8C; }
+.hb-s3 { margin-left: 27%; margin-right: 27%; background: #529873; }
+.hb-s4 { margin-left: 45%; background: #3E8E6B; font-weight: 700; }
+
+/* 동기-능력 */
+.hb-map { width: 100%; border-collapse: separate; border-spacing: 6px; margin: 0 0 14px; }
+.hb-map td { width: 50%; vertical-align: top; border-radius: 12px; padding: 12px 10px; font-size: 0.8125rem; text-align: center; }
+.hb-map-hard { background: #F7E9E6; color: #7E3A2E; }
+.hb-map-easy { background: #E3F2EA; color: #245A42; }
+.hb-map-k { font-size: 0.75rem; margin-bottom: 4px; }
+.hb-map-v { font-size: 0.9375rem; font-weight: 800; }
+
+/* 유혹 묶기 공식 강조 */
+.hb-bundle { width: 100%; border-collapse: separate; border-spacing: 6px; margin: 0 0 14px; }
+.hb-bundle td { vertical-align: middle; text-align: center; border-radius: 12px; padding: 12px 6px; font-size: 0.875rem; }
+.hb-b-need { width: 42%; background: #DCE2EC; color: #1C2C47; }
+.hb-bundle td.hb-b-plus { width: 16%; font-size: 1.375rem; font-weight: 800; color: #23395B; background: transparent; }
+.hb-b-want { width: 42%; background: #FFF6D9; color: #5C4A10; }
+.hb-b-k { font-size: 0.6875rem; margin-bottom: 3px; }
+.hb-b-v { font-size: 0.9375rem; font-weight: 800; }
+.hb-b-emoji { font-size: 1.5rem; }
+
+/* 6편: 지금 vs 나중 */
+.hb-time { width: 100%; border-collapse: separate; border-spacing: 0 6px; margin: 0 0 8px; font-size: 0.8125rem; }
+.hb-time td { padding: 10px 8px; vertical-align: middle; text-align: center; }
+.hb-time .hb-t-head td { font-size: 0.75rem; color: #6B7A90; padding: 0 8px; background: transparent; }
+.hb-time td.hb-t-k { width: 24%; background: #23395B; color: #FFFFFF; font-weight: 700; border-radius: 10px 0 0 10px; }
+.hb-t-good { background: #E3F2EA; color: #245A42; }
+.hb-t-bad { background: #F7E9E6; color: #7E3A2E; }
+.hb-time td.hb-t-last { border-radius: 0 10px 10px 0; }
+
+/* 트래커 */
+.hb-tracker { background: #FFFFFF; border: 1px solid #C9D6EA; border-radius: 14px; padding: 14px 10px; margin: 0 0 8px; }
+.hb-tracker-title { font-size: 0.875rem; font-weight: 800; color: #1C2C47; text-align: center; margin-bottom: 8px; }
+.hb-trk { width: 100%; border-collapse: separate; border-spacing: 4px; }
+.hb-trk td { text-align: center; vertical-align: middle; height: 32px; border-radius: 7px; font-size: 0.875rem; font-weight: 800; }
+.hb-trk td.hb-trk-w { font-size: 0.6875rem; color: #6B7A90; font-weight: 400; width: 13%; }
+.hb-trk td.hb-trk-d { font-size: 0.6875rem; color: #6B7A90; font-weight: 400; height: 18px; }
+.hb-trk td.y { background: #3E8E6B; color: #FFFFFF; }
+.hb-trk td.n { background: #EEF1F5; color: #A3ADBB; }
+.hb-trk td.r { background: #FFF6D9; color: #8A6D12; border: 1px solid #E5C766; }
+
+/* 자동화 곡선 */
+.hb-curve { background: #FFFFFF; border: 1px solid #C9D6EA; border-radius: 14px; padding: 14px 10px 10px; margin: 0 0 8px; }
+.hb-curve-title { font-size: 0.875rem; font-weight: 800; color: #1C2C47; text-align: center; margin-bottom: 4px; }
+.hb-curve-sub { font-size: 0.75rem; color: #6B7A90; text-align: center; margin-bottom: 10px; }
+.hb-cv { width: 100%; border-collapse: separate; border-spacing: 4px 0; }
+.hb-cv td { vertical-align: bottom; text-align: center; height: 130px; }
+.hb-cv-bar { background: #A9BCD8; border-radius: 6px 6px 0 0; }
+.hb-cv-bar.hb-cv-21 { background: #E0A99E; }
+.hb-cv-bar.hb-cv-66 { background: #23395B; }
+.hb-cv-lab td { height: auto; vertical-align: top; font-size: 0.6875rem; color: #6B7A90; padding-top: 4px; }
+.hb-cv-lab td.hb-cv-on { color: #23395B; font-weight: 800; }
+.hb-cv-lab td.hb-cv-myth { color: #9A4234; font-weight: 700; }
+
+/* 숫자 강조 */
+.hb-facts { width: 100%; border-collapse: separate; border-spacing: 8px; margin: 0 0 14px; }
+.hb-facts td { width: 33%; text-align: center; vertical-align: top; background: #EEF3FA; border-radius: 12px; padding: 12px 4px; }
+.hb-fact-n { font-size: 1.375rem; font-weight: 900; color: #1C2C47; line-height: 1.2; }
+.hb-fact-l { font-size: 0.75rem; color: #4A5A73; margin-top: 4px; line-height: 1.4; }
+
+/* 7편: 뒤집기 */
+.hb-flip { width: 100%; border-collapse: separate; border-spacing: 5px; margin: 0 0 6px; }
+.hb-flip td { width: 25%; text-align: center; vertical-align: middle; border-radius: 10px; padding: 10px 3px; font-size: 0.8125rem; }
+.hb-flip td.hb-f-good { background: #F4F6F9; color: #6B7A90; }
+.hb-flip td.hb-f-bad { background: #7E3A2E; color: #FFFFFF; font-weight: 800; }
+.hb-flip td.hb-f-mid { font-size: 0.875rem; color: #9A4234; padding: 0; height: 16px; }
+.hb-flip-k { font-size: 0.6875rem; opacity: .8; font-weight: 400; display: block; }
+
+/* 뒤집기 섹션 카드 */
+.hb-inv { border-radius: 14px; border: 1px solid #E8D3CE; background: #FFFFFF; padding: 14px 14px 10px; margin: 0 0 12px; }
+.hb-inv-top { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+.hb-inv-top td { vertical-align: middle; }
+.hb-inv-n { width: 40px; }
+.hb-inv-dot { width: 30px; height: 30px; line-height: 30px; border-radius: 50%; background: #7E3A2E; color: #FFFFFF; font-weight: 800; text-align: center; font-size: 0.9375rem; }
+.hb-inv-name { font-size: 1.0625rem; font-weight: 800; color: #1C2C47; }
+.hb-inv-from { font-size: 0.75rem; color: #6B7A90; }
+.hb-inv-list div { font-size: 0.875rem; color: #4A5A73; padding: 7px 0; border-top: 1px dashed #E3D2CD; }
+
+/* 충동 파도 */
+.hb-wave { background: #FFFFFF; border: 1px solid #C9D6EA; border-radius: 14px; padding: 14px 10px 10px; margin: 0 0 8px; }
+.hb-wave-title { font-size: 0.875rem; font-weight: 800; color: #1C2C47; text-align: center; margin-bottom: 10px; }
+.hb-wv { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 4px 0; }
+.hb-wv td { vertical-align: bottom; text-align: center; height: 110px; }
+.hb-wv-bar { background: #8FB3D9; border-radius: 6px 6px 0 0; }
+.hb-wv-bar.hb-wv-peak { background: #23395B; }
+.hb-wv-lab td { height: auto; vertical-align: top; font-size: 0.6875rem; color: #6B7A90; padding-top: 4px; }
+
+/* 설계도 */
+.hb-blue { background-color: #EEF3FA; background-image: linear-gradient(#DCE5F2 1px, transparent 1px), linear-gradient(90deg, #DCE5F2 1px, transparent 1px); background-size: 22px 22px; border: 2px solid #23395B; border-radius: 14px; padding: 18px 14px; margin: 0 0 22px; }
+.hb-blue-title { font-size: 1.1875rem; font-weight: 900; color: #1C2C47; text-align: center; margin-bottom: 2px; }
+.hb-blue-sub { font-size: 0.8125rem; color: #4A5A73; text-align: center; margin-bottom: 14px; }
+.hb-bp { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+.hb-bp td { vertical-align: top; }
+.hb-bp-n { width: 40px; }
+.hb-bp-box { background: #FFFFFF; border: 1px solid #C9D6EA; border-radius: 10px; padding: 10px 12px; }
+.hb-bp-k { font-size: 0.875rem; font-weight: 800; color: #1C2C47; }
+.hb-bp-ep { font-size: 0.6875rem; color: #6B7A90; font-weight: 400; }
+.hb-bp-hint { font-size: 0.75rem; color: #6B7A90; margin-top: 2px; }
+.hb-bp-line { border-bottom: 1px solid #A9BCD8; height: 24px; }
+
+/* 시리즈 정리 */
+.hb-recap { width: 100%; border-collapse: separate; border-spacing: 0 6px; margin: 0 0 18px; font-size: 0.875rem; }
+.hb-recap td { vertical-align: top; padding: 10px 10px; background: #F4F6F9; }
+.hb-recap td.hb-rc-n { width: 46px; text-align: center; font-weight: 800; color: #FFFFFF; background: #23395B; border-radius: 10px 0 0 10px; }
+.hb-recap td.hb-rc-v { border-radius: 0 10px 10px 0; color: #2B2F36; }
+.hb-rc-t { font-weight: 800; color: #1C2C47; display: block; }
+/* 각 편 표지: 노란색 양식 */
+.hb-hero { background: #E8B931; background-image: none; border: none; border-radius: 18px; padding: 28px 20px 24px; }
+.hb-series { background: #1F2430; color: #E8B931; border: none; }
+.hb-title { font-family: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", "Times New Roman", serif; color: #1F2430; letter-spacing: -0.3px; }
+.hb-sub { color: #2E2A1C; }
+
+/* ===== 합본 레이아웃 · 목차 UI (UI는 px 고정, 본문은 rem으로 글자크기 조절) ===== */
+:root {
+  color-scheme: light;
+  --toc-w: 280px;
+  --ov-w: 280px;
+  --body-w: 760px;
+  --font-scale: 1;
+  --ink: #1F2430;
+  --navy: #23395B;
+  --yellow: #E8B931;
+  --yellow-soft: #FBF1CF;
+  --paper: #FFFFFF;
+  --side: #FAF8F2;
+  --line: #E6E1D3;
+  --muted: #6B7A90;
+  --serif: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", "Times New Roman", serif;
+  --sans: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+html { font-size: calc(16px * var(--font-scale)); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+
+/* 진행바 */
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60; background: transparent; pointer-events: none; }
+.progress-bar { height: 100%; background: var(--yellow); transform-origin: 0 50%; transform: scaleX(0); }
+
+/* 좌측 목차 */
+.toc-side { position: fixed; top: 0; left: 0; bottom: 0; width: var(--toc-w); z-index: 50; background: var(--side); border-right: 1px solid var(--line); display: flex; flex-direction: column; font-size: 14px; transition: transform .2s ease; }
+.toc-head { padding: 16px 14px 10px 16px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid var(--line); }
+.toc-row { display: flex; align-items: center; gap: 8px; }
+.toc-title { flex: 1; min-width: 0; font-family: var(--serif); font-weight: 700; font-size: 17px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.toc-pct { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.toc-btn { border: 1px solid var(--line); background: #FFFFFF; color: var(--ink); border-radius: 8px; height: 30px; min-width: 30px; padding: 0 8px; font: inherit; font-size: 13px; cursor: pointer; }
+.toc-btn:hover { border-color: var(--navy); }
+.toc-btn:focus-visible, .toc-search:focus-visible, .toc-list a:focus-visible, .toc-handle:focus-visible, .toc-open:focus-visible, .ctl input:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+.toc-pin { display: none; }
+.toc-search { width: 100%; box-sizing: border-box; height: 34px; border: 1px solid var(--line); border-radius: 8px; padding: 0 10px; font: inherit; font-size: 14px; background: #FFFFFF; color: var(--ink); }
+.toc-nav { flex: 1; overflow-y: auto; padding: 8px 8px 16px; }
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-list li { margin: 0; }
+.toc-list a { display: block; padding: 6px 10px; border-radius: 6px; color: #3A4250; text-decoration: none; line-height: 1.45; border-left: 3px solid transparent; }
+.toc-list a:hover { background: #F0ECE0; }
+.toc-list .lv1 > a { font-weight: 700; color: var(--ink); margin-top: 8px; }
+.toc-list .lv0 > a { font-weight: 700; color: var(--ink); }
+.toc-list .lv2 > a { padding-left: 22px; font-size: 13px; }
+.toc-list .lv3 > a { padding-left: 34px; font-size: 13px; }
+.toc-list .lv4 > a { padding-left: 46px; font-size: 12px; }
+.toc-list a.active { background: var(--yellow-soft); border-left-color: var(--yellow); color: var(--ink); font-weight: 700; }
+.toc-list li.in-ep > a { color: var(--ink); }
+.toc-list mark { background: var(--yellow); color: var(--ink); border-radius: 2px; }
+.toc-empty { padding: 10px; font-size: 13px; color: var(--muted); }
+.toc-ctl { border-top: 1px solid var(--line); padding: 12px 16px 14px; display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: var(--muted); }
+.ctl { display: grid; grid-template-columns: 56px 1fr 52px; align-items: center; gap: 8px; }
+.ctl input { width: 100%; accent-color: var(--navy); }
+.ctl output { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); }
+.toc-handle { position: absolute; top: 0; right: -5px; width: 10px; height: 100%; cursor: col-resize; touch-action: none; z-index: 2; }
+.toc-handle::after { content: ""; position: absolute; top: 0; bottom: 0; left: 4px; width: 2px; background: transparent; transition: background .15s; }
+.toc-handle:hover::after, .toc-handle.dragging::after { background: var(--yellow); }
+body.resizing { cursor: col-resize; user-select: none; }
+
+/* 목차 열기 버튼 · 오버레이 배경 */
+.toc-open { display: none; position: fixed; top: calc(10px + env(safe-area-inset-top, 0px)); left: calc(10px + env(safe-area-inset-left, 0px)); z-index: 55; width: 42px; height: 42px; border-radius: 10px; border: 1px solid var(--line); background: #FFFFFF; color: var(--ink); font-size: 20px; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(31, 36, 48, .12); align-items: center; justify-content: center; }
+.toc-scrim { display: none; position: fixed; inset: 0; z-index: 45; background: rgba(31, 36, 48, .35); }
+
+/* 본문 */
+.main { margin-left: var(--toc-w); transition: margin-left .2s ease; }
+.main-inner { max-width: var(--body-w); margin: 0 auto; padding: 24px 24px 64px; }
+
+/* 접힘 · 오버레이 */
+.toc-collapsed .main { margin-left: 0; }
+.toc-collapsed .toc-side { width: var(--ov-w); transform: translateX(-105%); box-shadow: 4px 0 24px rgba(31, 36, 48, .18); }
+.toc-collapsed .toc-open { display: flex; }
+.toc-collapsed .toc-pin { display: inline-block; }
+.toc-overlay-open .toc-side { transform: none; }
+.toc-overlay-open .toc-scrim { display: block; }
+.toc-overlay-open .toc-open { display: none; }
+
+@media (max-width: 699px) {
+  .main { margin-left: 0; }
+  .main-inner { max-width: none; padding: 60px 0 48px; }
+  .toc-side { width: min(var(--ov-w), 88vw); transform: translateX(-105%); box-shadow: 4px 0 24px rgba(31, 36, 48, .18); }
+  .toc-open { display: flex; }
+  .toc-pin, .ctl-body-row { display: none !important; }
+  .toc-overlay-open .toc-side { transform: none; }
+}
+
+/* ===== 합본 표지 (노란색 양식) ===== */
+.cover { background: var(--yellow); color: var(--ink); border-radius: 20px; padding: 2.5rem 1.6rem 2rem; margin: 0 16px 40px; display: flex; flex-direction: column; gap: 1.25rem; }
+.cover-top { display: flex; justify-content: space-between; gap: 12px; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.04em; }
+.cover-title { font-family: var(--serif); font-size: 2.75rem; line-height: 1.2; font-weight: 700; margin: 0; letter-spacing: -0.5px; }
+.cover-sub { font-size: 0.9375rem; line-height: 1.7; margin: 0; max-width: 34em; }
+.cover-toc { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.cover-toc li { border-bottom: 1px solid rgba(31, 36, 48, .3); }
+.cover-toc a { display: grid; grid-template-columns: 3.2rem 1fr; gap: 8px; padding: 0.7rem 0; color: var(--ink); text-decoration: none; }
+.cover-toc a:hover b { text-decoration: underline; }
+.cover-toc a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.cover-toc .n { font-weight: 700; font-variant-numeric: tabular-nums; font-size: 0.9375rem; }
+.cover-toc b { display: block; font-size: 1rem; line-height: 1.45; }
+.cover-toc small { display: block; font-size: 0.8125rem; line-height: 1.5; opacity: .85; margin-top: 2px; }
+.cover-foot { font-size: 0.75rem; margin: 0; opacity: .85; }
+
+/* 편 구분 */
+.hb-ep { scroll-margin-top: 8px; }
+.hb-ep + .hb-ep { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 36px; }
+.hb h1[id], .hb h2[id] { scroll-margin-top: 16px; }
+a.hb-next { display: block; color: inherit; text-decoration: none; }
+a.hb-next:hover, a.hb-next:focus-visible { border-color: var(--navy); border-style: solid; outline: none; }
+.hb-next-go { display: block; margin-top: 6px; font-size: 0.8125rem; font-weight: 700; color: var(--navy); }
+
+/* 인쇄: UI 숨김 */
+@media print {
+  .progress, .toc-side, .toc-open, .toc-scrim { display: none !important; }
+  .main { margin-left: 0 !important; }
+  .main-inner { max-width: none; padding: 0; }
+  html { font-size: 15px; }
+  .cover { break-after: page; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hb-ep + .hb-ep { break-before: page; border-top: none; margin-top: 0; padding-top: 0; }
+  .hb-hero, .hb-sum, .hb-try, .hb-step-dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hb-next-go { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+
+<button type="button" class="toc-open" id="toc-open" aria-label="목차 열기" title="목차 열기" aria-controls="toc-side">☰</button>
+<div class="toc-scrim" id="toc-scrim" aria-hidden="true"></div>
+
+<aside class="toc-side" id="toc-side" aria-label="목차">
+  <div class="toc-head">
+    <div class="toc-row">
+      <span class="toc-title">습관의 원리</span>
+      <span class="toc-pct" id="toc-pct">0%</span>
+      <button type="button" class="toc-btn toc-pin" id="toc-pin" title="목차를 왼쪽에 고정">고정</button>
+      <button type="button" class="toc-btn" id="toc-close" aria-label="목차 접기">«</button>
+    </div>
+    <input type="search" class="toc-search" id="toc-search" placeholder="목차 검색 (예: 2분, 정체성)" aria-label="목차 검색" autocomplete="off">
+  </div>
+  <nav class="toc-nav" id="toc-nav" aria-label="문서 목차">
+    <ul class="toc-list" id="toc-list"></ul>
+    <p class="toc-empty" id="toc-empty" hidden>일치하는 항목이 없어요.</p>
+  </nav>
+  <div class="toc-ctl">
+    <label class="ctl ctl-body-row"><span>본문 폭</span><input type="range" id="ctl-body" min="560" max="1700" step="20" value="760"><output id="out-body">760px</output></label>
+    <label class="ctl"><span>글자 크기</span><input type="range" id="ctl-font" min="82" max="133" step="1" value="100"><output id="out-font">100%</output></label>
+    <div class="toc-row"><button type="button" class="toc-btn" id="ctl-reset">기본값으로</button></div>
+  </div>
+  <div class="toc-handle" id="toc-handle" role="separator" aria-orientation="vertical" aria-label="목차 폭 조절" tabindex="0"></div>
+</aside>
+
+<main class="main" id="main">
+<div class="main-inner">
+
+<header class="cover" id="cover">
+  <div class="cover-top"><span>시리즈 · 전 7편</span><span>합본</span></div>
+  <h1 class="cover-title" data-toc-skip>습관의<br>원리</h1>
+  <p class="cover-sub">작심삼일이 반복되는 건 의지가 약해서가 아니라 설계의 문제일 수 있어요. 습관이 만들어지고 무너지는 원리를 일곱 편에 나눠 정리했습니다.</p>
+  <ol class="cover-toc">
+      <li><a href="#ep1"><span class="n">1편</span><span><b>습관은 의지가 아니라 설계입니다</b><small>무너진 건 내가 아니라 설계예요.</small></span></a></li>
+      <li><a href="#ep2"><span class="n">2편</span><span><b>결과·과정·정체성, 변화의 세 층위</b><small>작은 행동은 되고 싶은 나에게 던지는 한 표.</small></span></a></li>
+      <li><a href="#ep3"><span class="n">3편</span><span><b>신호-열망-반응-보상, 습관 루프</b><small>신호, 열망, 반응, 보상. 내가 원한 건 &#x27;느낌&#x27;.</small></span></a></li>
+      <li><a href="#ep4"><span class="n">4편</span><span><b>분명하게: 환경과 습관 쌓기</b><small>언제, 어디서를 정하고 신호는 눈앞에.</small></span></a></li>
+      <li><a href="#ep5"><span class="n">5편</span><span><b>쉽게, 매력적으로: 2분 규칙</b><small>2분 버전으로 시작하고 즐거움과 묶기.</small></span></a></li>
+      <li><a href="#ep6"><span class="n">6편</span><span><b>만족스럽게: 3일의 벽 넘기</b><small>66일의 언덕, 두 번 연속만 피하기.</small></span></a></li>
+      <li><a href="#ep7"><span class="n">7편</span><span><b>나쁜 습관 끊기와 나만의 설계도</b><small>참기보다 신호를 치우고, 수고를 늘리기.</small></span></a></li>
+  </ol>
+  <p class="cover-foot">바탕 문헌 · 제임스 클리어, 『아주 작은 습관의 힘』 외 (각 편 끝 참고문헌)</p>
+</header>
+
+<section class="hb hb-ep" id="ep1" data-ep="1" aria-labelledby="ep1-title">
+  <!-- 표지 -->
+    <div class="hb-hero">
+      <div class="hb-series">습관의 원리 · 1편</div>
+      <h1 class="hb-title" id="ep1-title" data-toc="1편 · 습관은 의지가 아니라 설계입니다">습관은 의지가 아니라<br>설계입니다</h1>
+      <p class="hb-sub">작심삼일이 반복되는 이유는 마음이 약해서가 아니라, 행동이 일어나는 구조에 있을 수 있어요.</p>
+    </div>
+
+    <div class="hb-ask">
+      <div class="hb-ask-who">이런 생각, 해본 적 있나요?</div>
+      <div class="hb-ask-text">"운동도, 독서도 매번 사흘을 못 가요. 제가 의지가 약한 사람인 거겠죠?"</div>
+    </div>
+
+    <p>새해 계획, 다이어트, 일찍 일어나기. 시작할 때는 분명 진심이었는데 며칠 지나면 흐지부지됩니다. 그러면 대개 같은 결론에 닿죠. <strong>"역시 나는 의지가 약해."</strong></p>
+    <p>이번 시리즈는 이 결론을 조금 다르게 보는 데서 시작합니다. 습관이 무너지는 진짜 이유와, 의지 대신 무엇을 바꿔야 하는지를 함께 살펴볼게요.</p>
+
+    <!-- 섹션 1 -->
+    <h2 class="hb-h2" id="ep1-s1">우리 하루의 상당 부분은 '자동'으로 움직여요</h2>
+    <p>아침에 눈 뜨자마자 휴대폰을 확인하고, 늘 같은 길로 출근하고, 집에 오면 같은 자리에 가방을 둡니다. 이 행동들을 할 때 우리는 대부분 "해야지"라고 결심하지 않아요. 그냥 몸이 먼저 움직입니다.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      사람들의 하루를 기록해 본 연구에서, 일상 행동의 약 40% 이상이 거의 같은 장소와 상황에서 반복되는 습관적 행동이었고, 그동안 사람들은 대개 다른 생각을 하고 있었습니다.
+    </div>
+
+    <p>즉 우리의 하루는 매 순간의 결심보다 <strong>이미 자리 잡은 패턴</strong>에 더 많이 기대고 있어요. 그렇다면 새로운 행동을 만들 때도 결심만으로 버티기보다, 그 행동이 자동으로 일어나기 쉬운 패턴을 만드는 쪽이 훨씬 효율적입니다.</p>
+
+    <!-- 섹션 2 -->
+    <h2 class="hb-h2" id="ep1-s2">의지가 강한 사람들의 진짜 비밀</h2>
+    <p>"자기통제력이 높은 사람"이라고 하면 유혹을 꾹 참는 장면을 떠올리기 쉽습니다. 그런데 연구 결과는 조금 다릅니다.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      자기통제력이 높은 사람들은 유혹을 더 잘 참는다기보다, <strong>애초에 유혹을 덜 마주쳤고</strong> 좋은 행동이 이미 습관으로 자리 잡혀 있는 경우가 많았습니다.
+    </div>
+
+    <p>다시 말해 그들은 매번 이기는 사람이 아니라, <strong>싸울 일이 적은 환경을 만든 사람</strong>에 가깝습니다. 과자를 안 먹는 사람은 참는 게 아니라 집에 과자를 두지 않는 거예요.</p>
+
+    <table class="hb-vs">
+      <tr>
+        <td class="hb-vs-a">
+          <div class="hb-vs-emoji">💪</div>
+          <div class="hb-vs-head">의지에 기대는 방식</div>
+          <div class="hb-vs-item">"오늘은 꼭 운동해야지" 매일 다시 결심</div>
+          <div class="hb-vs-item">피곤하거나 기분이 처지면 쉽게 무너짐</div>
+          <div class="hb-vs-item">실패하면 "내가 문제야"로 이어짐</div>
+        </td>
+        <td class="hb-vs-b">
+          <div class="hb-vs-emoji">📐</div>
+          <div class="hb-vs-head">설계에 기대는 방식</div>
+          <div class="hb-vs-item">운동복을 전날 밤 침대 옆에 꺼내 둠</div>
+          <div class="hb-vs-item">컨디션이 나빠도 시작은 할 수 있게 작게 정함</div>
+          <div class="hb-vs-item">실패하면 "어디를 고칠까?"로 이어짐</div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- 섹션 3 -->
+    <h2 class="hb-h2" id="ep1-s3">아주 작은 차이가 쌓이면</h2>
+    <p>습관이 힘을 갖는 이유는 '반복'에 있습니다. 하루의 변화는 너무 작아서 티가 나지 않지만, 쌓이면 이야기가 달라져요. 매일 1%씩 나아지는 경우와 1%씩 뒷걸음질 치는 경우를 숫자로 비교해 볼게요.</p>
+
+    <table class="hb-compound">
+      <tr>
+        <td class="hb-day">30일 후</td>
+        <td class="hb-day">100일 후</td>
+        <td class="hb-day">1년 후</td>
+      </tr>
+      <tr>
+        <td class="hb-up"><div class="hb-num">1.35배</div><div class="hb-cap">매일 1% 나아지면</div></td>
+        <td class="hb-up"><div class="hb-num">2.7배</div><div class="hb-cap">매일 1% 나아지면</div></td>
+        <td class="hb-up"><div class="hb-numbig">37.8배</div><div class="hb-cap">매일 1% 나아지면</div></td>
+      </tr>
+      <tr>
+        <td class="hb-down"><div class="hb-num">0.74</div><div class="hb-cap">매일 1% 나빠지면</div></td>
+        <td class="hb-down"><div class="hb-num">0.37</div><div class="hb-cap">매일 1% 나빠지면</div></td>
+        <td class="hb-down"><div class="hb-numbig">0.03</div><div class="hb-cap">매일 1% 나빠지면</div></td>
+      </tr>
+    </table>
+    <p class="hb-note">※ 실제 삶이 이 계산처럼 정확히 움직이지는 않아요. 작은 반복이 시간과 함께 커진다는 방향을 보여주는 비유로 봐주세요.</p>
+
+    <p>그런데 여기엔 함정이 하나 있습니다. 초반에는 <strong>노력해도 아무 변화가 없는 것처럼 느껴지는 구간</strong>이 꼭 있다는 거예요.</p>
+
+    <table class="hb-ice">
+      <tr>
+        <td><div class="hb-ice-emoji">🧊</div><div class="hb-ice-temp">-3°C</div><div class="hb-ice-txt">그대로</div></td>
+        <td><div class="hb-ice-emoji">🧊</div><div class="hb-ice-temp">-2°C</div><div class="hb-ice-txt">그대로</div></td>
+        <td><div class="hb-ice-emoji">🧊</div><div class="hb-ice-temp">-1°C</div><div class="hb-ice-txt">그대로</div></td>
+        <td class="hb-melt"><div class="hb-ice-emoji">💧</div><div class="hb-ice-temp">0°C</div><div class="hb-ice-txt">녹기 시작</div></td>
+      </tr>
+    </table>
+
+    <p>차가운 방에 얼음을 두고 온도를 1도씩 올려도, 0도가 되기 전까지 얼음은 겉보기에 그대로입니다. 그렇다고 앞의 3도가 헛된 건 아니죠. 그 시간이 있었기에 0도에서 변화가 시작됩니다. <strong>보이지 않는 구간도 쌓이고 있는 중</strong>이라는 걸 기억해 두면, 중간에 그만두고 싶은 순간을 넘기기가 한결 쉬워져요.</p>
+
+    <!-- 섹션 4 -->
+    <h2 class="hb-h2" id="ep1-s4">목표보다 시스템을 먼저</h2>
+    <p>목표는 "어디로 갈지"를 알려줍니다. 하지만 목표만 있으면 "오늘 무엇을 할지"는 비어 있어요. 그 빈칸을 채우는 것이 <strong>시스템</strong>, 즉 결과를 만들어내는 일상의 구조입니다.</p>
+
+    <table class="hb-vs">
+      <tr>
+        <td class="hb-vs-a">
+          <div class="hb-vs-emoji">🎯</div>
+          <div class="hb-vs-head">목표</div>
+          <div class="hb-vs-item">한 달에 책 두 권 읽기</div>
+          <div class="hb-vs-item">5kg 감량하기</div>
+          <div class="hb-vs-item">밤 12시 전에 자기</div>
+        </td>
+        <td class="hb-vs-b">
+          <div class="hb-vs-emoji">⚙️</div>
+          <div class="hb-vs-head">시스템</div>
+          <div class="hb-vs-item">저녁 식사 후 소파에서 책 펴기</div>
+          <div class="hb-vs-item">퇴근길 한 정거장 먼저 내려 걷기</div>
+          <div class="hb-vs-item">11시 반이 되면 휴대폰을 거실에 충전하기</div>
+        </td>
+      </tr>
+    </table>
+
+    <p>목표만 붙잡으면 생기는 문제도 있어요. 목표를 이루기 전까지는 늘 "아직 부족한 상태"로 느껴지고, 막상 이루고 나면 계속할 이유가 사라지기도 합니다. 반면 시스템은 <strong>오늘 그 행동을 했다면 이미 성공</strong>이에요. 목표는 방향을 정하는 데 쓰고, 매일의 에너지는 시스템에 쏟아 보세요.</p>
+
+    <!-- 섹션 5 -->
+    <h2 class="hb-h2" id="ep1-s5">마음이 지쳐 있을 때 더 중요한 이야기</h2>
+
+    <div class="hb-care">
+      <div class="hb-care-emoji">🌱</div>
+      <div class="hb-care-title">무기력은 게으름이 아니에요</div>
+      우울하거나 불안할 때, 혹은 많이 지쳐 있을 때는 평소에 쉽던 일도 시작하기가 무척 어려워집니다. 이건 성격의 결함이 아니라 마음의 에너지가 줄어든 상태에서 자연스럽게 생기는 변화예요. 이럴 때 의지를 더 쥐어짜려 하면 실패 경험과 자책만 늘어나기 쉽습니다.
+    </div>
+
+    <p>그래서 이런 시기일수록 '더 노력하기'보다 <strong>질문을 바꾸는 것</strong>이 도움이 됩니다.</p>
+
+    <table class="hb-reframe">
+      <tr>
+        <td class="hb-rf-old">"나는 왜 이것도 못 할까?"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"무엇이 시작을 어렵게 만들까?"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"더 독하게 마음먹어야 해"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"더 쉽게 시작하려면 뭘 바꿀까?"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"또 실패했어"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"설계에서 어느 부분을 고칠까?"</td>
+      </tr>
+    </table>
+
+    <p>문제를 '나'에서 '구조'로 옮기면, 자책 대신 고칠 수 있는 지점이 보이기 시작합니다. 무기력이나 기분 저하가 2주 이상 이어진다면, 습관 설계와 함께 전문가와 상의해 보는 것도 좋은 방법이에요.</p>
+
+    <!-- 해보기 -->
+    <div class="hb-try">
+      <div class="hb-try-emoji">✏️</div>
+      <div class="hb-try-title">오늘 해보기: 내 습관 다시 보기</div>
+      <table class="hb-steps">
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">1</div></td>
+          <td>
+            <div class="hb-step-q">자꾸 실패했던 습관 하나를 떠올려 보세요.</div>
+            <div class="hb-step-ex">예: 아침 스트레칭, 자기 전 독서</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">2</div></td>
+          <td>
+            <div class="hb-step-q">그때 시작을 가장 어렵게 만든 건 무엇이었나요?</div>
+            <div class="hb-step-ex">예: 매트를 꺼내기 귀찮았다, 누우면 바로 휴대폰을 봤다</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">3</div></td>
+          <td>
+            <div class="hb-step-q">환경을 하나만 바꾼다면 무엇을 바꿀 수 있을까요?</div>
+            <div class="hb-step-ex">예: 매트를 펼쳐 둔 채로 두기, 책을 베개 위에 올려 두기</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 요약 -->
+    <div class="hb-sum">
+      <div class="hb-sum-label">오늘의 한 줄</div>
+      <div class="hb-sum-text">습관이 무너진 건 내가 약해서가 아니라, 설계를 아직 손보지 않았기 때문이에요.</div>
+    </div>
+
+    <a class="hb-next" href="#ep2">
+      <div class="hb-next-label">다음 편 예고 · 2편</div>
+      <div class="hb-next-title">결과·과정·정체성, 변화의 세 층위</div>
+      목표를 세워도 오래 가지 못하는 이유, 그리고 "나는 어떤 사람인가"라는 믿음이 습관을 어떻게 지탱하는지 알아봐요.
+      <span class="hb-next-go">이어서 읽기 →</span>
+    </a>
+
+    <!-- 참고문헌 -->
+    <details class="hb-ref">
+      <summary>참고문헌 보기</summary>
+      <ol>
+        <li>Clear, J. (2018). <em>Atomic Habits: An Easy &amp; Proven Way to Build Good Habits &amp; Break Bad Ones</em>. Avery. (한국어판: 제임스 클리어, 『아주 작은 습관의 힘』, 이한이 옮김, 비즈니스북스, 2019)</li>
+        <li>Wood, W., Quinn, J. M., &amp; Kashy, D. A. (2002). Habits in everyday life: Thought, emotion, and action. <em>Journal of Personality and Social Psychology, 83</em>(6), 1281–1297.</li>
+        <li>Neal, D. T., Wood, W., &amp; Quinn, J. M. (2006). Habits—A repeat performance. <em>Current Directions in Psychological Science, 15</em>(4), 198–202.</li>
+        <li>Hofmann, W., Baumeister, R. F., Förster, G., &amp; Vohs, K. D. (2012). Everyday temptations: An experience sampling study of desire, conflict, and self-control. <em>Journal of Personality and Social Psychology, 102</em>(6), 1318–1335.</li>
+        <li>Galla, B. M., &amp; Duckworth, A. L. (2015). More than resisting temptation: Beneficial habits mediate the relationship between self-control and positive life outcomes. <em>Journal of Personality and Social Psychology, 109</em>(3), 508–525.</li>
+        <li>Wood, W. (2019). <em>Good Habits, Bad Habits: The Science of Making Positive Changes That Stick</em>. Farrar, Straus and Giroux.</li>
+      </ol>
+      <div class="hb-ref-note">본 자료는 위 문헌의 개념을 일반 독자를 위해 재구성한 교육 자료이며, 의학적 진단이나 치료를 대신하지 않습니다.</div>
+    </details>
+
+
+</section>
+<section class="hb hb-ep" id="ep2" data-ep="2" aria-labelledby="ep2-title">
+  <!-- 표지 -->
+    <div class="hb-hero">
+      <div class="hb-series">습관의 원리 · 2편</div>
+      <h1 class="hb-title" id="ep2-title" data-toc="2편 · 결과·과정·정체성, 변화의 세 층위">결과·과정·정체성,<br>변화의 세 층위</h1>
+      <p class="hb-sub">같은 목표를 세워도 누군가는 오래 가고, 누군가는 금세 멈춥니다. 차이는 변화를 어느 층에서 시작하느냐에 있을 수 있어요.</p>
+    </div>
+
+    <div class="hb-ask">
+      <div class="hb-ask-who">이런 생각, 해본 적 있나요?</div>
+      <div class="hb-ask-text">"목표는 분명한데 왜 오래 못 갈까요? 목표를 더 크게 잡아야 하나요?"</div>
+    </div>
+
+    <p>1편에서 습관은 의지보다 설계의 문제라는 이야기를 했어요. 이번 편에서는 그 설계를 시작하기 전에 꼭 짚어야 할 질문을 다룹니다. <strong>우리는 정확히 무엇을 바꾸려는 걸까요?</strong></p>
+    <p>변화에는 세 개의 층이 있습니다. 양파처럼 바깥에서 안쪽으로 겹겹이 쌓여 있다고 생각해 보세요.</p>
+
+    <!-- 동심원 -->
+    <div class="hb-ring1">
+      <div class="hb-ring-name">결과</div>
+      <div class="hb-ring-desc">내가 얻는 것</div>
+      <div class="hb-ring2">
+        <div class="hb-ring-name">과정</div>
+        <div class="hb-ring-desc">내가 하는 것</div>
+        <div class="hb-ring3">
+          <div class="hb-ring-name">정체성</div>
+          <div class="hb-ring-desc">내가 나에 대해 믿는 것</div>
+        </div>
+      </div>
+    </div>
+    <p class="hb-note">바깥일수록 눈에 잘 보이고, 안쪽일수록 오래 갑니다.</p>
+
+    <!-- 섹션 1 -->
+    <h2 class="hb-h2" id="ep2-s1">세 층위를 하나씩 들여다보면</h2>
+
+    <div class="hb-layer">
+      <table class="hb-layer-top"><tr>
+        <td class="hb-layer-emoji"><div>🏆</div></td>
+        <td><div class="hb-layer-name">결과</div><div class="hb-layer-q">무엇을 얻고 싶은가?</div></td>
+      </tr></table>
+      <p>도달하고 싶은 상태예요. 방향을 알려주지만, 오늘 무엇을 할지는 알려주지 않습니다.</p>
+      <table class="hb-layer-ex">
+        <tr><td class="hb-ex-k">독서</td><td class="hb-ex-v">한 달에 책 두 권 읽기</td></tr>
+        <tr><td class="hb-ex-k">정리</td><td class="hb-ex-v">깔끔한 책상 만들기</td></tr>
+      </table>
+    </div>
+
+    <div class="hb-layer">
+      <table class="hb-layer-top"><tr>
+        <td class="hb-layer-emoji"><div>🔁</div></td>
+        <td><div class="hb-layer-name">과정</div><div class="hb-layer-q">무엇을 반복할 것인가?</div></td>
+      </tr></table>
+      <p>결과를 만들어내는 일상의 행동과 환경이에요. 1편에서 말한 '시스템'이 바로 이 층입니다.</p>
+      <table class="hb-layer-ex">
+        <tr><td class="hb-ex-k">독서</td><td class="hb-ex-v">잠들기 전 두 쪽 읽기</td></tr>
+        <tr><td class="hb-ex-k">정리</td><td class="hb-ex-v">퇴근 전 물건 세 개 제자리에 두기</td></tr>
+      </table>
+    </div>
+
+    <div class="hb-layer hb-core">
+      <table class="hb-layer-top"><tr>
+        <td class="hb-layer-emoji"><div>🌳</div></td>
+        <td><div class="hb-layer-name">정체성</div><div class="hb-layer-q">나는 어떤 사람이 되고 싶은가?</div></td>
+      </tr></table>
+      <p>"나는 원래 이런 사람이야"라는 자기 이해예요. 가장 안쪽에 있어서 잘 보이지 않지만, 바깥의 두 층을 조용히 붙잡아 줍니다.</p>
+      <table class="hb-layer-ex">
+        <tr><td class="hb-ex-k">독서</td><td class="hb-ex-v">읽고 배우는 사람</td></tr>
+        <tr><td class="hb-ex-k">정리</td><td class="hb-ex-v">내가 쓴 공간을 돌보는 사람</td></tr>
+      </table>
+    </div>
+
+    <p>세 층 모두 필요합니다. 다만 대부분의 사람은 <strong>가장 바깥인 결과에서만 출발</strong>하고, 그래서 결과가 빨리 보이지 않으면 쉽게 멈춰요. 1편의 얼음 이야기처럼, 결과는 늘 한참 뒤에야 나타나니까요.</p>
+
+    <!-- 섹션 2 -->
+    <h2 class="hb-h2" id="ep2-s2">같은 행동, 다른 말</h2>
+    <p>두 사람이 똑같이 저녁 산책을 권유받았다고 해볼게요. 둘의 대답은 이렇게 다를 수 있습니다.</p>
+
+    <table class="hb-say">
+      <tr>
+        <td class="hb-say-a">
+          <div class="hb-say-who">결과에서 출발한 사람</div>
+          <div class="hb-say-line">"살 빼려고 걷는 중이에요."</div>
+          살이 빠지지 않거나 목표를 이루고 나면 걸을 이유도 함께 사라지기 쉬워요.
+        </td>
+        <td class="hb-say-b">
+          <div class="hb-say-who">정체성에서 출발한 사람</div>
+          <div class="hb-say-line">"저는 매일 걷는 사람이에요."</div>
+          체중과 상관없이 걷는 행동 자체가 '나다움'이라서 계속할 이유가 남아 있어요.
+        </td>
+      </tr>
+    </table>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      사람은 자신의 행동을 관찰하면서 "나는 이런 사람이구나"를 추론한다는 이론(자기지각 이론)이 오래전부터 제시되어 왔어요. 또 "투표하세요"보다 "투표자가 되어 주세요"처럼 행동을 정체성으로 표현했을 때 참여가 늘었다는 연구도 있습니다. 다만 이 연구는 후속 연구에서 효과가 일관되게 나타나지 않아, <strong>말 한마디보다 꾸준한 행동이 함께할 때 의미가 있다</strong>고 보는 것이 안전해요.
+    </div>
+
+    <!-- 섹션 3 -->
+    <h2 class="hb-h2" id="ep2-s3">작은 행동은 나에게 던지는 한 표</h2>
+    <p>정체성은 선언한다고 생기지 않아요. "나는 오늘부터 부지런한 사람이야"라고 말해도, 마음 한쪽에서는 "정말?" 하는 의심이 남습니다. 정체성을 바꾸는 건 <strong>행동이라는 증거</strong>예요.</p>
+    <p>매번의 행동을 '나는 어떤 사람인가'에 던지는 한 표라고 생각해 보세요.</p>
+
+    <div class="hb-vote">
+      <div class="hb-vote-title">"나는 걷는 사람이다"에 대한 이번 주 투표</div>
+      <table class="hb-vote-row">
+        <tr>
+          <td><div class="hb-vote-day">월</div><div class="hb-vote-box hb-vote-yes">✓</div></td>
+          <td><div class="hb-vote-day">화</div><div class="hb-vote-box hb-vote-yes">✓</div></td>
+          <td><div class="hb-vote-day">수</div><div class="hb-vote-box hb-vote-no">–</div></td>
+          <td><div class="hb-vote-day">목</div><div class="hb-vote-box hb-vote-yes">✓</div></td>
+          <td><div class="hb-vote-day">금</div><div class="hb-vote-box hb-vote-yes">✓</div></td>
+          <td><div class="hb-vote-day">토</div><div class="hb-vote-box hb-vote-no">–</div></td>
+          <td><div class="hb-vote-day">일</div><div class="hb-vote-box hb-vote-yes">✓</div></td>
+        </tr>
+      </table>
+      <div class="hb-vote-result">7표 중 5표 찬성. 만장일치가 아니어도 충분히 이기고 있어요.</div>
+    </div>
+
+    <p>이 비유가 좋은 이유는 <strong>완벽할 필요가 없다는 것</strong>을 알려주기 때문이에요. 하루 빠졌다고 정체성이 무너지지 않습니다. 선거에서 몇 표를 잃어도 과반이면 이기는 것처럼요. 그리고 한 표는 아주 작은 행동으로도 충분합니다. 10분 걷기도, 운동화 끈을 묶고 현관까지 나가기도 모두 한 표예요.</p>
+
+    <!-- 섹션 4 -->
+    <h2 class="hb-h2" id="ep2-s4">정체성과 행동은 서로를 키워요</h2>
+    <p>정체성이 행동을 이끌고, 행동이 다시 정체성을 단단하게 만듭니다. 이 흐름을 순서대로 보면 이렇습니다.</p>
+
+    <table class="hb-cycle">
+      <tr>
+        <td class="hb-cycle-n"><div class="hb-step-dot">1</div></td>
+        <td><div class="hb-cycle-body"><div class="hb-cycle-t">되고 싶은 사람을 정해요</div><div class="hb-cycle-d">"생각을 글로 남기는 사람"</div></div></td>
+      </tr>
+      <tr>
+        <td class="hb-cycle-n"><div class="hb-step-dot">2</div></td>
+        <td><div class="hb-cycle-body"><div class="hb-cycle-t">그 사람이 할 법한 가장 작은 행동을 해요</div><div class="hb-cycle-d">저녁에 컴퓨터를 켜면 먼저 세 문장 쓰기</div></div></td>
+      </tr>
+      <tr>
+        <td class="hb-cycle-n"><div class="hb-step-dot">3</div></td>
+        <td><div class="hb-cycle-body"><div class="hb-cycle-t">행동이 증거로 쌓여요</div><div class="hb-cycle-d">"이번 주에도 네 번이나 글을 썼네"</div></div></td>
+      </tr>
+      <tr>
+        <td class="hb-cycle-n"><div class="hb-step-dot">4</div></td>
+        <td><div class="hb-cycle-body"><div class="hb-cycle-t">믿음이 단단해져요</div><div class="hb-cycle-d">"나는 정말 글을 쓰는 사람인가 봐"</div></div></td>
+      </tr>
+    </table>
+    <div class="hb-cycle-back">↺ 단단해진 믿음이 다음 행동을 더 쉽게 만들어요</div>
+
+    <p>이 흐름을 글쓰기에 적용해 정리하면 다음과 같아요.</p>
+
+    <table class="hb-case">
+      <tr><td class="hb-case-k">원하는 결과</td><td>글 한 편 완성하기</td></tr>
+      <tr><td class="hb-case-k">원하는 정체성</td><td>생각을 글로 남기는 사람</td></tr>
+      <tr><td class="hb-case-k">반복할 과정</td><td>저녁에 컴퓨터를 켜면 먼저 세 문장 쓰기</td></tr>
+      <tr><td class="hb-case-k">작은 실천의 의미</td><td>"오늘도 생각을 글로 남기는 행동을 했다."</td></tr>
+      <tr class="hb-case-hl"><td class="hb-case-k">중단했을 때</td><td>"이틀 쉬었지만, 오늘 세 문장으로 다시 시작할 수 있다."</td></tr>
+    </table>
+
+    <p>세 문장은 분량으로는 작지만, 반복할 수 있는 과정이자 새로운 자기 이해를 뒷받침하는 증거가 됩니다. 완성된 글이라는 결과는 그 반복 속에서 자연스럽게 따라와요.</p>
+
+    <!-- 섹션 5 -->
+    <h2 class="hb-h2" id="ep2-s5">나를 가두는 정체성도 있어요</h2>
+
+    <div class="hb-care">
+      <div class="hb-care-emoji">🌱</div>
+      <div class="hb-care-title">"나는 원래 그런 사람이야"라는 말</div>
+      정체성은 우리를 지탱하기도 하지만, 가두기도 합니다. "나는 원래 게을러", "나는 꾸준하지 못해" 같은 생각은 새로운 행동을 시도하기 전에 이미 결론을 내려 버려요. 특히 우울하거나 지쳐 있을 때는 이런 부정적인 꼬리표가 더 쉽게 붙고, 더 진짜처럼 느껴집니다.
+    </div>
+
+    <p>이럴 때 기억할 점은, 지금의 꼬리표도 사실 <strong>과거 행동이 남긴 기록</strong>일 뿐이라는 거예요. 기록은 오늘부터 다시 쓸 수 있습니다. 그리고 새 정체성은 단단하기보다 유연한 편이 오래 갑니다.</p>
+
+    <table class="hb-reframe">
+      <tr>
+        <td class="hb-rf-old">"나는 매일 완벽하게 운동하는 사람"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"나는 몸을 돌보는 사람"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"나는 절대 미루지 않는 사람"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"나는 멈춰도 다시 시작하는 사람"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"나는 원래 게으른 사람"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"나는 작게라도 움직여 보는 사람"</td>
+      </tr>
+    </table>
+
+    <p>왼쪽처럼 너무 엄격한 정체성은 한 번의 실수에도 "역시 난 아니야"로 무너지기 쉬워요. 오른쪽처럼 방향을 담은 정체성은 하루 빠진 날에도 여전히 지킬 수 있습니다.</p>
+
+    <!-- 해보기 -->
+    <div class="hb-try">
+      <div class="hb-try-emoji">✏️</div>
+      <div class="hb-try-title">오늘 해보기: 나의 세 층위 적어보기</div>
+      <table class="hb-steps">
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">1</div></td>
+          <td>
+            <div class="hb-step-q">요즘 이루고 싶은 결과 하나를 적어 보세요.</div>
+            <div class="hb-step-ex">예: 밤에 푹 자기, 방 정리하기</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">2</div></td>
+          <td>
+            <div class="hb-step-q">그 결과를 가진 사람은 어떤 사람일까요? "나는 ○○하는 사람"으로 적어 보세요.</div>
+            <div class="hb-step-ex">예: 나는 내 잠을 아끼는 사람, 나는 내 공간을 돌보는 사람</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">3</div></td>
+          <td>
+            <div class="hb-step-q">그 사람이라면 오늘 할 수 있는 가장 작은 '한 표'는 무엇일까요?</div>
+            <div class="hb-step-ex">예: 11시에 조명 하나 끄기, 책상 위 컵 하나 치우기</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 요약 -->
+    <div class="hb-sum">
+      <div class="hb-sum-label">오늘의 한 줄</div>
+      <div class="hb-sum-text">결과는 방향을, 과정은 오늘을, 정체성은 계속할 이유를 줍니다. 작은 행동 하나가 내가 되고 싶은 사람에게 던지는 한 표예요.</div>
+    </div>
+
+    <a class="hb-next" href="#ep3">
+      <div class="hb-next-label">다음 편 예고 · 3편</div>
+      <div class="hb-next-title">신호-열망-반응-보상, 습관 루프</div>
+      왜 나도 모르게 휴대폰을 집어 들게 될까요? 습관이 저절로 굴러가는 네 단계의 구조를 해부해 봐요.
+      <span class="hb-next-go">이어서 읽기 →</span>
+    </a>
+
+    <!-- 참고문헌 -->
+    <details class="hb-ref">
+      <summary>참고문헌 보기</summary>
+      <ol>
+        <li>Clear, J. (2018). <em>Atomic Habits: An Easy &amp; Proven Way to Build Good Habits &amp; Break Bad Ones</em>. Avery. (한국어판: 제임스 클리어, 『아주 작은 습관의 힘』, 이한이 옮김, 비즈니스북스, 2019)</li>
+        <li>Bem, D. J. (1972). Self-perception theory. In L. Berkowitz (Ed.), <em>Advances in Experimental Social Psychology</em> (Vol. 6, pp. 1–62). Academic Press.</li>
+        <li>Bryan, C. J., Walton, G. M., Rogers, T., &amp; Dweck, C. S. (2011). Motivating voter turnout by invoking the self. <em>Proceedings of the National Academy of Sciences, 108</em>(31), 12653–12656.</li>
+        <li>Gerber, A. S., Huber, G. A., Biggers, D. R., &amp; Hendry, D. J. (2016). A field experiment shows that subtle linguistic cues might not affect voter behavior. <em>Proceedings of the National Academy of Sciences, 113</em>(26), 7112–7117.</li>
+        <li>Oyserman, D. (2015). <em>Pathways to Success Through Identity-Based Motivation</em>. Oxford University Press.</li>
+      </ol>
+      <div class="hb-ref-note">본 자료는 위 문헌의 개념을 일반 독자를 위해 재구성한 교육 자료이며, 의학적 진단이나 치료를 대신하지 않습니다.</div>
+    </details>
+
+
+</section>
+<section class="hb hb-ep" id="ep3" data-ep="3" aria-labelledby="ep3-title">
+  <!-- 표지 -->
+    <div class="hb-hero">
+      <div class="hb-series">습관의 원리 · 3편</div>
+      <h1 class="hb-title" id="ep3-title" data-toc="3편 · 신호-열망-반응-보상, 습관 루프">신호-열망-반응-보상,<br>습관 루프</h1>
+      <p class="hb-sub">모든 습관은 같은 네 단계로 돌아갑니다. 이 구조를 알면 "왜 또 그랬지?"가 "아, 이래서 그랬구나"로 바뀌어요.</p>
+    </div>
+
+    <div class="hb-ask">
+      <div class="hb-ask-who">이런 생각, 해본 적 있나요?</div>
+      <div class="hb-ask-text">"정신 차려 보면 손에 휴대폰이 들려 있어요. 보려고 한 적도 없는데요."</div>
+    </div>
+
+    <p>1편에서는 습관이 설계의 문제라는 것을, 2편에서는 작은 행동이 정체성을 만든다는 것을 이야기했어요. 이제 설계도를 그리려면 <strong>습관이라는 기계가 어떻게 돌아가는지</strong>부터 알아야 합니다.</p>
+    <p>휴대폰을 집어 드는 일, 퇴근 후 소파에 눕는 일, 스트레스받으면 단것을 찾는 일. 겉보기엔 제각각이지만 속을 들여다보면 모두 같은 고리로 움직여요.</p>
+
+    <!-- 섹션 1 -->
+    <h2 class="hb-h2" id="ep3-s1">습관을 돌리는 네 개의 톱니</h2>
+
+    <table class="hb-loop">
+      <tr>
+        <td class="hb-loop-cell hb-c1">
+          <div class="hb-loop-emoji">🔔</div>
+          <div class="hb-loop-n">1단계</div>
+          <div class="hb-loop-name">신호</div>
+          <div class="hb-loop-desc">행동을 시작하게 하는 계기</div>
+        </td>
+        <td class="hb-loop-arrow">→</td>
+        <td class="hb-loop-cell hb-c2">
+          <div class="hb-loop-emoji">💭</div>
+          <div class="hb-loop-n">2단계</div>
+          <div class="hb-loop-name">열망</div>
+          <div class="hb-loop-desc">원하는 상태로 바뀌고 싶은 마음</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="hb-loop-varrow">↑</td>
+        <td></td>
+        <td class="hb-loop-varrow">↓</td>
+      </tr>
+      <tr>
+        <td class="hb-loop-cell hb-c4">
+          <div class="hb-loop-emoji">🎁</div>
+          <div class="hb-loop-n">4단계</div>
+          <div class="hb-loop-name">보상</div>
+          <div class="hb-loop-desc">행동 뒤에 얻는 만족</div>
+        </td>
+        <td class="hb-loop-arrow">←</td>
+        <td class="hb-loop-cell hb-c3">
+          <div class="hb-loop-emoji">✋</div>
+          <div class="hb-loop-n">3단계</div>
+          <div class="hb-loop-name">반응</div>
+          <div class="hb-loop-desc">실제로 하는 행동</div>
+        </td>
+      </tr>
+    </table>
+    <p class="hb-note">보상이 다시 다음 신호와 연결되면서 고리는 계속 돌아갑니다.</p>
+
+    <p>휴대폰 사례에 대입해 볼게요. 책상 위에서 <strong>알림 진동</strong>이 울립니다(신호). 무슨 소식인지 궁금하고 <strong>지루함을 덜고 싶어집니다</strong>(열망). 휴대폰을 <strong>집어 들어 확인</strong>합니다(반응). <strong>새 소식을 보고 궁금증이 풀립니다</strong>(보상). 뇌는 이 경험을 기억하고, 다음에 진동이 울리면 더 빨리 손을 뻗게 돼요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      습관이 충분히 자리 잡으면, 목표나 마음이 바뀌어도 행동은 상황에 이끌려 계속됩니다. 영화관에서 팝콘을 늘 먹던 사람들은 <strong>눅눅하게 오래된 팝콘</strong>을 줘도 맛이 없다고 하면서 비슷한 양을 먹었어요. 반면 같은 사람들도 영화관이 아닌 회의실에서는 오래된 팝콘을 훨씬 덜 먹었습니다. 행동을 이끈 건 '먹고 싶은 마음'이 아니라 <strong>영화관이라는 신호</strong>였던 거죠.
+    </div>
+
+    <!-- 섹션 2 -->
+    <h2 class="hb-h2" id="ep3-s2">우리가 원하는 건 행동이 아니라 '느낌'</h2>
+    <p>네 단계 중 가장 놓치기 쉬운 것이 <strong>열망</strong>이에요. 우리는 휴대폰 자체를 원하는 게 아닙니다. 휴대폰이 주는 <strong>느낌</strong>, 이를테면 지루함에서 벗어난 느낌, 누군가와 연결된 느낌, 뒤처지지 않았다는 안도감을 원하는 거예요.</p>
+    <p>이건 중요한 단서입니다. 같은 열망을 채워 주는 다른 행동이 있다면, 습관을 바꿀 수 있는 문이 열리니까요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">뇌에서는</div>
+      도파민은 흔히 '쾌락 물질'로 알려져 있지만, 연구에서는 보상을 받을 때보다 <strong>보상을 기대할 때</strong>, 그리고 예상보다 좋은 결과가 나왔을 때 특히 활발해지는 모습이 관찰되었어요. 언제 올지 모르는 알림처럼 <strong>예측할 수 없는 보상</strong>이 사람을 더 자주 확인하게 만드는 이유도 여기서 일부 설명됩니다. 다만 '도파민 중독'이라는 말은 이 복잡한 과정을 지나치게 단순화한 표현이라는 점도 함께 기억해 주세요.
+    </div>
+
+    <!-- 섹션 3 -->
+    <h2 class="hb-h2" id="ep3-s3">신호는 생각보다 다양해요</h2>
+    <p>습관을 바꾸려면 먼저 신호를 찾아야 합니다. 신호는 대체로 다섯 가지 중 하나예요.</p>
+
+    <table class="hb-cues">
+      <tr><td class="hb-cue-emoji"><div>🕘</div></td><td class="hb-cue-k">시간</td><td class="hb-cue-v">밤 11시만 되면 배달 앱을 연다</td></tr>
+      <tr><td class="hb-cue-emoji"><div>📍</div></td><td class="hb-cue-k">장소</td><td class="hb-cue-v">침대에 누우면 휴대폰을 켠다</td></tr>
+      <tr><td class="hb-cue-emoji"><div>⏮️</div></td><td class="hb-cue-k">직전 행동</td><td class="hb-cue-v">밥을 다 먹으면 커피를 찾는다</td></tr>
+      <tr class="hb-cue-hl"><td class="hb-cue-emoji"><div>🌧️</div></td><td class="hb-cue-k">감정 상태</td><td class="hb-cue-v">불안하거나 외로우면 SNS를 넘긴다</td></tr>
+      <tr><td class="hb-cue-emoji"><div>👥</div></td><td class="hb-cue-k">다른 사람</td><td class="hb-cue-v">특정 친구를 만나면 늘 술자리가 된다</td></tr>
+    </table>
+
+    <p>시간, 장소, 직전 행동처럼 <strong>바깥에 있는 신호</strong>는 비교적 찾기 쉬워요. 반면 <strong>감정 상태</strong>는 신호인 줄 모르고 지나치기 쉽습니다. 다음 섹션에서 이 부분을 조금 더 살펴볼게요.</p>
+
+    <!-- 섹션 4 -->
+    <h2 class="hb-h2" id="ep3-s4">감정이 신호가 될 때</h2>
+
+    <div class="hb-care">
+      <div class="hb-care-emoji">🌱</div>
+      <div class="hb-care-title">그 습관은 나를 돌보려던 방법이었을지도 몰라요</div>
+      불안할 때 휴대폰을 붙잡거나, 허전할 때 무언가를 먹거나, 잠이 안 올 때 술을 찾는 행동. 이런 습관은 대부분 <strong>힘든 감정을 잠시 덜어 주는 역할</strong>을 해 왔기 때문에 생겨요. 그래서 "왜 이렇게 한심하게 굴까"라고 자신을 몰아세우기보다, "이 행동이 나에게 어떤 감정을 달래 주고 있었을까?"를 먼저 물어보는 것이 도움이 됩니다.
+    </div>
+
+    <p>밤마다 야식을 먹는 습관을 네 단계로 풀어 보면 이렇습니다.</p>
+
+    <table class="hb-anal">
+      <tr class="r1"><td class="hb-anal-k">신호</td><td class="hb-anal-v">밤 11시, 혼자 있는 방, 하루가 허무하게 느껴짐</td></tr>
+      <tr class="r2"><td class="hb-anal-k">열망</td><td class="hb-anal-v">고생한 나를 위로받고 싶다</td></tr>
+      <tr class="r3"><td class="hb-anal-k">반응</td><td class="hb-anal-v">라면이나 배달 음식을 먹는다</td></tr>
+      <tr class="r4"><td class="hb-anal-k">보상</td><td class="hb-anal-v">잠깐 따뜻하고 편안해진다</td></tr>
+      <tr class="r5"><td class="hb-anal-k">그 뒤</td><td class="hb-anal-v">더부룩해서 잠을 설치고, 아침에 후회한다</td></tr>
+    </table>
+    <p class="hb-note">보상은 즉시 오고, 대가는 나중에 와요. 그래서 알면서도 반복하게 됩니다.</p>
+
+    <p>이렇게 적고 나면 보이는 게 있어요. 진짜 원한 건 라면이 아니라 <strong>위로</strong>였다는 것. 그렇다면 위로라는 열망을 채워 줄 다른 반응을 찾아볼 수 있습니다.</p>
+
+    <!-- 섹션 5 -->
+    <h2 class="hb-h2" id="ep3-s5">바꿀 수 있는 건 가운데 고리</h2>
+    <p>습관을 바꿀 때 많이 쓰이는 원칙이 있어요. <strong>신호와 보상은 그대로 두고, 반응만 바꾸는 것</strong>입니다. 신호는 피할 수 없을 때가 많고, 보상(원하는 느낌)은 여전히 필요하니까요.</p>
+
+    <table class="hb-golden">
+      <tr>
+        <td class="hb-g-keep"><div class="hb-g-label">그대로</div><div class="hb-g-name">신호</div><div class="hb-g-ex">밤 11시, 허전함</div></td>
+        <td class="hb-g-keep"><div class="hb-g-label">그대로</div><div class="hb-g-name">열망</div><div class="hb-g-ex">위로받고 싶다</div></td>
+        <td class="hb-g-change"><div class="hb-g-label">바꾸기</div><div class="hb-g-name">반응</div><div class="hb-g-ex">따뜻한 차 + 좋아하는 음악</div></td>
+        <td class="hb-g-keep"><div class="hb-g-label">그대로</div><div class="hb-g-name">보상</div><div class="hb-g-ex">편안해지는 느낌</div></td>
+      </tr>
+    </table>
+
+    <p>새 반응이 처음부터 라면만큼 만족스럽지는 않을 수 있어요. 괜찮습니다. 핵심은 <strong>내가 원하는 느낌을 정확히 아는 것</strong>이고, 거기에 맞는 대안을 몇 번 시험해 보면서 나에게 맞는 걸 찾아가면 됩니다. 구체적인 바꾸는 방법은 4편부터 하나씩 다룰게요.</p>
+
+    <!-- 해보기 -->
+    <div class="hb-try">
+      <div class="hb-try-emoji">✏️</div>
+      <div class="hb-try-title">오늘 해보기: 내 습관 루프 그려보기</div>
+      <table class="hb-steps">
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">1</div></td>
+          <td>
+            <div class="hb-step-q">바꾸고 싶은 습관 하나를 고르고, 그 직전에 무엇이 있었는지 적어 보세요.</div>
+            <div class="hb-step-ex">시간·장소·직전 행동·감정·사람 중 무엇이었나요?</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">2</div></td>
+          <td>
+            <div class="hb-step-q">그 행동으로 내가 진짜 얻고 싶었던 느낌은 무엇일까요?</div>
+            <div class="hb-step-ex">예: 쉬고 싶었다, 외롭지 않고 싶었다, 머리를 비우고 싶었다</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">3</div></td>
+          <td>
+            <div class="hb-step-q">같은 느낌을 줄 수 있는 다른 행동을 두 가지 떠올려 보세요.</div>
+            <div class="hb-step-ex">예: 창문 열고 5분 서 있기, 친구에게 짧은 메시지 보내기</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 요약 -->
+    <div class="hb-sum">
+      <div class="hb-sum-label">오늘의 한 줄</div>
+      <div class="hb-sum-text">습관은 신호, 열망, 반응, 보상으로 돌아가요. 내가 원한 '느낌'을 알면, 같은 느낌을 주는 다른 행동을 고를 수 있습니다.</div>
+    </div>
+
+    <a class="hb-next" href="#ep4">
+      <div class="hb-next-label">다음 편 예고 · 4편</div>
+      <div class="hb-next-title">분명하게: 환경과 습관 쌓기</div>
+      좋은 습관의 신호를 눈앞에 두는 법, 그리고 이미 하고 있는 행동에 새 습관을 얹는 '습관 쌓기'를 알아봐요.
+      <span class="hb-next-go">이어서 읽기 →</span>
+    </a>
+
+    <!-- 참고문헌 -->
+    <details class="hb-ref">
+      <summary>참고문헌 보기</summary>
+      <ol>
+        <li>Clear, J. (2018). <em>Atomic Habits: An Easy &amp; Proven Way to Build Good Habits &amp; Break Bad Ones</em>. Avery. (한국어판: 제임스 클리어, 『아주 작은 습관의 힘』, 이한이 옮김, 비즈니스북스, 2019)</li>
+        <li>Duhigg, C. (2012). <em>The Power of Habit: Why We Do What We Do in Life and Business</em>. Random House. (한국어판: 찰스 두히그, 『습관의 힘』, 강주헌 옮김, 갤리온, 2012)</li>
+        <li>Neal, D. T., Wood, W., Wu, M., &amp; Kurlander, D. (2011). The pull of the past: When do habits persist despite conflict with motives? <em>Personality and Social Psychology Bulletin, 37</em>(11), 1428–1437.</li>
+        <li>Schultz, W., Dayan, P., &amp; Montague, P. R. (1997). A neural substrate of prediction and reward. <em>Science, 275</em>(5306), 1593–1599.</li>
+        <li>Wood, W., &amp; Neal, D. T. (2007). A new look at habits and the habit–goal interface. <em>Psychological Review, 114</em>(4), 843–863.</li>
+        <li>Wood, W., &amp; Rünger, D. (2016). Psychology of habit. <em>Annual Review of Psychology, 67</em>, 289–314.</li>
+      </ol>
+      <div class="hb-ref-note">본 자료는 위 문헌의 개념을 일반 독자를 위해 재구성한 교육 자료이며, 의학적 진단이나 치료를 대신하지 않습니다.</div>
+    </details>
+
+
+</section>
+<section class="hb hb-ep" id="ep4" data-ep="4" aria-labelledby="ep4-title">
+  <!-- 표지 -->
+    <div class="hb-hero">
+      <div class="hb-series">습관의 원리 · 4편</div>
+      <h1 class="hb-title" id="ep4-title" data-toc="4편 · 분명하게: 환경과 습관 쌓기">분명하게:<br>환경과 습관 쌓기</h1>
+      <p class="hb-sub">기억력이나 의지에 맡기지 마세요. 언제, 어디서 할지가 분명하면 행동은 훨씬 쉽게 시작됩니다.</p>
+    </div>
+
+    <div class="hb-ask">
+      <div class="hb-ask-who">이런 생각, 해본 적 있나요?</div>
+      <div class="hb-ask-text">"하려고 마음은 먹었는데, 자꾸 까먹어요. 생각나면 이미 밤이에요."</div>
+    </div>
+
+    <p>3편에서 습관은 신호, 열망, 반응, 보상의 네 단계로 돌아간다고 했어요. 이번 편부터는 이 네 단계를 하나씩 손보는 방법을 다룹니다. 각 단계에 맞는 법칙이 하나씩 있어요.</p>
+
+    <table class="hb-road">
+      <tr>
+        <td class="hb-road-on"><div class="hb-road-stage">신호</div><div class="hb-road-law">분명하게</div><div class="hb-road-ep">4편 · 지금</div></td>
+        <td><div class="hb-road-stage">열망</div><div class="hb-road-law">매력적으로</div><div class="hb-road-ep">5편</div></td>
+        <td><div class="hb-road-stage">반응</div><div class="hb-road-law">쉽게</div><div class="hb-road-ep">5편</div></td>
+        <td><div class="hb-road-stage">보상</div><div class="hb-road-law">만족스럽게</div><div class="hb-road-ep">6편</div></td>
+      </tr>
+    </table>
+    <p class="hb-note">나쁜 습관을 끊을 때는 이 네 법칙을 거꾸로 적용해요. 7편에서 다룹니다.</p>
+
+    <p>첫 번째 법칙은 <strong>분명하게 만들기</strong>, 즉 좋은 습관의 신호를 놓칠 수 없게 만드는 것입니다.</p>
+
+    <!-- 섹션 1 -->
+    <h2 class="hb-h2" id="ep4-s1">"언젠가 해야지"에는 신호가 없어요</h2>
+    <p>"운동 좀 해야지", "책 좀 읽어야지". 이런 계획에는 빠진 것이 있습니다. <strong>언제, 어디서</strong>예요. 시작 신호가 정해져 있지 않으니 하루 내내 '해야 할 일'로 머리 한구석에 떠다니다가, 결국 피곤한 밤이 되어서야 생각나곤 하죠.</p>
+    <p>이 빈칸을 채우는 간단한 문장이 있어요. 심리학에서는 <strong>실행 의도</strong>라고 부릅니다.</p>
+
+    <div class="hb-formula">
+      <div class="hb-formula-label">실행 의도 공식</div>
+      <div class="hb-formula-line">나는 <span class="hb-slot">언제</span> <span class="hb-slot">어디서</span><br><span class="hb-slot">무엇을</span> 한다.</div>
+      <div class="hb-formula-ex">예: 나는 <strong>평일 저녁 7시에</strong> <strong>집 앞 공원에서</strong> <strong>20분 걷는다.</strong></div>
+    </div>
+
+    <p>너무 단순해 보이지만, 효과는 꽤 분명하게 확인되었어요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      운동을 계획한 성인들을 세 집단으로 나눠 2주 동안 지켜본 연구가 있어요. 운동의 장점을 읽게 한 집단은 아무것도 하지 않은 집단과 실천율이 비슷했지만, 여기에 <strong>"언제 어디서 운동할지" 한 문장을 적게 한 집단</strong>은 대부분이 실제로 운동했습니다.
+    </div>
+
+    <table class="hb-bars">
+      <tr>
+        <td class="hb-bar-k">아무것도 안 함</td>
+        <td><table class="hb-bar-in"><tr><td class="hb-bar-on" style="width:38%;">38%</td><td class="hb-bar-off"></td></tr></table></td>
+      </tr>
+      <tr>
+        <td class="hb-bar-k">동기 높이기만</td>
+        <td><table class="hb-bar-in"><tr><td class="hb-bar-on" style="width:35%;">35%</td><td class="hb-bar-off"></td></tr></table></td>
+      </tr>
+      <tr>
+        <td class="hb-bar-k"><strong>동기 + 실행 의도</strong></td>
+        <td><table class="hb-bar-in"><tr><td class="hb-bar-on hb-bar-win" style="width:91%;">91%</td><td class="hb-bar-off"></td></tr></table></td>
+      </tr>
+    </table>
+    <p class="hb-note">※ 주 1회 이상 운동한 비율. 한 연구의 결과이므로 모든 상황에서 같은 수치가 나온다는 뜻은 아니에요. 다만 실행 의도의 효과는 이후 많은 연구를 모은 분석에서도 꾸준히 확인되었습니다.</p>
+
+    <p>"더 하고 싶은 마음"보다 <strong>"언제 어디서 할지"를 정하는 것</strong>이 실천에 더 큰 차이를 만든 셈이에요.</p>
+
+    <!-- 섹션 2 -->
+    <h2 class="hb-h2" id="ep4-s2">이미 하는 일에 새 습관 얹기</h2>
+    <p>실행 의도를 더 쉽게 쓰는 방법이 있어요. 시간 대신 <strong>이미 매일 하고 있는 행동</strong>을 신호로 삼는 겁니다. 이걸 <strong>습관 쌓기</strong>라고 해요.</p>
+
+    <div class="hb-formula">
+      <div class="hb-formula-label">습관 쌓기 공식</div>
+      <div class="hb-formula-line"><span class="hb-slot">지금 하는 습관</span>을 한 뒤에<br><span class="hb-slot">새 습관</span>을 한다.</div>
+    </div>
+
+    <p>양치질, 커피 내리기, 현관문 열기처럼 이미 몸에 붙은 행동은 따로 기억할 필요가 없어요. 그 뒤에 새 행동을 붙이면, 기존 습관이 알람 역할을 해 줍니다. 익숙해지면 블록처럼 하나씩 더 쌓을 수도 있어요.</p>
+
+    <div class="hb-stack">
+      <div class="hb-block hb-block-old"><span class="hb-block-tag">이미 하는 습관</span>아침에 커피를 내린다</div>
+      <div class="hb-stack-arrow">↓ 그 뒤에</div>
+      <div class="hb-block hb-block-new"><span class="hb-block-tag">새 습관 1</span>영어 문장 하나를 소리 내어 읽는다</div>
+      <div class="hb-stack-arrow">↓ 그 뒤에</div>
+      <div class="hb-block hb-block-new"><span class="hb-block-tag">새 습관 2</span>오늘 할 일 세 가지를 적는다</div>
+    </div>
+    <p class="hb-note">처음에는 하나만 얹고, 그게 자연스러워지면 다음 블록을 쌓으세요.</p>
+
+    <p>여기서 중요한 건 <strong>닻이 되는 기존 습관을 잘 고르는 것</strong>이에요. 너무 애매하면 신호 역할을 못 합니다.</p>
+
+    <table class="hb-reframe">
+      <tr>
+        <td class="hb-rf-old">"쉬는 시간에 스트레칭"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"점심 먹고 자리에 앉으면 스트레칭"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"아침에 물 마시기"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"알람을 끄면 머리맡 물 한 컵 마시기"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"자기 전에 일기 쓰기"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"양치를 마치면 일기장 펴기"</td>
+      </tr>
+    </table>
+    <p>좋은 닻은 <strong>매일 일어나고, 시작과 끝이 분명하며, 새 습관과 장소가 가까운</strong> 행동이에요. 오른쪽처럼 '그 행동이 끝나는 순간'이 정확히 그려지면 성공입니다.</p>
+
+    <!-- 섹션 3 -->
+    <h2 class="hb-h2" id="ep4-s3">눈에 보이는 것이 행동을 이끌어요</h2>
+    <p>신호를 분명하게 만드는 또 하나의 방법은 <strong>환경</strong>입니다. 우리는 생각보다 훨씬 많이, 눈앞에 보이는 것에 따라 움직여요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      한 병원 구내식당에서 냉장고 눈높이 칸에 생수를 더 많이 두고 계산대 근처에도 생수 바구니를 놓았더니, 몇 달 사이 <strong>생수 판매는 늘고 탄산음료 판매는 줄었습니다</strong>. 메뉴는 그대로였고, 바뀐 건 물건의 위치뿐이었어요.
+    </div>
+
+    <p>선택지를 없앤 게 아니라 <strong>보이는 순서</strong>를 바꿨을 뿐인데 행동이 달라진 거예요. 집에서도 똑같이 적용할 수 있습니다.</p>
+
+    <table class="hb-env">
+      <tr><td class="hb-env-goal">물 더 마시기</td><td class="hb-env-emoji"><div>💧</div></td><td class="hb-env-do">물병을 책상 위, 손 닿는 자리에 두기</td></tr>
+      <tr><td class="hb-env-goal">책 읽기</td><td class="hb-env-emoji"><div>📖</div></td><td class="hb-env-do">리모컨 자리에 읽던 책 올려 두기</td></tr>
+      <tr><td class="hb-env-goal">약 챙기기</td><td class="hb-env-emoji"><div>💊</div></td><td class="hb-env-do">칫솔 옆에 약통 두기</td></tr>
+      <tr><td class="hb-env-goal">아침 운동</td><td class="hb-env-emoji"><div>👟</div></td><td class="hb-env-do">운동화를 현관 정중앙에 꺼내 두기</td></tr>
+    </table>
+
+    <p>한 걸음 더 나아가면, <strong>공간 하나에 용도 하나</strong>를 정해 주는 것도 좋아요. 침대에서 일도 하고, 영상도 보고, 밥도 먹으면 침대는 '잠'의 신호를 잃어버립니다. 그래서 불면증 치료에서도 <strong>"침대는 잠과 휴식에만 쓰고, 잠이 오지 않으면 잠시 침대에서 나오기"</strong>를 중요한 원칙으로 삼아요. 공간과 행동의 연결을 다시 분명하게 만드는 거죠.</p>
+
+    <!-- 섹션 4 -->
+    <h2 class="hb-h2" id="ep4-s4">머리가 무거운 날일수록</h2>
+
+    <div class="hb-care">
+      <div class="hb-care-emoji">🌱</div>
+      <div class="hb-care-title">기억은 환경에게 맡겨도 괜찮아요</div>
+      우울하거나 불안할 때, 잠을 잘 못 잤을 때는 집중력과 기억력이 평소보다 떨어지기 쉬워요. 해야 할 일을 자꾸 잊는 건 성의가 없어서가 아니라 머리가 이미 많은 것을 버티고 있기 때문입니다. 이런 시기에는 "잊지 말아야지" 다짐하기보다, <strong>눈에 보이는 물건, 정해진 자리, 기존 습관</strong>이 대신 기억하게 해 주세요. 약을 자주 잊는다면 칫솔 옆에 약통을 두는 것만으로도 큰 도움이 될 수 있어요.
+    </div>
+
+    <!-- 해보기 -->
+    <div class="hb-try">
+      <div class="hb-try-emoji">✏️</div>
+      <div class="hb-try-title">오늘 해보기: 신호를 분명하게</div>
+      <table class="hb-steps">
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">1</div></td>
+          <td>
+            <div class="hb-step-q">만들고 싶은 습관 하나를 실행 의도 문장으로 써 보세요.</div>
+            <div class="hb-step-ex">"나는 [언제] [어디서] [무엇을] 한다."</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">2</div></td>
+          <td>
+            <div class="hb-step-q">같은 습관을 습관 쌓기 문장으로도 바꿔 보세요.</div>
+            <div class="hb-step-ex">"[지금 하는 습관]을 한 뒤에 [새 습관]을 한다."</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">3</div></td>
+          <td>
+            <div class="hb-step-q">그 습관의 신호가 눈에 보이도록, 오늘 옮겨 둘 물건 하나는 무엇인가요?</div>
+            <div class="hb-step-ex">예: 요가 매트를 침대 옆에 펼쳐 두기, 물병을 모니터 앞에 두기</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 요약 -->
+    <div class="hb-sum">
+      <div class="hb-sum-label">오늘의 한 줄</div>
+      <div class="hb-sum-text">"언젠가"를 "언제, 어디서"로 바꾸고, 신호는 눈앞에 두세요. 기억은 환경이 대신해 줄 수 있어요.</div>
+    </div>
+
+    <a class="hb-next" href="#ep5">
+      <div class="hb-next-label">다음 편 예고 · 5편</div>
+      <div class="hb-next-title">쉽게, 매력적으로: 2분 규칙</div>
+      신호가 분명해도 시작이 무거우면 몸이 움직이지 않아요. 행동을 아주 작게 줄이는 2분 규칙과, 하고 싶게 만드는 방법을 알아봐요.
+      <span class="hb-next-go">이어서 읽기 →</span>
+    </a>
+
+    <!-- 참고문헌 -->
+    <details class="hb-ref">
+      <summary>참고문헌 보기</summary>
+      <ol>
+        <li>Clear, J. (2018). <em>Atomic Habits: An Easy &amp; Proven Way to Build Good Habits &amp; Break Bad Ones</em>. Avery. (한국어판: 제임스 클리어, 『아주 작은 습관의 힘』, 이한이 옮김, 비즈니스북스, 2019)</li>
+        <li>Gollwitzer, P. M. (1999). Implementation intentions: Strong effects of simple plans. <em>American Psychologist, 54</em>(7), 493–503.</li>
+        <li>Gollwitzer, P. M., &amp; Sheeran, P. (2006). Implementation intentions and goal achievement: A meta-analysis of effects and processes. <em>Advances in Experimental Social Psychology, 38</em>, 69–119.</li>
+        <li>Milne, S., Orbell, S., &amp; Sheeran, P. (2002). Combining motivational and volitional interventions to promote exercise participation: Protection motivation theory and implementation intentions. <em>British Journal of Health Psychology, 7</em>(2), 163–184.</li>
+        <li>Thorndike, A. N., Sonnenberg, L., Riis, J., Barraclough, S., &amp; Levy, D. E. (2012). A 2-phase labeling and choice architecture intervention to improve healthy food and beverage choices. <em>American Journal of Public Health, 102</em>(3), 527–533.</li>
+        <li>Bootzin, R. R. (1972). Stimulus control treatment for insomnia. <em>Proceedings of the 80th Annual Convention of the American Psychological Association, 7</em>, 395–396.</li>
+      </ol>
+      <div class="hb-ref-note">본 자료는 위 문헌의 개념을 일반 독자를 위해 재구성한 교육 자료이며, 의학적 진단이나 치료를 대신하지 않습니다.</div>
+    </details>
+
+
+</section>
+<section class="hb hb-ep" id="ep5" data-ep="5" aria-labelledby="ep5-title">
+  <!-- 표지 -->
+    <div class="hb-hero">
+      <div class="hb-series">습관의 원리 · 5편</div>
+      <h1 class="hb-title" id="ep5-title" data-toc="5편 · 쉽게, 매력적으로: 2분 규칙">쉽게, 매력적으로:<br>2분 규칙</h1>
+      <p class="hb-sub">시작이 무거우면 몸은 움직이지 않아요. 행동은 더 작게, 기분은 더 즐겁게 만드는 두 가지 법칙을 알아봅니다.</p>
+    </div>
+
+    <div class="hb-ask">
+      <div class="hb-ask-who">이런 생각, 해본 적 있나요?</div>
+      <div class="hb-ask-text">"30분 운동은 생각만 해도 지쳐요. 시작하기도 전에 포기하게 돼요."</div>
+    </div>
+
+    <p>4편에서 신호를 분명하게 만들었다면, 이제 신호를 본 다음의 순간을 다룰 차례예요. 신호가 울려도 <strong>"하기 싫다"</strong>는 마음이 크거나 <strong>"너무 번거롭다"</strong>고 느껴지면 행동은 일어나지 않습니다.</p>
+
+    <table class="hb-road">
+      <tr>
+        <td><div class="hb-road-stage">신호</div><div class="hb-road-law">분명하게</div><div class="hb-road-ep">4편</div></td>
+        <td class="hb-road-on"><div class="hb-road-stage">열망</div><div class="hb-road-law">매력적으로</div><div class="hb-road-ep">5편 · 지금</div></td>
+        <td class="hb-road-on"><div class="hb-road-stage">반응</div><div class="hb-road-law">쉽게</div><div class="hb-road-ep">5편 · 지금</div></td>
+        <td><div class="hb-road-stage">보상</div><div class="hb-road-law">만족스럽게</div><div class="hb-road-ep">6편</div></td>
+      </tr>
+    </table>
+    <p class="hb-note">이번 편은 두 법칙을 함께 다뤄요. 효과가 더 크고 바로 써먹기 좋은 '쉽게'부터 시작할게요.</p>
+
+    <!-- 섹션 1 -->
+    <h2 class="hb-h2" id="ep5-s1">사람은 쉬운 쪽으로 흘러가요</h2>
+    <p>우리 뇌는 에너지를 아끼도록 만들어져 있어요. 그래서 두 가지 선택지가 있으면 대개 <strong>수고가 덜 드는 쪽</strong>을 고릅니다. 이건 게으름이 아니라 아주 자연스러운 성향이에요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      유럽 여러 나라의 장기기증 동의율을 비교한 연구가 있어요. 문화가 비슷한 이웃 나라끼리도 동의율이 크게 갈렸는데, 차이를 만든 건 국민성이 아니라 <strong>신청서의 기본 설정</strong>이었습니다. "원하면 체크해서 동의"하는 나라는 동의율이 낮았고, "원하지 않으면 체크해서 거부"하는 나라는 대부분이 동의 상태였어요. 체크박스 하나만큼의 수고가 결과를 바꾼 거예요.
+    </div>
+
+    <p>습관도 똑같아요. 좋은 습관은 <strong>수고를 한 단계라도 줄이고</strong>, 나쁜 습관은 수고를 한 단계라도 늘리면 됩니다. 이 '수고'를 흔히 <strong>마찰</strong>이라고 불러요.</p>
+
+    <table class="hb-env">
+      <tr><td class="hb-env-goal">아침 운동</td><td class="hb-env-emoji"><div>👕</div></td><td class="hb-env-do">전날 밤 운동복을 입고 자기</td></tr>
+      <tr><td class="hb-env-goal">건강한 간식</td><td class="hb-env-emoji"><div>🥕</div></td><td class="hb-env-do">과일·채소를 씻어서 바로 꺼내 먹게 두기</td></tr>
+      <tr><td class="hb-env-goal">일기 쓰기</td><td class="hb-env-emoji"><div>📓</div></td><td class="hb-env-do">일기장을 펴고 펜을 그 위에 올려 두기</td></tr>
+    </table>
+
+    <!-- 섹션 2 -->
+    <h2 class="hb-h2" id="ep5-s2">2분 규칙: 시작만 하면 성공</h2>
+    <p>마찰을 줄이는 가장 강력한 방법은 <strong>행동 자체를 작게 만드는 것</strong>이에요. 새 습관을 시작할 때는 <strong>2분 안에 끝낼 수 있는 버전</strong>으로 줄여 보세요.</p>
+
+    <table class="hb-shrink">
+      <tr class="hb-sh-head"><td>원래 계획</td><td></td><td>2분 버전</td></tr>
+      <tr><td class="hb-sh-big">매일 30분 달리기</td><td class="hb-sh-arrow">▶</td><td class="hb-sh-small">운동화 신고 현관 나가기</td></tr>
+      <tr><td class="hb-sh-big">자기 전 책 30쪽 읽기</td><td class="hb-sh-arrow">▶</td><td class="hb-sh-small">책 펴고 한 쪽 읽기</td></tr>
+      <tr><td class="hb-sh-big">명상 20분 하기</td><td class="hb-sh-arrow">▶</td><td class="hb-sh-small">앉아서 숨 세 번 쉬기</td></tr>
+      <tr><td class="hb-sh-big">방 전체 정리하기</td><td class="hb-sh-arrow">▶</td><td class="hb-sh-small">물건 하나 제자리에 두기</td></tr>
+    </table>
+
+    <p>"이렇게 작게 해서 무슨 의미가 있나" 싶을 수 있어요. 하지만 2분 규칙의 목표는 운동량이 아니라 <strong>'시작하는 사람'이 되는 것</strong>입니다. 아직 존재하지 않는 습관은 개선할 수도 없으니까요. 먼저 매일 나타나는 법을 익히고, 그다음에 늘리면 돼요.</p>
+
+    <div class="hb-stairs">
+      <div class="hb-stair hb-s4"><span class="hb-stair-w">그 이후</span>30분 걷기·달리기</div>
+      <div class="hb-stair hb-s3"><span class="hb-stair-w">3~4주차</span>동네 한 바퀴 15분</div>
+      <div class="hb-stair hb-s2"><span class="hb-stair-w">2주차</span>집 앞 5분 걷기</div>
+      <div class="hb-stair hb-s1"><span class="hb-stair-w">1주차 · 여기서 시작</span>운동화 신기</div>
+    </div>
+    <p class="hb-note">아래에서 위로, 계단은 내 속도에 맞춰 오르면 돼요. 한 칸에 오래 머물러도 괜찮습니다.</p>
+
+    <p>그리고 기억해 두세요. <strong>2분만 하고 멈춰도 그날은 성공</strong>이에요. 하다 보니 더 하고 싶으면 더 해도 되지만, 의무는 아닙니다. 그래야 다음 날도 부담 없이 다시 시작할 수 있어요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">행동과학에서는</div>
+      행동은 <strong>동기, 능력, 신호</strong>가 동시에 맞아떨어질 때 일어난다고 설명하는 모델이 있어요. 동기는 날마다 오르내리기 때문에 믿기 어렵지만, 행동을 아주 쉽게 만들면 동기가 낮은 날에도 실행할 수 있습니다.
+    </div>
+
+    <table class="hb-map">
+      <tr>
+        <td class="hb-map-hard"><div class="hb-map-k">동기 낮은 날 + 어려운 행동</div><div class="hb-map-v">하지 않게 됨</div></td>
+        <td class="hb-map-easy"><div class="hb-map-k">동기 낮은 날 + 아주 쉬운 행동</div><div class="hb-map-v">그래도 할 수 있음</div></td>
+      </tr>
+    </table>
+
+    <!-- 섹션 3 -->
+    <h2 class="hb-h2" id="ep5-s3">하고 싶게 만드는 방법</h2>
+    <p>이제 '매력적으로' 차례예요. 3편에서 습관을 움직이는 건 '열망'이라고 했죠. 해야 하는 일이 즐거운 느낌과 함께 오면, 그 일을 더 기다리게 됩니다. 가장 간단한 방법은 <strong>유혹 묶기</strong>예요.</p>
+
+    <table class="hb-bundle">
+      <tr>
+        <td class="hb-b-need"><div class="hb-b-emoji">🏃</div><div class="hb-b-k">해야 하는 일</div><div class="hb-b-v">러닝머신 걷기</div></td>
+        <td class="hb-b-plus">+</td>
+        <td class="hb-b-want"><div class="hb-b-emoji">🎧</div><div class="hb-b-k">하고 싶은 일</div><div class="hb-b-v">좋아하는 오디오북</div></td>
+      </tr>
+    </table>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      좋아하는 오디오 소설을 <strong>헬스장에서만</strong> 들을 수 있게 한 실험에서, 참가자들의 운동 횟수가 늘었어요. 이야기 다음 편이 궁금해서 헬스장에 간 셈이죠. 다만 시간이 지나 연휴 등을 거치면서 효과가 줄어드는 모습도 보였는데, 이건 매력만으로는 부족하고 앞에서 본 다른 법칙들과 함께 써야 한다는 뜻이기도 해요.
+    </div>
+
+    <p>4편의 습관 쌓기와 합치면 이런 공식이 됩니다.</p>
+
+    <div class="hb-formula">
+      <div class="hb-formula-label">습관 쌓기 + 유혹 묶기</div>
+      <div class="hb-formula-line"><span class="hb-slot">지금 하는 습관</span> 뒤에 <span class="hb-slot">해야 하는 일</span>,<br>그 뒤에 <span class="hb-slot">하고 싶은 일</span>을 한다.</div>
+      <div class="hb-formula-ex">예: 퇴근하면 스트레칭 5분, 그 뒤에 좋아하는 유튜브를 본다.</div>
+    </div>
+
+    <p>말 한마디를 바꾸는 것도 매력을 더해 줘요. 같은 일이라도 어떻게 부르느냐에 따라 느낌이 달라집니다.</p>
+
+    <table class="hb-reframe">
+      <tr>
+        <td class="hb-rf-old">"운동해야 해"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"몸을 깨워 볼 시간이야"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"정리해야 해"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"내일의 나에게 선물을 남기자"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"공부해야 해"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"오늘 하나만 새로 알아보자"</td>
+      </tr>
+    </table>
+
+    <!-- 섹션 4 -->
+    <h2 class="hb-h2" id="ep5-s4">의욕이 하나도 없을 때</h2>
+
+    <div class="hb-care">
+      <div class="hb-care-emoji">🌱</div>
+      <div class="hb-care-title">의욕은 행동 뒤에 따라오기도 해요</div>
+      우울할 때는 "기분이 나아지면 해야지"라고 생각하기 쉬워요. 하지만 우울은 기분을 기다리는 동안 더 깊어지는 경우가 많습니다. 그래서 우울 치료에 쓰이는 <strong>행동활성화</strong>에서는 순서를 거꾸로 생각해요. <strong>작게 먼저 움직이면, 기분이 조금씩 뒤따라온다</strong>는 것이죠. 연구에서도 행동활성화는 우울을 줄이는 데 효과적인 방법으로 확인되었어요. 2분 규칙은 바로 이 '작게 먼저 움직이기'를 일상에서 해보는 방법이기도 합니다. 다만 아주 작은 행동도 버겁게 느껴진다면, 그건 혼자 견디기보다 전문가와 함께 다뤄야 할 신호일 수 있어요.
+    </div>
+
+    <!-- 해보기 -->
+    <div class="hb-try">
+      <div class="hb-try-emoji">✏️</div>
+      <div class="hb-try-title">오늘 해보기: 작고 즐겁게</div>
+      <table class="hb-steps">
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">1</div></td>
+          <td>
+            <div class="hb-step-q">만들고 싶은 습관을 2분 버전으로 줄여 보세요.</div>
+            <div class="hb-step-ex">"이건 너무 쉬운데?" 싶을 정도면 딱 좋아요.</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">2</div></td>
+          <td>
+            <div class="hb-step-q">내일 시작을 더 쉽게 하려면, 오늘 미리 준비해 둘 것 하나는?</div>
+            <div class="hb-step-ex">예: 운동화를 현관에 두기, 책갈피를 오늘 읽을 쪽에 끼워 두기</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">3</div></td>
+          <td>
+            <div class="hb-step-q">그 습관과 묶을 수 있는 '하고 싶은 일'은 무엇인가요?</div>
+            <div class="hb-step-ex">예: 설거지할 때만 듣는 팟캐스트, 산책 후에만 마시는 좋아하는 음료</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 요약 -->
+    <div class="hb-sum">
+      <div class="hb-sum-label">오늘의 한 줄</div>
+      <div class="hb-sum-text">2분이면 충분해요. 작게 시작하고, 좋아하는 것과 묶으면, 동기가 없는 날에도 몸이 먼저 움직입니다.</div>
+    </div>
+
+    <a class="hb-next" href="#ep6">
+      <div class="hb-next-label">다음 편 예고 · 6편</div>
+      <div class="hb-next-title">만족스럽게: 3일의 벽 넘기</div>
+      습관이 자리 잡는 데 정말 21일이면 될까요? 실제 연구가 말하는 기간, 그리고 하루 빠졌을 때 무너지지 않는 법을 알아봐요.
+      <span class="hb-next-go">이어서 읽기 →</span>
+    </a>
+
+    <!-- 참고문헌 -->
+    <details class="hb-ref">
+      <summary>참고문헌 보기</summary>
+      <ol>
+        <li>Clear, J. (2018). <em>Atomic Habits: An Easy &amp; Proven Way to Build Good Habits &amp; Break Bad Ones</em>. Avery. (한국어판: 제임스 클리어, 『아주 작은 습관의 힘』, 이한이 옮김, 비즈니스북스, 2019)</li>
+        <li>Fogg, B. J. (2019). <em>Tiny Habits: The Small Changes That Change Everything</em>. Houghton Mifflin Harcourt. (한국어판: BJ 포그, 『습관의 디테일』, 김미정 옮김, 흐름출판, 2020)</li>
+        <li>Johnson, E. J., &amp; Goldstein, D. (2003). Do defaults save lives? <em>Science, 302</em>(5649), 1338–1339.</li>
+        <li>Milkman, K. L., Minson, J. A., &amp; Volpp, K. G. M. (2014). Holding the Hunger Games hostage at the gym: An evaluation of temptation bundling. <em>Management Science, 60</em>(2), 283–299.</li>
+        <li>Premack, D. (1959). Toward empirical behavior laws: I. Positive reinforcement. <em>Psychological Review, 66</em>(4), 219–233.</li>
+        <li>Dimidjian, S., Hollon, S. D., Dobson, K. S., et al. (2006). Randomized trial of behavioral activation, cognitive therapy, and antidepressant medication in the acute treatment of adults with major depression. <em>Journal of Consulting and Clinical Psychology, 74</em>(4), 658–670.</li>
+      </ol>
+      <div class="hb-ref-note">본 자료는 위 문헌의 개념을 일반 독자를 위해 재구성한 교육 자료이며, 의학적 진단이나 치료를 대신하지 않습니다.</div>
+    </details>
+
+
+</section>
+<section class="hb hb-ep" id="ep6" data-ep="6" aria-labelledby="ep6-title">
+  <!-- 표지 -->
+    <div class="hb-hero">
+      <div class="hb-series">습관의 원리 · 6편</div>
+      <h1 class="hb-title" id="ep6-title" data-toc="6편 · 만족스럽게: 3일의 벽 넘기">만족스럽게:<br>3일의 벽 넘기</h1>
+      <p class="hb-sub">습관은 '했더니 좋았다'는 느낌이 있어야 남아요. 그리고 하루 빠진 날을 어떻게 보내느냐가 습관의 운명을 가릅니다.</p>
+    </div>
+
+    <div class="hb-ask">
+      <div class="hb-ask-who">이런 생각, 해본 적 있나요?</div>
+      <div class="hb-ask-text">"하루 빠지면 다 망한 것 같아요. 그래서 그냥 다 그만두게 돼요."</div>
+    </div>
+
+    <p>4편과 5편에서 습관을 분명하고, 쉽고, 매력적으로 만드는 법을 살펴봤어요. 이번 편은 습관 루프의 마지막 고리, <strong>보상</strong>을 다룹니다. 보상은 뇌에게 "이건 다시 해도 좋은 행동이야"라고 알려 주는 신호예요.</p>
+
+    <table class="hb-road">
+      <tr>
+        <td><div class="hb-road-stage">신호</div><div class="hb-road-law">분명하게</div><div class="hb-road-ep">4편</div></td>
+        <td><div class="hb-road-stage">열망</div><div class="hb-road-law">매력적으로</div><div class="hb-road-ep">5편</div></td>
+        <td><div class="hb-road-stage">반응</div><div class="hb-road-law">쉽게</div><div class="hb-road-ep">5편</div></td>
+        <td class="hb-road-on"><div class="hb-road-stage">보상</div><div class="hb-road-law">만족스럽게</div><div class="hb-road-ep">6편 · 지금</div></td>
+      </tr>
+    </table>
+
+    <!-- 섹션 1 -->
+    <h2 class="hb-h2" id="ep6-s1">좋은 습관은 보상이 늦게 와요</h2>
+    <p>좋은 습관이 어렵고 나쁜 습관이 쉬운 데는 이유가 있어요. 보상이 <strong>언제</strong> 오느냐가 다르기 때문입니다.</p>
+
+    <table class="hb-time">
+      <tr class="hb-t-head"><td></td><td>지금 느끼는 것</td><td>나중에 오는 것</td></tr>
+      <tr><td class="hb-t-k">운동</td><td class="hb-t-bad">힘들고 귀찮음</td><td class="hb-t-good hb-t-last">체력, 좋은 기분</td></tr>
+      <tr><td class="hb-t-k">저축</td><td class="hb-t-bad">쓰고 싶은 걸 참음</td><td class="hb-t-good hb-t-last">여유와 안정감</td></tr>
+      <tr><td class="hb-t-k">야식</td><td class="hb-t-good">맛있고 편안함</td><td class="hb-t-bad hb-t-last">더부룩함, 수면 방해</td></tr>
+      <tr><td class="hb-t-k">밤샘 폰</td><td class="hb-t-good">재미있고 시간 잊음</td><td class="hb-t-bad hb-t-last">피로, 다음 날 무기력</td></tr>
+    </table>
+    <p class="hb-note">좋은 습관은 대가가 먼저, 나쁜 습관은 보상이 먼저 와요.</p>
+
+    <p>사람은 멀리 있는 큰 보상보다 <strong>지금 당장의 작은 보상</strong>에 더 크게 반응하는 경향이 있어요. 그래서 좋은 습관을 오래 이어가려면, 나중의 보상을 기다리는 동안 <strong>지금 느낄 수 있는 작은 만족</strong>을 하나 붙여 주는 것이 도움이 됩니다.</p>
+
+    <table class="hb-env">
+      <tr><td class="hb-env-goal">커피값 아끼기</td><td class="hb-env-emoji"><div>✈️</div></td><td class="hb-env-do">아낀 5천 원을 그 자리에서 '여행 통장'으로 이체하기</td></tr>
+      <tr><td class="hb-env-goal">산책하기</td><td class="hb-env-emoji"><div>📸</div></td><td class="hb-env-do">산책 중 마음에 드는 풍경 한 장 찍기</td></tr>
+      <tr><td class="hb-env-goal">설거지</td><td class="hb-env-emoji"><div>🧴</div></td><td class="hb-env-do">향이 좋은 세제와 핸드크림 쓰기</td></tr>
+    </table>
+    <p>다만 보상이 습관과 반대 방향이면 안 돼요. 운동 후 케이크를 보상으로 주면, 몸을 돌보는 사람이라는 정체성과 부딪히니까요. <strong>내가 되고 싶은 모습과 어울리는 보상</strong>을 고르세요.</p>
+
+    <!-- 섹션 2 -->
+    <h2 class="hb-h2" id="ep6-s2">눈에 보이는 기록이 주는 힘</h2>
+    <p>가장 손쉬운 즉시 보상은 <strong>기록</strong>이에요. 달력에 체크 하나를 그리는 순간, "오늘도 해냈다"는 만족이 바로 생깁니다. 기록이 쌓이면 그 자체로 다음 행동의 신호가 되기도 하고요.</p>
+
+    <div class="hb-tracker">
+      <div class="hb-tracker-title">한 달 걷기 기록</div>
+      <table class="hb-trk">
+        <tr><td class="hb-trk-d"></td><td class="hb-trk-d">월</td><td class="hb-trk-d">화</td><td class="hb-trk-d">수</td><td class="hb-trk-d">목</td><td class="hb-trk-d">금</td><td class="hb-trk-d">토</td><td class="hb-trk-d">일</td></tr>
+        <tr><td class="hb-trk-w">1주</td><td class="y">✓</td><td class="y">✓</td><td class="n">–</td><td class="r">↺</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+        <tr><td class="hb-trk-w">2주</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="n">–</td><td class="r">↺</td></tr>
+        <tr><td class="hb-trk-w">3주</td><td class="y">✓</td><td class="n">–</td><td class="r">↺</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+        <tr><td class="hb-trk-w">4주</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="n">–</td><td class="r">↺</td><td class="y">✓</td><td class="y">✓</td></tr>
+      </table>
+    </div>
+    <p class="hb-note">✓ 한 날 · – 빠진 날 · ↺ 빠진 다음 날 다시 시작한 날. 빠진 날은 있어도, 두 번 연속 빠진 날은 없어요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      여러 연구를 모아 분석한 결과, 목표를 향한 진행 상황을 <strong>자주 확인하는 것</strong>만으로도 목표 달성 가능성이 높아졌어요. 특히 머릿속으로만 확인할 때보다 <strong>직접 적어서 기록할 때</strong> 효과가 더 컸습니다.
+    </div>
+
+    <p>단, 기록은 도구일 뿐 목표가 아니에요. 연속 기록을 지키는 게 목적이 되면, 한 번 끊겼을 때 의욕이 한꺼번에 무너질 수 있거든요. 그래서 다음 이야기가 중요합니다.</p>
+
+    <!-- 섹션 3 -->
+    <h2 class="hb-h2" id="ep6-s3">21일이면 습관이 된다는 말</h2>
+    <p>"21일만 하면 습관이 된다"는 말, 많이 들어 보셨죠? 이 숫자는 1960년대 한 성형외과 의사의 책에서 나왔어요. 환자들이 바뀐 외모에 익숙해지는 데 <strong>"최소 21일 정도"</strong> 걸린다는 관찰이었는데, 전해지면서 '최소'라는 말이 빠지고 습관 전반의 법칙처럼 굳어졌습니다.</p>
+    <p>그렇다면 실제로는 얼마나 걸릴까요? 실제 사람들을 대상으로 측정한 연구가 있어요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      런던대학교 연구팀이 참가자들에게 물 마시기, 과일 먹기, 운동 같은 새 습관을 하나씩 정해 12주 동안 매일 하게 하고, 그 행동이 얼마나 '자동으로' 느껴지는지 측정했어요.
+    </div>
+
+    <table class="hb-facts">
+      <tr>
+        <td><div class="hb-fact-n">66일</div><div class="hb-fact-l">자동화에 이르기까지 걸린 기간의 중앙값</div></td>
+        <td><div class="hb-fact-n">18~254일</div><div class="hb-fact-l">사람과 습관에 따른 개인차</div></td>
+        <td><div class="hb-fact-n">하루</div><div class="hb-fact-l">빠져도 습관 형성에 큰 영향 없음</div></td>
+      </tr>
+    </table>
+
+    <div class="hb-curve">
+      <div class="hb-curve-title">습관이 '자동'으로 느껴지는 정도</div>
+      <div class="hb-curve-sub">처음엔 빠르게 오르다가, 점점 완만해지며 자리 잡아요 (개념도)</div>
+      <table class="hb-cv">
+        <tr>
+          <td><div class="hb-cv-bar" style="height:10px;"></div></td>
+          <td><div class="hb-cv-bar" style="height:34px;"></div></td>
+          <td><div class="hb-cv-bar" style="height:54px;"></div></td>
+          <td><div class="hb-cv-bar hb-cv-21" style="height:68px;"></div></td>
+          <td><div class="hb-cv-bar" style="height:88px;"></div></td>
+          <td><div class="hb-cv-bar" style="height:104px;"></div></td>
+          <td><div class="hb-cv-bar hb-cv-66" style="height:120px;"></div></td>
+          <td><div class="hb-cv-bar" style="height:124px;"></div></td>
+        </tr>
+        <tr class="hb-cv-lab">
+          <td>1일</td><td>7일</td><td>14일</td><td class="hb-cv-myth">21일</td><td>35일</td><td>50일</td><td class="hb-cv-on">66일</td><td>90일</td>
+        </tr>
+      </table>
+    </div>
+    <p class="hb-note">※ 연구 결과의 경향을 단순화해 그린 그림이며 실제 측정값이 아니에요. 21일 무렵은 아직 오르는 중이라는 점에 주목해 주세요.</p>
+
+    <p>이 연구가 주는 메시지는 두 가지예요. 하나, <strong>21일이 지났는데도 아직 힘들다면 지극히 정상</strong>입니다. 둘, <strong>하루 빠진다고 처음으로 돌아가지 않아요.</strong> 습관은 스위치처럼 켜지는 게 아니라, 언덕을 오르듯 서서히 쌓입니다.</p>
+
+    <!-- 섹션 4 -->
+    <h2 class="hb-h2" id="ep6-s4">진짜 위험한 건 '하루'가 아니라 '포기'</h2>
+    <p>그렇다면 작심삼일은 왜 일어날까요? 많은 경우 습관을 무너뜨리는 건 빠진 하루가 아니라, <strong>빠진 하루를 해석하는 방식</strong>이에요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">재발 예방 연구에서는</div>
+      한 번의 실수를 "역시 나는 안 돼"라는 전면적 실패로 받아들일 때, 오히려 원래 행동으로 완전히 돌아가기 쉽다는 사실이 알려져 있어요. 이를 <strong>'금단 위반 효과'</strong>라고 부르는데, 다이어트 중 과자 하나를 먹고 "이왕 망한 김에" 한 봉지를 다 먹어 버리는 것도 같은 흐름입니다.
+    </div>
+
+    <table class="hb-reframe">
+      <tr>
+        <td class="hb-rf-old">"하루 빠졌으니 다 망했어"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"한 번은 사고, 오늘 다시 하면 돼"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"이왕 이렇게 된 거 이번 주는 쉬자"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"오늘은 2분 버전만이라도 하자"</td>
+      </tr>
+      <tr>
+        <td class="hb-rf-old">"처음부터 다시 시작해야지"</td>
+        <td class="hb-rf-arrow">▶</td>
+        <td class="hb-rf-new">"쌓아 온 날들은 사라지지 않았어"</td>
+      </tr>
+    </table>
+
+    <div class="hb-formula">
+      <div class="hb-formula-label">이것만 기억하세요</div>
+      <div class="hb-formula-line">한 번 빠지는 건 괜찮아요.<br><span class="hb-slot">두 번 연속</span>만 피하세요.</div>
+      <div class="hb-formula-ex">한 번은 사고지만, 두 번 연속은 새 패턴의 시작이 되기 쉬우니까요.</div>
+    </div>
+
+    <p>이를 위해 미리 <strong>'나쁜 날 버전'</strong>을 정해 두면 좋아요. 몸이 아프거나 너무 지친 날에는 5편의 2분 버전만 해도 된다고 스스로에게 허락하는 거예요. 30분 대신 운동화만 신어도, 한 쪽 대신 한 줄만 읽어도 그날의 '한 표'는 지켜집니다.</p>
+
+    <!-- 섹션 5 -->
+    <h2 class="hb-h2" id="ep6-s5">스스로를 대하는 말투가 다음 날을 정해요</h2>
+
+    <div class="hb-care">
+      <div class="hb-care-emoji">🌱</div>
+      <div class="hb-care-title">자책보다 다정함이 더 멀리 가요</div>
+      "이렇게 나를 몰아세워야 정신을 차리지"라고 생각하기 쉽지만, 연구 결과는 반대예요. 실수한 뒤 스스로에게 <strong>친구에게 하듯 다정하게</strong> 말한 사람들이 오히려 그 실수를 고치려는 동기가 더 높았습니다. 특히 완벽주의 성향이 있거나 우울할 때는 작은 실수도 크게 느껴지기 쉬워요. 그럴수록 "괜찮아, 누구나 그래. 내일 다시 해보자"라는 말이 필요합니다. 회복은 직선이 아니라 오르내리며 나아가는 계단이라는 것도 함께 기억해 주세요.
+    </div>
+
+    <!-- 해보기 -->
+    <div class="hb-try">
+      <div class="hb-try-emoji">✏️</div>
+      <div class="hb-try-title">오늘 해보기: 만족과 회복 계획</div>
+      <table class="hb-steps">
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">1</div></td>
+          <td>
+            <div class="hb-step-q">내 습관에 붙일 '바로 느낄 수 있는 작은 보상'은 무엇인가요?</div>
+            <div class="hb-step-ex">내가 되고 싶은 모습과 어울리는 것으로 골라 보세요.</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">2</div></td>
+          <td>
+            <div class="hb-step-q">어디에, 어떻게 기록할지 정해 보세요.</div>
+            <div class="hb-step-ex">예: 냉장고에 붙인 달력에 체크, 휴대폰 메모에 날짜 적기</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="hb-step-n"><div class="hb-step-dot">3</div></td>
+          <td>
+            <div class="hb-step-q">빠진 다음 날 할 '나쁜 날 버전'과, 나에게 해줄 한마디를 적어 보세요.</div>
+            <div class="hb-step-ex">예: "운동화만 신고 현관까지. 괜찮아, 다시 하면 돼."</div>
+            <div class="hb-step-line"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 요약 -->
+    <div class="hb-sum">
+      <div class="hb-sum-label">오늘의 한 줄</div>
+      <div class="hb-sum-text">습관은 21일이 아니라 평균 두 달 넘게 천천히 자라요. 하루 빠져도 괜찮습니다. 두 번 연속만 피하고, 다시 시작하면 돼요.</div>
+    </div>
+
+    <a class="hb-next" href="#ep7">
+      <div class="hb-next-label">다음 편 예고 · 7편 (마지막)</div>
+      <div class="hb-next-title">나쁜 습관 끊기와 나만의 설계도</div>
+      네 법칙을 거꾸로 써서 나쁜 습관을 끊는 법을 알아보고, 시리즈 전체를 한 장의 습관 설계도로 정리해요.
+      <span class="hb-next-go">이어서 읽기 →</span>
+    </a>
+
+    <!-- 참고문헌 -->
+    <details class="hb-ref">
+      <summary>참고문헌 보기</summary>
+      <ol>
+        <li>Clear, J. (2018). <em>Atomic Habits: An Easy &amp; Proven Way to Build Good Habits &amp; Break Bad Ones</em>. Avery. (한국어판: 제임스 클리어, 『아주 작은 습관의 힘』, 이한이 옮김, 비즈니스북스, 2019)</li>
+        <li>Lally, P., van Jaarsveld, C. H. M., Potts, H. W. W., &amp; Wardle, J. (2010). How are habits formed: Modelling habit formation in the real world. <em>European Journal of Social Psychology, 40</em>(6), 998–1009.</li>
+        <li>Maltz, M. (1960). <em>Psycho-Cybernetics</em>. Prentice-Hall.</li>
+        <li>Harkin, B., Webb, T. L., Chang, B. P. I., et al. (2016). Does monitoring goal progress promote goal attainment? A meta-analysis of the experimental evidence. <em>Psychological Bulletin, 142</em>(2), 198–229.</li>
+        <li>Marlatt, G. A., &amp; Gordon, J. R. (Eds.). (1985). <em>Relapse Prevention: Maintenance Strategies in the Treatment of Addictive Behaviors</em>. Guilford Press.</li>
+        <li>Breines, J. G., &amp; Chen, S. (2012). Self-compassion increases self-improvement motivation. <em>Personality and Social Psychology Bulletin, 38</em>(9), 1133–1143.</li>
+      </ol>
+      <div class="hb-ref-note">본 자료는 위 문헌의 개념을 일반 독자를 위해 재구성한 교육 자료이며, 의학적 진단이나 치료를 대신하지 않습니다.</div>
+    </details>
+
+
+</section>
+<section class="hb hb-ep" id="ep7" data-ep="7" aria-labelledby="ep7-title">
+  <!-- 표지 -->
+    <div class="hb-hero">
+      <div class="hb-series">습관의 원리 · 7편 (마지막)</div>
+      <h1 class="hb-title" id="ep7-title" data-toc="7편 · 나쁜 습관 끊기와 나만의 설계도">나쁜 습관 끊기와<br>나만의 설계도</h1>
+      <p class="hb-sub">좋은 습관을 만든 네 법칙을 거꾸로 쓰면, 나쁜 습관을 끊는 도구가 됩니다. 그리고 시리즈 전체를 한 장의 설계도로 정리해요.</p>
+    </div>
+
+    <div class="hb-ask">
+      <div class="hb-ask-who">이런 생각, 해본 적 있나요?</div>
+      <div class="hb-ask-text">"알면서도 못 끊겠어요. '오늘만' 하면서 매일 하고 있어요."</div>
+    </div>
+
+    <p>지금까지 좋은 습관을 만드는 법을 살펴봤어요. 그런데 많은 분들이 정말 고민하는 건 반대쪽이죠. 밤새 휴대폰 보기, 야식, 미루기처럼 <strong>그만두고 싶은데 그만둬지지 않는 습관</strong>이요.</p>
+
+    <!-- 섹션 1 -->
+    <h2 class="hb-h2" id="ep7-s1">왜 참아도 끊기지 않을까</h2>
+    <p>앞의 편들을 떠올려 보면, 나쁜 습관이 질긴 이유가 이미 다 나와 있어요.</p>
+
+    <table class="hb-recap">
+      <tr><td class="hb-rc-n">3편</td><td class="hb-rc-v"><span class="hb-rc-t">신호가 환경에 그대로 남아 있어요</span>침대, 소파, 밤 11시 같은 신호는 매일 다시 찾아옵니다.</td></tr>
+      <tr><td class="hb-rc-n">3편</td><td class="hb-rc-v"><span class="hb-rc-t">힘든 감정을 달래 주고 있어요</span>지루함, 불안, 외로움을 잠시 덜어 주는 역할을 해 왔어요.</td></tr>
+      <tr><td class="hb-rc-n">6편</td><td class="hb-rc-v"><span class="hb-rc-t">보상이 바로 와요</span>즐거움은 지금, 대가는 나중이라 뇌는 지금을 선택합니다.</td></tr>
+    </table>
+
+    <p>여기에 하나가 더해집니다. <strong>억지로 참을수록 더 생각난다</strong>는 점이에요.</p>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      참가자들에게 "5분 동안 흰 곰을 생각하지 마세요"라고 했더니, 오히려 흰 곰이 계속 떠올랐어요. 그리고 억누르기를 멈춘 뒤에는 처음부터 생각해도 된다고 한 사람들보다 <strong>흰 곰을 더 자주 떠올렸습니다.</strong> 무언가를 억누르려는 노력이 그것을 더 강하게 만들 수 있다는 뜻이에요.
+    </div>
+
+    <p>그래서 나쁜 습관은 "참자"보다 <strong>"신호를 치우고, 수고를 늘리고, 대신할 행동을 마련하자"</strong>로 접근하는 편이 훨씬 효과적이에요. 좋은 습관의 네 법칙을 그대로 뒤집으면 됩니다.</p>
+
+    <table class="hb-flip">
+      <tr>
+        <td class="hb-f-good"><span class="hb-flip-k">좋은 습관</span>분명하게</td>
+        <td class="hb-f-good"><span class="hb-flip-k">좋은 습관</span>매력적으로</td>
+        <td class="hb-f-good"><span class="hb-flip-k">좋은 습관</span>쉽게</td>
+        <td class="hb-f-good"><span class="hb-flip-k">좋은 습관</span>만족스럽게</td>
+      </tr>
+      <tr>
+        <td class="hb-f-mid">↓</td><td class="hb-f-mid">↓</td><td class="hb-f-mid">↓</td><td class="hb-f-mid">↓</td>
+      </tr>
+      <tr>
+        <td class="hb-f-bad"><span class="hb-flip-k">나쁜 습관</span>안 보이게</td>
+        <td class="hb-f-bad"><span class="hb-flip-k">나쁜 습관</span>매력 없게</td>
+        <td class="hb-f-bad"><span class="hb-flip-k">나쁜 습관</span>어렵게</td>
+        <td class="hb-f-bad"><span class="hb-flip-k">나쁜 습관</span>불만족스럽게</td>
+      </tr>
+    </table>
+    <p class="hb-note">아래에서는 많은 분들이 고민하는 '자기 전 휴대폰'을 예로 들어 볼게요.</p>
+
+    <!-- 섹션 2 -->
+    <h2 class="hb-h2" id="ep7-s2">네 법칙 뒤집기</h2>
+
+    <div class="hb-inv">
+      <table class="hb-inv-top"><tr>
+        <td class="hb-inv-n"><div class="hb-inv-dot">1</div></td>
+        <td><div class="hb-inv-name">안 보이게: 신호 치우기</div><div class="hb-inv-from">4편 '분명하게'의 반대</div></td>
+      </tr></table>
+      <div class="hb-inv-list">
+        <div>휴대폰은 침실 밖, 거실에서 충전하기</div>
+        <div>자주 여는 앱을 첫 화면에서 폴더 속으로 옮기기</div>
+        <div>밤 시간에는 알림이 울리지 않게 설정하기</div>
+      </div>
+    </div>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      1970년대 베트남전에 참전했던 미군 가운데 상당수가 현지에서 헤로인을 사용했지만, 귀국 후 다시 중독 상태로 돌아간 비율은 예상보다 훨씬 낮았어요. 약물과 연결되어 있던 <strong>장소, 사람, 상황이라는 신호가 통째로 사라진 것</strong>이 중요한 이유 중 하나로 꼽힙니다. 다만 이는 특수한 상황이었고, 중독은 환경만 바꿔서 해결되는 문제가 아니라 전문적인 치료가 필요하다는 점도 꼭 함께 기억해 주세요.
+    </div>
+
+    <div class="hb-inv">
+      <table class="hb-inv-top"><tr>
+        <td class="hb-inv-n"><div class="hb-inv-dot">2</div></td>
+        <td><div class="hb-inv-name">매력 없게: 진짜 대가 보기</div><div class="hb-inv-from">5편 '매력적으로'의 반대</div></td>
+      </tr></table>
+      <div class="hb-inv-list">
+        <div>"딱 10분만"이 실제로 몇 분이었는지 화면 사용 시간으로 확인하기</div>
+        <div>다음 날 아침의 내 기분을 한 줄로 적어 두고, 밤에 다시 읽기</div>
+        <div>"폰 보면서 쉰다"가 정말 쉼이었는지 스스로 물어보기</div>
+      </div>
+    </div>
+
+    <div class="hb-inv">
+      <table class="hb-inv-top"><tr>
+        <td class="hb-inv-n"><div class="hb-inv-dot">3</div></td>
+        <td><div class="hb-inv-name">어렵게: 수고 한 단계 늘리기</div><div class="hb-inv-from">5편 '쉽게'의 반대</div></td>
+      </tr></table>
+      <div class="hb-inv-list">
+        <div>SNS 앱은 매번 로그아웃해 두기</div>
+        <div>정해진 시간이 지나면 앱이 잠기도록 시간 제한 설정하기</div>
+        <div>침대 옆에는 휴대폰 대신 종이책이나 일기장 두기</div>
+      </div>
+    </div>
+
+    <div class="hb-inv">
+      <table class="hb-inv-top"><tr>
+        <td class="hb-inv-n"><div class="hb-inv-dot">4</div></td>
+        <td><div class="hb-inv-name">불만족스럽게: 누군가와 약속하기</div><div class="hb-inv-from">6편 '만족스럽게'의 반대</div></td>
+      </tr></table>
+      <div class="hb-inv-list">
+        <div>가족이나 친구에게 "12시 이후엔 폰 안 하기"를 말해 두기</div>
+        <div>성공한 날을 함께 확인해 줄 짝꿍 만들기</div>
+        <div>비난하는 벌칙보다, 지켜 준 사람에게 고마움을 전하는 방식으로</div>
+      </div>
+    </div>
+
+    <p>네 가지를 한꺼번에 다 할 필요는 없어요. <strong>가장 쉬워 보이는 하나</strong>부터 시작하세요. 대부분은 1번, 신호를 치우는 것만으로도 꽤 큰 차이를 느낍니다. 그리고 3편에서 이야기했듯, 그 습관이 채워 주던 느낌을 대신할 행동도 함께 준비해 두면 빈자리가 덜 허전해요.</p>
+
+    <!-- 섹션 3 -->
+    <h2 class="hb-h2" id="ep7-s3">충동이 밀려올 때: 파도 타기</h2>
+    <p>신호를 아무리 치워도 충동은 찾아옵니다. 이때 쓸 수 있는 방법이 <strong>충동 파도 타기</strong>예요. 충동을 없애려고 싸우지 않고, 파도처럼 올라왔다가 지나가는 것을 지켜보는 연습입니다.</p>
+
+    <div class="hb-wave">
+      <div class="hb-wave-title">충동은 파도처럼 올라왔다가 가라앉아요</div>
+      <table class="hb-wv">
+        <tr>
+          <td><div class="hb-wv-bar" style="height:22px;"></div></td>
+          <td><div class="hb-wv-bar" style="height:56px;"></div></td>
+          <td><div class="hb-wv-bar" style="height:88px;"></div></td>
+          <td><div class="hb-wv-bar hb-wv-peak" style="height:104px;"></div></td>
+          <td><div class="hb-wv-bar" style="height:78px;"></div></td>
+          <td><div class="hb-wv-bar" style="height:48px;"></div></td>
+          <td><div class="hb-wv-bar" style="height:24px;"></div></td>
+        </tr>
+        <tr class="hb-wv-lab">
+          <td>신호</td><td></td><td></td><td>정점</td><td></td><td></td><td>잠잠</td>
+        </tr>
+      </table>
+    </div>
+    <p class="hb-note">※ 개념도예요. 충동의 세기와 지속 시간은 사람과 상황마다 달라요.</p>
+
+    <table class="hb-steps">
+      <tr>
+        <td class="hb-step-n"><div class="hb-step-dot">1</div></td>
+        <td><div class="hb-step-q">알아차리기</div><div class="hb-step-ex">"아, 지금 휴대폰을 보고 싶은 충동이 올라왔구나."</div></td>
+      </tr>
+      <tr>
+        <td class="hb-step-n"><div class="hb-step-dot">2</div></td>
+        <td><div class="hb-step-q">몸에서 느껴 보기</div><div class="hb-step-ex">손이 근질거리는지, 가슴이 답답한지, 어디에서 느껴지는지 살펴봐요.</div></td>
+      </tr>
+      <tr>
+        <td class="hb-step-n"><div class="hb-step-dot">3</div></td>
+        <td><div class="hb-step-q">호흡에 올라타기</div><div class="hb-step-ex">천천히 숨을 쉬며 충동이 커졌다가 작아지는 것을 지켜봐요. 행동은 파도가 지나간 뒤에 정해도 늦지 않아요.</div></td>
+      </tr>
+    </table>
+
+    <div class="hb-research">
+      <div class="hb-research-label">연구에서는</div>
+      흡연자들에게 이 파도 타기 방법을 짧게 가르친 실험에서, 담배를 피우고 싶은 충동 자체는 비슷하게 느꼈지만 <strong>실제로 피운 개비 수는 줄었어요.</strong> 충동을 느끼는 것과 그 충동대로 행동하는 것 사이에 틈을 만들 수 있다는 뜻입니다.
+    </div>
+
+    <div class="hb-care">
+      <div class="hb-care-emoji">🌱</div>
+      <div class="hb-care-title">혼자 끊기 어려운 습관도 있어요</div>
+      술, 약물, 도박처럼 스스로 조절이 잘 되지 않고 생활에 큰 영향을 주는 행동은 의지나 요령만으로 해결하기 어려운 경우가 많아요. 그건 당신이 약해서가 아니라, 뇌와 몸이 이미 그 행동에 깊이 적응했기 때문일 수 있습니다. 이럴 때는 <strong>전문가의 도움을 받는 것이 가장 효과적인 설계</strong>예요. 끊으려고 노력하다 실패한 경험이 여러 번 있다면, 더욱 혼자 짊어지지 않아도 됩니다.
+    </div>
+
+    <!-- 섹션 4: 설계도 -->
+    <h2 class="hb-h2" id="ep7-s4">나만의 습관 설계도</h2>
+    <p>이제 일곱 편에서 배운 것을 한 장에 모아 볼게요. 만들고 싶은 습관 하나를 정하고, 아래 빈칸을 차례대로 채워 보세요. 화면을 캡처하거나 종이에 옮겨 적어 두면 좋아요.</p>
+
+    <div class="hb-blue">
+      <div class="hb-care-emoji" style="text-align:center;">📐</div>
+      <div class="hb-blue-title">나의 습관 설계도</div>
+      <div class="hb-blue-sub">위에서부터 한 칸씩, 완벽하지 않아도 괜찮아요</div>
+      <table class="hb-bp">
+        <tr>
+          <td class="hb-bp-n"><div class="hb-step-dot">1</div></td>
+          <td><div class="hb-bp-box"><div class="hb-bp-k">나는 ○○하는 사람이다 <span class="hb-bp-ep">· 2편</span></div><div class="hb-bp-hint">되고 싶은 모습을 유연한 문장으로</div><div class="hb-bp-line"></div></div></td>
+        </tr>
+        <tr>
+          <td class="hb-bp-n"><div class="hb-step-dot">2</div></td>
+          <td><div class="hb-bp-box"><div class="hb-bp-k">언제, 어디서 할까 <span class="hb-bp-ep">· 4편</span></div><div class="hb-bp-hint">"[지금 하는 습관]을 한 뒤에 [새 습관]을 한다"</div><div class="hb-bp-line"></div></div></td>
+        </tr>
+        <tr>
+          <td class="hb-bp-n"><div class="hb-step-dot">3</div></td>
+          <td><div class="hb-bp-box"><div class="hb-bp-k">눈앞에 둘 신호 <span class="hb-bp-ep">· 4편</span></div><div class="hb-bp-hint">미리 꺼내 두거나 옮겨 둘 물건 하나</div><div class="hb-bp-line"></div></div></td>
+        </tr>
+        <tr>
+          <td class="hb-bp-n"><div class="hb-step-dot">4</div></td>
+          <td><div class="hb-bp-box"><div class="hb-bp-k">2분 버전 <span class="hb-bp-ep">· 5편</span></div><div class="hb-bp-hint">"이건 너무 쉬운데?" 싶은 크기로</div><div class="hb-bp-line"></div></div></td>
+        </tr>
+        <tr>
+          <td class="hb-bp-n"><div class="hb-step-dot">5</div></td>
+          <td><div class="hb-bp-box"><div class="hb-bp-k">함께 묶을 즐거움 <span class="hb-bp-ep">· 5편</span></div><div class="hb-bp-hint">이 습관을 할 때만 누리는 것</div><div class="hb-bp-line"></div></div></td>
+        </tr>
+        <tr>
+          <td class="hb-bp-n"><div class="hb-step-dot">6</div></td>
+          <td><div class="hb-bp-box"><div class="hb-bp-k">바로 느낄 보상과 기록 방법 <span class="hb-bp-ep">· 6편</span></div><div class="hb-bp-hint">예: 달력에 체크하고 좋아하는 차 한 잔</div><div class="hb-bp-line"></div></div></td>
+        </tr>
+        <tr>
+          <td class="hb-bp-n"><div class="hb-step-dot">7</div></td>
+          <td><div class="hb-bp-box"><div class="hb-bp-k">나쁜 날 버전과 나에게 할 말 <span class="hb-bp-ep">· 6편</span></div><div class="hb-bp-hint">두 번 연속만 피하기 위한 최소한의 행동</div><div class="hb-bp-line"></div></div></td>
+        </tr>
+        <tr>
+          <td class="hb-bp-n"><div class="hb-step-dot">8</div></td>
+          <td><div class="hb-bp-box"><div class="hb-bp-k">대신 줄일 습관과 뒤집기 한 가지 <span class="hb-bp-ep">· 7편</span></div><div class="hb-bp-hint">예: 자기 전 폰 → 거실에서 충전하기</div><div class="hb-bp-line"></div></div></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 시리즈 정리 -->
+    <h2 class="hb-h2" id="ep7-s5">일곱 편을 한눈에</h2>
+    <table class="hb-recap">
+      <tr><td class="hb-rc-n">1</td><td class="hb-rc-v"><span class="hb-rc-t">습관은 의지가 아니라 설계</span>무너진 건 내가 아니라 설계예요.</td></tr>
+      <tr><td class="hb-rc-n">2</td><td class="hb-rc-v"><span class="hb-rc-t">결과·과정·정체성</span>작은 행동은 되고 싶은 나에게 던지는 한 표.</td></tr>
+      <tr><td class="hb-rc-n">3</td><td class="hb-rc-v"><span class="hb-rc-t">습관 루프</span>신호, 열망, 반응, 보상. 내가 원한 건 '느낌'.</td></tr>
+      <tr><td class="hb-rc-n">4</td><td class="hb-rc-v"><span class="hb-rc-t">분명하게</span>언제, 어디서를 정하고 신호는 눈앞에.</td></tr>
+      <tr><td class="hb-rc-n">5</td><td class="hb-rc-v"><span class="hb-rc-t">쉽게, 매력적으로</span>2분 버전으로 시작하고 즐거움과 묶기.</td></tr>
+      <tr><td class="hb-rc-n">6</td><td class="hb-rc-v"><span class="hb-rc-t">만족스럽게</span>66일의 언덕, 두 번 연속만 피하기.</td></tr>
+      <tr><td class="hb-rc-n">7</td><td class="hb-rc-v"><span class="hb-rc-t">나쁜 습관 끊기</span>참기보다 신호를 치우고, 수고를 늘리기.</td></tr>
+    </table>
+
+    <!-- 요약 -->
+    <div class="hb-sum">
+      <div class="hb-sum-label">시리즈를 마치며</div>
+      <div class="hb-sum-text">완벽한 계획보다 오늘의 작은 한 걸음이 더 중요해요. 멈춰도 괜찮습니다. 설계를 고쳐 다시 시작하면 되니까요.</div>
+    </div>
+
+    <div class="hb-next">
+      <div class="hb-next-label">이어서 읽어 보세요</div>
+      <div class="hb-next-title">루틴(자동화)의 중요성</div>
+      습관 여러 개가 모이면 하루의 흐름, 루틴이 됩니다. 결정 피로를 줄이고 하루를 가볍게 만드는 루틴 설계로 이어져요.
+    </div>
+
+    <!-- 참고문헌 -->
+    <details class="hb-ref">
+      <summary>참고문헌 보기</summary>
+      <ol>
+        <li>Clear, J. (2018). <em>Atomic Habits: An Easy &amp; Proven Way to Build Good Habits &amp; Break Bad Ones</em>. Avery. (한국어판: 제임스 클리어, 『아주 작은 습관의 힘』, 이한이 옮김, 비즈니스북스, 2019)</li>
+        <li>Wegner, D. M., Schneider, D. J., Carter, S. R., &amp; White, T. L. (1987). Paradoxical effects of thought suppression. <em>Journal of Personality and Social Psychology, 53</em>(1), 5–13.</li>
+        <li>Robins, L. N., Davis, D. H., &amp; Goodwin, D. W. (1974). Drug use by U.S. Army enlisted men in Vietnam: A follow-up on their return home. <em>American Journal of Epidemiology, 99</em>(4), 235–249.</li>
+        <li>Bowen, S., &amp; Marlatt, A. (2009). Surfing the urge: Brief mindfulness-based intervention for college student smokers. <em>Psychology of Addictive Behaviors, 23</em>(4), 666–671.</li>
+        <li>Wood, W. (2019). <em>Good Habits, Bad Habits: The Science of Making Positive Changes That Stick</em>. Farrar, Straus and Giroux.</li>
+        <li>Duhigg, C. (2012). <em>The Power of Habit: Why We Do What We Do in Life and Business</em>. Random House. (한국어판: 찰스 두히그, 『습관의 힘』, 강주헌 옮김, 갤리온, 2012)</li>
+      </ol>
+      <div class="hb-ref-note">본 자료는 위 문헌의 개념을 일반 독자를 위해 재구성한 교육 자료이며, 의학적 진단이나 치료를 대신하지 않습니다.</div>
+    </details>
+
+
+</section>
+
+</div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var KEY = 'habit_design_all:view:v1';
+  var LIM = { tocMin: 170, tocMax: 620, ovMin: 240, ovMax: 560, bodyMin: 560, bodyMax: 1700, fontMin: 82, fontMax: 133 };
+  var DEF = { toc: 280, body: 760, font: 100, collapsed: false };
+  var MOBILE = 700;
+  var COLLAPSE_AT = 120;
+  var root = document.documentElement;
+
+  function clamp(v, a, b) { v = Number(v); if (!isFinite(v)) return a; return Math.min(b, Math.max(a, v)); }
+  function load() {
+    var s = {};
+    try { var raw = window.localStorage.getItem(KEY); if (raw) s = JSON.parse(raw) || {}; } catch (e) { s = {}; }
+    return {
+      toc: clamp(s.toc != null ? s.toc : DEF.toc, LIM.tocMin, LIM.tocMax),
+      body: clamp(s.body != null ? s.body : DEF.body, LIM.bodyMin, LIM.bodyMax),
+      font: clamp(s.font != null ? s.font : DEF.font, LIM.fontMin, LIM.fontMax),
+      collapsed: !!s.collapsed
+    };
+  }
+  function save() { try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* 저장 불가 환경 */ } }
+
+  var state = load();
+  var $ = function (id) { return document.getElementById(id); };
+  var side = $('toc-side'), list = $('toc-list'), search = $('toc-search'), empty = $('toc-empty');
+  var nav = $('toc-nav'), openBtn = $('toc-open'), closeBtn = $('toc-close'), pinBtn = $('toc-pin');
+  var scrim = $('toc-scrim'), handle = $('toc-handle'), bar = $('progress-bar'), pct = $('toc-pct');
+  var bodyRange = $('ctl-body'), fontRange = $('ctl-font'), bodyOut = $('out-body'), fontOut = $('out-font'), resetBtn = $('ctl-reset');
+
+  function isMobile() { return window.innerWidth < MOBILE; }
+  function isOverlayMode() { return state.collapsed || isMobile(); }
+
+  function apply() {
+    root.style.setProperty('--toc-w', state.toc + 'px');
+    root.style.setProperty('--ov-w', clamp(state.toc, LIM.ovMin, LIM.ovMax) + 'px');
+    root.style.setProperty('--body-w', state.body + 'px');
+    root.style.setProperty('--font-scale', String(state.font / 100));
+    root.classList.toggle('toc-collapsed', state.collapsed);
+    bodyRange.value = String(state.body);
+    fontRange.value = String(state.font);
+    bodyOut.textContent = state.body + 'px';
+    fontOut.textContent = state.font + '%';
+    closeBtn.textContent = isOverlayMode() ? '×' : '«';
+    closeBtn.setAttribute('aria-label', isOverlayMode() ? '목차 닫기' : '목차 접기');
+    closeBtn.title = closeBtn.getAttribute('aria-label');
+  }
+
+  /* ---- 목차 만들기 ---- */
+  var heads = Array.prototype.slice.call(document.querySelectorAll('.main h1[id], .main h2[id], .main h3[id], .main h4[id]'))
+    .filter(function (h) { return !h.hasAttribute('data-toc-skip'); });
+  var items = [];
+  function addItem(level, id, text, ep) {
+    var li = document.createElement('li');
+    li.className = 'lv' + level;
+    if (ep) li.setAttribute('data-ep', ep);
+    var a = document.createElement('a');
+    a.href = '#' + id;
+    a.textContent = text;
+    li.appendChild(a);
+    list.appendChild(li);
+    items.push({ li: li, a: a, text: text, level: level, ep: ep, id: id });
+  }
+  addItem(0, 'cover', '표지 · 전체 목차', '');
+  heads.forEach(function (h) {
+    var host = h.closest('[data-ep]');
+    var text = h.getAttribute('data-toc') || h.textContent.replace(/\s+/g, ' ').trim();
+    addItem(Number(h.tagName.charAt(1)), h.id, text, host ? host.getAttribute('data-ep') : '');
+  });
+  var linkById = {};
+  items.forEach(function (it) { linkById[it.id] = it; });
+
+  /* ---- 검색 ---- */
+  function escapeHtml(s) { return s.replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function runSearch() {
+    var q = search.value.trim().toLowerCase();
+    var shown = 0;
+    var epHit = {};
+    items.forEach(function (it) {
+      var hit = !q || it.text.toLowerCase().indexOf(q) !== -1;
+      it.hit = hit;
+      if (hit && it.ep) epHit[it.ep] = true;
+    });
+    items.forEach(function (it) {
+      var show = it.hit || (q && it.level === 1 && epHit[it.ep]);
+      it.li.hidden = !show;
+      if (show) shown++;
+      if (q && it.hit) {
+        var i = it.text.toLowerCase().indexOf(q);
+        it.a.innerHTML = escapeHtml(it.text.slice(0, i)) + '<mark>' + escapeHtml(it.text.slice(i, i + q.length)) + '</mark>' + escapeHtml(it.text.slice(i + q.length));
+      } else {
+        it.a.textContent = it.text;
+      }
+    });
+    empty.hidden = shown !== 0;
+  }
+  search.addEventListener('input', runSearch);
+  search.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      var first = items.filter(function (it) { return !it.li.hidden && it.hit; })[0];
+      if (first) { e.preventDefault(); first.a.click(); }
+    }
+  });
+
+  /* ---- 스크롤 위치 강조 · 진행바 ---- */
+  var current = null;
+  function setActive(id) {
+    if (current === id) return;
+    if (current && linkById[current]) linkById[current].a.classList.remove('active');
+    items.forEach(function (it) { it.li.classList.remove('in-ep'); });
+    current = id;
+    var it = id && linkById[id];
+    if (!it) return;
+    it.a.classList.add('active');
+    items.forEach(function (o) { if (o.ep && o.ep === it.ep && o.level === 1) o.li.classList.add('in-ep'); });
+    var top = it.li.offsetTop, h = nav.clientHeight;
+    if (top < nav.scrollTop + 24 || top > nav.scrollTop + h - 48) nav.scrollTop = Math.max(0, top - h / 3);
+  }
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      ticking = false;
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      bar.style.transform = 'scaleX(' + p + ')';
+      pct.textContent = Math.round(p * 100) + '%';
+      var cur = 'cover';
+      for (var i = 0; i < heads.length; i++) {
+        if (heads[i].getBoundingClientRect().top <= 96) cur = heads[i].id; else break;
+      }
+      if (max > 0 && p >= 0.999 && heads.length) cur = heads[heads.length - 1].id;
+      setActive(cur);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---- 접기 · 오버레이 ---- */
+  function openOverlay() { root.classList.add('toc-overlay-open'); side.setAttribute('aria-hidden', 'false'); setTimeout(function () { search.focus(); }, 0); }
+  function closeOverlay() { root.classList.remove('toc-overlay-open'); }
+  closeBtn.addEventListener('click', function () {
+    if (isOverlayMode()) { closeOverlay(); openBtn.focus(); }
+    else { state.collapsed = true; save(); apply(); openBtn.focus(); }
+  });
+  pinBtn.addEventListener('click', function () { state.collapsed = false; save(); closeOverlay(); apply(); });
+  openBtn.addEventListener('click', openOverlay);
+  scrim.addEventListener('click', closeOverlay);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && root.classList.contains('toc-overlay-open')) { closeOverlay(); openBtn.focus(); } });
+  list.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a') : null;
+    if (a && isOverlayMode()) closeOverlay();
+  });
+
+  /* ---- 목차 폭 드래그 (Pointer Events) ---- */
+  var drag = null;
+  handle.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    e.preventDefault();
+    drag = { x: e.clientX, w: side.getBoundingClientRect().width || state.toc, overlay: isOverlayMode(), collapse: false };
+    if (handle.setPointerCapture && e.pointerId != null) { try { handle.setPointerCapture(e.pointerId); } catch (err) { /* 무시 */ } }
+    handle.classList.add('dragging');
+    document.body.classList.add('resizing');
+  });
+  handle.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    var w = drag.w + (e.clientX - drag.x);
+    if (drag.overlay) { state.toc = clamp(w, LIM.ovMin, LIM.ovMax); drag.collapse = false; }
+    else { drag.collapse = w < COLLAPSE_AT; state.toc = clamp(w, LIM.tocMin, LIM.tocMax); }
+    apply();
+  });
+  function endDrag() {
+    if (!drag) return;
+    if (drag.collapse) state.collapsed = true;
+    drag = null;
+    handle.classList.remove('dragging');
+    document.body.classList.remove('resizing');
+    save(); apply();
+  }
+  handle.addEventListener('pointerup', endDrag);
+  handle.addEventListener('pointercancel', endDrag);
+  handle.addEventListener('lostpointercapture', endDrag);
+  handle.addEventListener('keydown', function (e) {
+    var step = e.shiftKey ? 40 : 10;
+    var lo = isOverlayMode() ? LIM.ovMin : LIM.tocMin, hi = isOverlayMode() ? LIM.ovMax : LIM.tocMax;
+    if (e.key === 'ArrowLeft') { state.toc = clamp(state.toc - step, lo, hi); }
+    else if (e.key === 'ArrowRight') { state.toc = clamp(state.toc + step, lo, hi); }
+    else return;
+    e.preventDefault(); save(); apply();
+  });
+
+  /* ---- 본문 폭 · 글자 크기 ---- */
+  bodyRange.addEventListener('input', function () { state.body = clamp(bodyRange.value, LIM.bodyMin, LIM.bodyMax); apply(); });
+  fontRange.addEventListener('input', function () { state.font = clamp(fontRange.value, LIM.fontMin, LIM.fontMax); apply(); onScroll(); });
+  bodyRange.addEventListener('change', save);
+  fontRange.addEventListener('change', save);
+  resetBtn.addEventListener('click', function () { state.body = DEF.body; state.font = DEF.font; state.toc = DEF.toc; save(); apply(); onScroll(); });
+
+  /* ---- 화면 크기 변화 · 인쇄 ---- */
+  var lastMobile = isMobile();
+  window.addEventListener('resize', function () {
+    var m = isMobile();
+    if (m !== lastMobile) { closeOverlay(); lastMobile = m; }
+    apply(); onScroll();
+  });
+  var closedDetails = [];
+  window.addEventListener('beforeprint', function () {
+    closedDetails = Array.prototype.slice.call(document.querySelectorAll('details:not([open])'));
+    closedDetails.forEach(function (d) { d.open = true; });
+  });
+  window.addEventListener('afterprint', function () { closedDetails.forEach(function (d) { d.open = false; }); closedDetails = []; });
+
+  apply();
+  runSearch();
+  onScroll();
+  window.__tocReady = true;
+})();
+</script>
+</body>
+</html>
