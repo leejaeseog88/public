@@ -1,0 +1,3212 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="기존 데이터 플랫폼 비교부터 Odoo 색종이 제조 적용까지">
+<title>Palantir Foundry·Ontology 실무 교재</title>
+
+<style>
+:root {
+  --navy:#102a43;
+  --navy2:#173f5f;
+  --blue:#246b9e;
+  --brown:#99672f;
+  --brown-soft:#f7f0e6;
+  --ink:#202b36;
+  --muted:#667788;
+  --line:#d9e1e8;
+  --paper:#fff;
+  --page:#f4f7fa;
+  --sidebar:326px;
+  --content:1040px;
+}
+
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  color:var(--ink);
+  background:var(--page);
+  font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic","Segoe UI",sans-serif;
+  line-height:1.78;
+  word-break:keep-all;
+}
+a { color:var(--blue); }
+a:hover { color:var(--brown); }
+
+.layout {
+  display:grid;
+  grid-template-columns:var(--sidebar) minmax(0,1fr);
+  min-height:100vh;
+}
+
+.sidebar {
+  position:sticky;
+  top:0;
+  z-index:30;
+  height:100vh;
+  overflow:hidden;
+  color:white;
+  background:linear-gradient(180deg,#0d263d 0%,#173f5f 100%);
+  border-right:1px solid rgba(255,255,255,.12);
+}
+.sidebar-head {
+  padding:25px 21px 17px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.sidebar-title {
+  font-size:1.08rem;
+  font-weight:800;
+  line-height:1.44;
+}
+.sidebar-sub {
+  margin-top:7px;
+  color:rgba(255,255,255,.7);
+  font-size:.81rem;
+  line-height:1.5;
+}
+.search-box { padding:13px 15px 8px; }
+#toc-search {
+  width:100%;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:9px;
+  padding:10px 12px;
+  color:white;
+  background:rgba(255,255,255,.1);
+  outline:none;
+}
+#toc-search::placeholder { color:rgba(255,255,255,.55); }
+#toc-search:focus {
+  border-color:rgba(255,255,255,.52);
+  background:rgba(255,255,255,.15);
+}
+
+.toc {
+  height:calc(100vh - 161px);
+  padding:6px 11px 30px;
+  overflow-y:auto;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.28) transparent;
+}
+.toc-link {
+  display:block;
+  margin:1px 0;
+  padding:7px 9px;
+  border-left:3px solid transparent;
+  border-radius:0 7px 7px 0;
+  color:rgba(255,255,255,.77);
+  font-size:.86rem;
+  line-height:1.42;
+  text-decoration:none;
+  transition:.17s ease;
+}
+.toc-link:hover {
+  color:white;
+  background:rgba(255,255,255,.09);
+}
+.toc-link.active {
+  color:white;
+  font-weight:700;
+  border-left-color:#e1b66f;
+  background:rgba(255,255,255,.14);
+}
+.toc-level-1 {
+  margin-top:7px;
+  color:white;
+  font-weight:720;
+}
+.toc-level-2 {
+  padding-left:19px;
+  color:rgba(255,255,255,.70);
+}
+.toc-level-3 {
+  padding-left:34px;
+  color:rgba(255,255,255,.58);
+  font-size:.79rem;
+}
+
+.main {
+  min-width:0;
+  padding:34px 42px 80px;
+}
+.document {
+  max-width:var(--content);
+  margin:0 auto;
+  overflow:hidden;
+  border:1px solid #e1e8ee;
+  border-radius:18px;
+  background:var(--paper);
+  box-shadow:0 16px 44px rgba(16,42,67,.08);
+}
+.hero {
+  padding:53px 58px 45px;
+  color:white;
+  background:
+    radial-gradient(circle at 87% 18%,rgba(194,145,76,.20),transparent 28%),
+    linear-gradient(135deg,#0e2a44 0%,#1b5277 100%);
+}
+.hero-kicker {
+  color:#e7c48e;
+  font-size:.84rem;
+  font-weight:750;
+  letter-spacing:.14em;
+}
+.hero h1 {
+  margin:12px 0 12px;
+  color:white;
+  font-size:clamp(2rem,4vw,3.18rem);
+  line-height:1.22;
+  letter-spacing:-.04em;
+}
+.hero p {
+  max-width:760px;
+  margin:0;
+  color:rgba(255,255,255,.82);
+  font-size:1.05rem;
+}
+
+.content { padding:48px 58px 82px; }
+h1,h2,h3,h4 {
+  color:var(--navy);
+  line-height:1.38;
+  scroll-margin-top:24px;
+}
+.content h1 {
+  margin:68px 0 21px;
+  padding-bottom:11px;
+  border-bottom:3px solid var(--navy);
+  font-size:1.93rem;
+}
+.content h1:first-child { margin-top:0; }
+.content h2 {
+  margin:47px 0 16px;
+  padding-left:13px;
+  border-left:5px solid var(--brown);
+  font-size:1.47rem;
+}
+.content h3 {
+  margin:34px 0 12px;
+  font-size:1.2rem;
+}
+.content h4 {
+  margin:28px 0 9px;
+  color:var(--brown);
+  font-size:1.05rem;
+}
+.heading-anchor {
+  margin-left:8px;
+  opacity:0;
+  font-size:.68em;
+  text-decoration:none;
+}
+h1:hover .heading-anchor,
+h2:hover .heading-anchor,
+h3:hover .heading-anchor { opacity:.48; }
+
+p { margin:11px 0 18px; }
+ul,ol { padding-left:1.5rem; }
+li { margin:5px 0; }
+hr {
+  margin:45px 0;
+  border:0;
+  border-top:1px solid var(--line);
+}
+blockquote {
+  margin:23px 0;
+  padding:16px 20px;
+  color:#493725;
+  border-left:5px solid var(--brown);
+  border-radius:0 10px 10px 0;
+  background:var(--brown-soft);
+}
+blockquote p:last-child { margin-bottom:0; }
+
+table {
+  width:100%;
+  margin:22px 0 31px;
+  border-collapse:collapse;
+  display:block;
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+thead { color:white; background:var(--navy); }
+th,td {
+  min-width:128px;
+  padding:11px 13px;
+  border:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+}
+tbody tr:nth-child(even) { background:#f7f9fb; }
+
+code {
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  font-size:.91em;
+}
+:not(pre)>code {
+  padding:2px 6px;
+  border-radius:5px;
+  color:#983d2f;
+  background:#edf3f7;
+}
+.code-wrap {
+  margin:22px 0 29px;
+  overflow:hidden;
+  border-radius:11px;
+  background:#101820;
+  box-shadow:0 8px 22px rgba(16,24,32,.14);
+}
+.code-toolbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:7px 12px;
+  color:#b8c8d5;
+  background:#1c2833;
+  font-size:.77rem;
+}
+.copy-code {
+  padding:4px 9px;
+  color:#d9e4ec;
+  border:1px solid #465866;
+  border-radius:6px;
+  background:transparent;
+  cursor:pointer;
+}
+.copy-code:hover { background:#2b3e4b; }
+pre {
+  margin:0;
+  padding:18px 20px;
+  overflow-x:auto;
+  color:#e6edf3;
+  background:#101820;
+  line-height:1.62;
+  white-space:pre;
+}
+.mermaid {
+  margin:26px 0 34px;
+  padding:20px;
+  overflow-x:auto;
+  text-align:center;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fbfcfd;
+}
+
+.back-top {
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:60;
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:50%;
+  color:white;
+  background:var(--navy);
+  box-shadow:0 8px 24px rgba(16,42,67,.23);
+  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(9px);
+  transition:.2s;
+}
+.back-top.show {
+  opacity:1;
+  pointer-events:auto;
+  transform:none;
+}
+.mobile-toggle {
+  display:none;
+  position:fixed;
+  top:14px;
+  left:14px;
+  z-index:90;
+  padding:10px 12px;
+  color:white;
+  border:0;
+  border-radius:9px;
+  background:var(--navy);
+  box-shadow:0 6px 18px rgba(16,42,67,.25);
+  cursor:pointer;
+}
+.overlay { display:none; }
+
+@media(max-width:980px) {
+  .layout { display:block; }
+  .sidebar {
+    position:fixed;
+    left:0;
+    top:0;
+    width:min(87vw,345px);
+    transform:translateX(-104%);
+    transition:transform .23s ease;
+    box-shadow:12px 0 34px rgba(0,0,0,.28);
+  }
+  .sidebar.open { transform:translateX(0); }
+  .mobile-toggle { display:block; }
+  .overlay {
+    position:fixed;
+    inset:0;
+    z-index:20;
+    background:rgba(5,18,29,.48);
+  }
+  .overlay.show { display:block; }
+  .main { padding:73px 14px 48px; }
+  .hero { padding:42px 27px 34px; }
+  .content { padding:36px 26px 60px; }
+  .document { border-radius:12px; }
+}
+@media(max-width:640px) {
+  body { word-break:normal; }
+  .hero h1 { font-size:1.84rem; }
+  .hero p { font-size:.95rem; }
+  .content { padding:30px 19px 52px; }
+  .content h1 { font-size:1.58rem; }
+  .content h2 { font-size:1.3rem; }
+  th,td { min-width:113px; padding:9px; }
+}
+@media print {
+  body { background:white; }
+  .sidebar,.mobile-toggle,.overlay,.back-top { display:none!important; }
+  .layout { display:block; }
+  .main { padding:0; }
+  .document { max-width:none; border:0; box-shadow:none; }
+  .hero { padding:0 0 28px; color:black; background:white; }
+  .hero h1 { color:black; }
+  .hero-kicker,.hero p { color:#444; }
+  .content { padding:0; }
+  .content h1 { break-before:page; }
+  .code-toolbar { display:none; }
+  pre { white-space:pre-wrap; }
+}
+</style>
+</head>
+
+<body>
+<button class="mobile-toggle" type="button" aria-label="목차 열기">☰ 목차</button>
+<div class="overlay"></div>
+
+<div class="layout">
+  <aside class="sidebar" aria-label="문서 목차">
+    <div class="sidebar-head">
+      <div class="sidebar-title">Palantir Foundry·Ontology 실무 교재</div>
+      <div class="sidebar-sub">기존 데이터 플랫폼 비교부터 Odoo 색종이 제조 적용까지</div>
+    </div>
+    <div class="search-box">
+      <input id="toc-search" type="search" placeholder="목차 검색" aria-label="목차 검색">
+    </div>
+    <nav class="toc" id="toc">
+      <a class="toc-link toc-level-1" href="#문서-사용-안내">문서 사용 안내</a>
+<a class="toc-link toc-level-1" href="#목차">목차</a>
+<a class="toc-link toc-level-1" href="#1-이-채팅에서-출발한-핵심-질문">1. 이 채팅에서 출발한 핵심 질문</a>
+<a class="toc-link toc-level-2" href="#11-첫-번째-질문">1.1 첫 번째 질문</a>
+<a class="toc-link toc-level-2" href="#12-두-번째-질문">1.2 두 번째 질문</a>
+<a class="toc-link toc-level-2" href="#13-세-번째-질문">1.3 세 번째 질문</a>
+<a class="toc-link toc-level-2" href="#14-네-번째-질문">1.4 네 번째 질문</a>
+<a class="toc-link toc-level-2" href="#15-다섯-번째-질문">1.5 다섯 번째 질문</a>
+<a class="toc-link toc-level-1" href="#2-기존-데이터-플랫폼과-foundry의-차이">2. 기존 데이터 플랫폼과 Foundry의 차이</a>
+<a class="toc-link toc-level-2" href="#21-기존-데이터-플랫폼의-전형적인-구조">2.1 기존 데이터 플랫폼의 전형적인 구조</a>
+<a class="toc-link toc-level-2" href="#22-foundry의-관점">2.2 Foundry의 관점</a>
+<a class="toc-link toc-level-2" href="#23-핵심-질문의-차이">2.3 핵심 질문의 차이</a>
+<a class="toc-link toc-level-2" href="#24-중요한-보정">2.4 중요한 보정</a>
+<a class="toc-link toc-level-1" href="#3-데이터-레이크와-온톨로지-비교">3. 데이터 레이크와 온톨로지 비교</a>
+<a class="toc-link toc-level-2" href="#31-데이터-레이크란-무엇인가">3.1 데이터 레이크란 무엇인가</a>
+<a class="toc-link toc-level-3" href="#장점">장점</a>
+<a class="toc-link toc-level-3" href="#위험">위험</a>
+<a class="toc-link toc-level-2" href="#32-온톨로지란-무엇인가">3.2 온톨로지란 무엇인가</a>
+<a class="toc-link toc-level-2" href="#33-비유">3.3 비유</a>
+<a class="toc-link toc-level-2" href="#34-색종이-사례">3.4 색종이 사례</a>
+<a class="toc-link toc-level-1" href="#4-foundry-전체-구조와-구성요소">4. Foundry 전체 구조와 구성요소</a>
+<a class="toc-link toc-level-2" href="#41-큰-흐름">4.1 큰 흐름</a>
+<a class="toc-link toc-level-2" href="#42-구성요소-요약">4.2 구성요소 요약</a>
+<a class="toc-link toc-level-1" href="#5-data-connection">5. Data Connection</a>
+<a class="toc-link toc-level-2" href="#51-정의">5.1 정의</a>
+<a class="toc-link toc-level-2" href="#52-연결-대상">5.2 연결 대상</a>
+<a class="toc-link toc-level-2" href="#53-핵심-개념">5.3 핵심 개념</a>
+<a class="toc-link toc-level-2" href="#54-색종이-공장-연결-설계">5.4 색종이 공장 연결 설계</a>
+<a class="toc-link toc-level-2" href="#55-설계-원칙">5.5 설계 원칙</a>
+<a class="toc-link toc-level-1" href="#6-contour">6. Contour</a>
+<a class="toc-link toc-level-2" href="#61-정의">6.1 정의</a>
+<a class="toc-link toc-level-2" href="#62-적합한-질문">6.2 적합한 질문</a>
+<a class="toc-link toc-level-2" href="#63-색종이-예제">6.3 색종이 예제</a>
+<a class="toc-link toc-level-2" href="#64-contour의-한계">6.4 Contour의 한계</a>
+<a class="toc-link toc-level-1" href="#7-pipeline-builder">7. Pipeline Builder</a>
+<a class="toc-link toc-level-2" href="#71-정의">7.1 정의</a>
+<a class="toc-link toc-level-2" href="#72-전형적인-흐름">7.2 전형적인 흐름</a>
+<a class="toc-link toc-level-2" href="#73-주요-작업">7.3 주요 작업</a>
+<a class="toc-link toc-level-2" href="#74-색종이-공장-예">7.4 색종이 공장 예</a>
+<a class="toc-link toc-level-1" href="#8-ontology-manager">8. Ontology Manager</a>
+<a class="toc-link toc-level-2" href="#81-정의">8.1 정의</a>
+<a class="toc-link toc-level-2" href="#82-객체-유형-예">8.2 객체 유형 예</a>
+<a class="toc-link toc-level-2" href="#83-속성-예">8.3 속성 예</a>
+<a class="toc-link toc-level-2" href="#84-링크-예">8.4 링크 예</a>
+<a class="toc-link toc-level-2" href="#85-액션-예">8.5 액션 예</a>
+<a class="toc-link toc-level-2" href="#86-온톨로지-설계-원칙">8.6 온톨로지 설계 원칙</a>
+<a class="toc-link toc-level-1" href="#9-object-explorer">9. Object Explorer</a>
+<a class="toc-link toc-level-2" href="#91-정의">9.1 정의</a>
+<a class="toc-link toc-level-2" href="#92-사용-예">9.2 사용 예</a>
+<a class="toc-link toc-level-2" href="#93-영향-분석">9.3 영향 분석</a>
+<a class="toc-link toc-level-1" href="#10-functions">10. Functions</a>
+<a class="toc-link toc-level-2" href="#101-정의">10.1 정의</a>
+<a class="toc-link toc-level-2" href="#102-예시">10.2 예시</a>
+<a class="toc-link toc-level-3" href="#납기-위험도">납기 위험도</a>
+<a class="toc-link toc-level-3" href="#품질-위험도">품질 위험도</a>
+<a class="toc-link toc-level-2" href="#103-함수-결과의-활용">10.3 함수 결과의 활용</a>
+<a class="toc-link toc-level-1" href="#11-workshop">11. Workshop</a>
+<a class="toc-link toc-level-2" href="#111-정의">11.1 정의</a>
+<a class="toc-link toc-level-2" href="#112-단순-bi와의-차이">11.2 단순 BI와의 차이</a>
+<a class="toc-link toc-level-2" href="#113-색종이-생산관리-앱">11.3 색종이 생산관리 앱</a>
+<a class="toc-link toc-level-1" href="#12-case-management">12. Case Management</a>
+<a class="toc-link toc-level-2" href="#121-개념">12.1 개념</a>
+<a class="toc-link toc-level-2" href="#122-적합한-업무">12.2 적합한 업무</a>
+<a class="toc-link toc-level-2" href="#123-case의-구성">12.3 Case의 구성</a>
+<a class="toc-link toc-level-2" href="#124-case-흐름">12.4 Case 흐름</a>
+<a class="toc-link toc-level-1" href="#13-apollo">13. Apollo</a>
+<a class="toc-link toc-level-2" href="#131-정의">13.1 정의</a>
+<a class="toc-link toc-level-2" href="#132-foundry-업무-기능과의-구분">13.2 Foundry 업무 기능과의 구분</a>
+<a class="toc-link toc-level-2" href="#133-제조기업-적용">13.3 제조기업 적용</a>
+<a class="toc-link toc-level-1" href="#14-resource-management">14. Resource Management</a>
+<a class="toc-link toc-level-2" href="#141-공식-의미에-대한-보정">14.1 공식 의미에 대한 보정</a>
+<a class="toc-link toc-level-2" href="#142-주요-관리-관점">14.2 주요 관리 관점</a>
+<a class="toc-link toc-level-2" href="#143-색종이-사례">14.3 색종이 사례</a>
+<a class="toc-link toc-level-1" href="#15-온톨로지의-핵심-구조">15. 온톨로지의 핵심 구조</a>
+<a class="toc-link toc-level-2" href="#151-객체object">15.1 객체(Object)</a>
+<a class="toc-link toc-level-2" href="#152-액션action">15.2 액션(Action)</a>
+<a class="toc-link toc-level-2" href="#153-링크link">15.3 링크(Link)</a>
+<a class="toc-link toc-level-2" href="#154-순환-구조">15.4 순환 구조</a>
+<a class="toc-link toc-level-2" href="#155-기존-모델과의-차이">15.5 기존 모델과의 차이</a>
+<a class="toc-link toc-level-1" href="#16-판단-중심-온톨로지의-5가지-원리">16. 판단 중심 온톨로지의 5가지 원리</a>
+<a class="toc-link toc-level-2" href="#161-스스로-질문에-답하는-구조">16.1 스스로 질문에 답하는 구조</a>
+<a class="toc-link toc-level-3" href="#예">예</a>
+<a class="toc-link toc-level-2" href="#162-값이-아닌-상태-중심">16.2 값이 아닌 상태 중심</a>
+<a class="toc-link toc-level-2" href="#163-비교가-아닌-상태-전이를-기록">16.3 비교가 아닌 상태 전이를 기록</a>
+<a class="toc-link toc-level-2" href="#164-액션-가능성을-포함">16.4 액션 가능성을 포함</a>
+<a class="toc-link toc-level-2" href="#165-책임의-명시화">16.5 책임의 명시화</a>
+<a class="toc-link toc-level-1" href="#17-색종이-생산공장-사례-개요">17. 색종이 생산공장 사례 개요</a>
+<a class="toc-link toc-level-2" href="#171-가상-기업">17.1 가상 기업</a>
+<a class="toc-link toc-level-2" href="#172-공정-구조">17.2 공정 구조</a>
+<a class="toc-link toc-level-2" href="#173-추림-공정의-특징">17.3 추림 공정의 특징</a>
+<a class="toc-link toc-level-1" href="#18-색종이-공정의-odoo-구조">18. 색종이 공정의 Odoo 구조</a>
+<a class="toc-link toc-level-2" href="#181-기본-odoo-개념">18.1 기본 Odoo 개념</a>
+<a class="toc-link toc-level-2" href="#182-mo와-wo">18.2 MO와 WO</a>
+<a class="toc-link toc-level-3" href="#제조오더mo">제조오더(MO)</a>
+<a class="toc-link toc-level-3" href="#작업오더wo">작업오더(WO)</a>
+<a class="toc-link toc-level-2" href="#183-bom-설계-대안">18.3 BOM 설계 대안</a>
+<a class="toc-link toc-level-3" href="#대안-a-모든-공정을-한-개의-bom에-구성">대안 A: 모든 공정을 한 개의 BOM에 구성</a>
+<a class="toc-link toc-level-3" href="#대안-b-반제품-다단계-bom">대안 B: 반제품 다단계 BOM</a>
+<a class="toc-link toc-level-1" href="#19-색종이-제조-온톨로지-설계">19. 색종이 제조 온톨로지 설계</a>
+<a class="toc-link toc-level-2" href="#191-객체-목록">19.1 객체 목록</a>
+<a class="toc-link toc-level-3" href="#기준-객체">기준 객체</a>
+<a class="toc-link toc-level-3" href="#거래운영-객체">거래·운영 객체</a>
+<a class="toc-link toc-level-3" href="#추적-객체">추적 객체</a>
+<a class="toc-link toc-level-2" href="#192-주요-링크">19.2 주요 링크</a>
+<a class="toc-link toc-level-2" href="#193-다대다-lot-계보">19.3 다대다 Lot 계보</a>
+<a class="toc-link toc-level-2" href="#194-객체의-원천-시스템">19.4 객체의 원천 시스템</a>
+<a class="toc-link toc-level-1" href="#20-상태액션권한-설계">20. 상태·액션·권한 설계</a>
+<a class="toc-link toc-level-2" href="#201-제조오더-상태">20.1 제조오더 상태</a>
+<a class="toc-link toc-level-2" href="#202-상태별-액션과-역할">20.2 상태별 액션과 역할</a>
+<a class="toc-link toc-level-2" href="#203-액션-정의-예">20.3 액션 정의 예</a>
+<a class="toc-link toc-level-2" href="#204-권한-설계">20.4 권한 설계</a>
+<a class="toc-link toc-level-1" href="#21-lotserial라벨-설계">21. Lot·Serial·라벨 설계</a>
+<a class="toc-link toc-level-2" href="#211-lot와-serial의-차이">21.1 Lot와 Serial의 차이</a>
+<a class="toc-link toc-level-2" href="#212-권장-추적-단위">21.2 권장 추적 단위</a>
+<a class="toc-link toc-level-2" href="#213-추림-시-lot-생성">21.3 추림 시 Lot 생성</a>
+<a class="toc-link toc-level-2" href="#214-라벨-구성">21.4 라벨 구성</a>
+<a class="toc-link toc-level-3" href="#완제품-lot-라벨-권장-항목">완제품 Lot 라벨 권장 항목</a>
+<a class="toc-link toc-level-3" href="#qr에-넣을-정보">QR에 넣을 정보</a>
+<a class="toc-link toc-level-1" href="#22-품질-이상과-case-처리">22. 품질 이상과 Case 처리</a>
+<a class="toc-link toc-level-2" href="#221-품질-이상-시나리오">22.1 품질 이상 시나리오</a>
+<a class="toc-link toc-level-2" href="#222-자동-감지">22.2 자동 감지</a>
+<a class="toc-link toc-level-2" href="#223-근본-원인-추적">22.3 근본 원인 추적</a>
+<a class="toc-link toc-level-2" href="#224-조치-구분">22.4 조치 구분</a>
+<a class="toc-link toc-level-1" href="#23-데이터-파이프라인과-kpi">23. 데이터 파이프라인과 KPI</a>
+<a class="toc-link toc-level-2" href="#231-주요-데이터셋">23.1 주요 데이터셋</a>
+<a class="toc-link toc-level-2" href="#232-kpi">23.2 KPI</a>
+<a class="toc-link toc-level-3" href="#생산">생산</a>
+<a class="toc-link toc-level-3" href="#품질">품질</a>
+<a class="toc-link toc-level-3" href="#설비">설비</a>
+<a class="toc-link toc-level-3" href="#재고lot">재고·Lot</a>
+<a class="toc-link toc-level-3" href="#원가">원가</a>
+<a class="toc-link toc-level-2" href="#233-kpi에서-액션으로">23.3 KPI에서 액션으로</a>
+<a class="toc-link toc-level-1" href="#24-workshop-운영-앱-설계">24. Workshop 운영 앱 설계</a>
+<a class="toc-link toc-level-2" href="#241-생산관제-화면">24.1 생산관제 화면</a>
+<a class="toc-link toc-level-3" href="#상단">상단</a>
+<a class="toc-link toc-level-3" href="#중앙">중앙</a>
+<a class="toc-link toc-level-3" href="#우측-패널">우측 패널</a>
+<a class="toc-link toc-level-2" href="#242-품질-앱">24.2 품질 앱</a>
+<a class="toc-link toc-level-2" href="#243-현장-태블릿-화면">24.3 현장 태블릿 화면</a>
+<a class="toc-link toc-level-1" href="#25-odoo와-foundry-연동-아키텍처">25. Odoo와 Foundry 연동 아키텍처</a>
+<a class="toc-link toc-level-2" href="#251-역할-분담">25.1 역할 분담</a>
+<a class="toc-link toc-level-3" href="#odoo">Odoo</a>
+<a class="toc-link toc-level-3" href="#foundry">Foundry</a>
+<a class="toc-link toc-level-2" href="#252-권장-원칙">25.2 권장 원칙</a>
+<a class="toc-link toc-level-2" href="#253-연동-흐름">25.3 연동 흐름</a>
+<a class="toc-link toc-level-2" href="#254-writeback-주의">25.4 Writeback 주의</a>
+<a class="toc-link toc-level-1" href="#26-sqlpythonjson-예제">26. SQL·Python·JSON 예제</a>
+<a class="toc-link toc-level-2" href="#261-sql-작업오더별-불량률">26.1 SQL: 작업오더별 불량률</a>
+<a class="toc-link toc-level-2" href="#262-sql-완제품-lot의-투입-lot-계보">26.2 SQL: 완제품 Lot의 투입 Lot 계보</a>
+<a class="toc-link toc-level-2" href="#263-python-품질-상태-계산">26.3 Python: 품질 상태 계산</a>
+<a class="toc-link toc-level-2" href="#264-python-odoo-json-2-api-호출-구조-예">26.4 Python: Odoo JSON-2 API 호출 구조 예</a>
+<a class="toc-link toc-level-2" href="#265-action-요청-json">26.5 Action 요청 JSON</a>
+<a class="toc-link toc-level-2" href="#266-odoo-화면-xml-예">26.6 Odoo 화면 XML 예</a>
+<a class="toc-link toc-level-1" href="#27-aillmmcp에이전트-연결">27. AI·LLM·MCP·에이전트 연결</a>
+<a class="toc-link toc-level-2" href="#271-단순-챗봇과-운영-에이전트의-차이">27.1 단순 챗봇과 운영 에이전트의 차이</a>
+<a class="toc-link toc-level-2" href="#272-ontology가-필요한-이유">27.2 Ontology가 필요한 이유</a>
+<a class="toc-link toc-level-2" href="#273-ai-생산관리자-예">27.3 AI 생산관리자 예</a>
+<a class="toc-link toc-level-2" href="#274-mcp-관점">27.4 MCP 관점</a>
+<a class="toc-link toc-level-1" href="#28-구축-로드맵">28. 구축 로드맵</a>
+<a class="toc-link toc-level-2" href="#281-0단계-문제-정의">28.1 0단계: 문제 정의</a>
+<a class="toc-link toc-level-2" href="#282-1단계-데이터-연결">28.2 1단계: 데이터 연결</a>
+<a class="toc-link toc-level-2" href="#283-2단계-최소-온톨로지">28.3 2단계: 최소 온톨로지</a>
+<a class="toc-link toc-level-2" href="#284-3단계-첫-운영-앱">28.4 3단계: 첫 운영 앱</a>
+<a class="toc-link toc-level-2" href="#285-4단계-확장">28.5 4단계: 확장</a>
+<a class="toc-link toc-level-1" href="#29-거버넌스보안감사">29. 거버넌스·보안·감사</a>
+<a class="toc-link toc-level-2" href="#291-데이터-소유권">29.1 데이터 소유권</a>
+<a class="toc-link toc-level-2" href="#292-최소-권한">29.2 최소 권한</a>
+<a class="toc-link toc-level-2" href="#293-ai-보안">29.3 AI 보안</a>
+<a class="toc-link toc-level-2" href="#294-감사-항목">29.4 감사 항목</a>
+<a class="toc-link toc-level-1" href="#30-테스트와-운영-전환">30. 테스트와 운영 전환</a>
+<a class="toc-link toc-level-2" href="#301-데이터-테스트">30.1 데이터 테스트</a>
+<a class="toc-link toc-level-2" href="#302-온톨로지-테스트">30.2 온톨로지 테스트</a>
+<a class="toc-link toc-level-2" href="#303-업무-시나리오-테스트">30.3 업무 시나리오 테스트</a>
+<a class="toc-link toc-level-3" href="#시나리오-a">시나리오 A</a>
+<a class="toc-link toc-level-3" href="#시나리오-b">시나리오 B</a>
+<a class="toc-link toc-level-3" href="#시나리오-c">시나리오 C</a>
+<a class="toc-link toc-level-3" href="#시나리오-d">시나리오 D</a>
+<a class="toc-link toc-level-2" href="#304-병행-운영">30.4 병행 운영</a>
+<a class="toc-link toc-level-1" href="#31-실습-과제">31. 실습 과제</a>
+<a class="toc-link toc-level-2" href="#실습-1-객체-찾기">실습 1: 객체 찾기</a>
+<a class="toc-link toc-level-2" href="#실습-2-lot-계보">실습 2: Lot 계보</a>
+<a class="toc-link toc-level-2" href="#실습-3-상태-모델">실습 3: 상태 모델</a>
+<a class="toc-link toc-level-2" href="#실습-4-액션-규칙">실습 4: 액션 규칙</a>
+<a class="toc-link toc-level-2" href="#실습-5-workshop-화면">실습 5: Workshop 화면</a>
+<a class="toc-link toc-level-2" href="#실습-6-ai-에이전트">실습 6: AI 에이전트</a>
+<a class="toc-link toc-level-1" href="#32-핵심-용어집">32. 핵심 용어집</a>
+<a class="toc-link toc-level-1" href="#33-공식-참고자료">33. 공식 참고자료</a>
+<a class="toc-link toc-level-2" href="#palantir">Palantir</a>
+<a class="toc-link toc-level-2" href="#odoo-1">Odoo</a>
+<a class="toc-link toc-level-1" href="#맺음말">맺음말</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <article class="document">
+      <header class="hero">
+        <div class="hero-kicker">PALANTIR FOUNDRY · ONTOLOGY · ODOO</div>
+        <h1>Palantir Foundry·Ontology 실무 교재</h1>
+        <p>기존 데이터 플랫폼 비교부터 Odoo 색종이 제조 적용까지</p>
+      </header>
+      <section class="content">
+        
+
+<blockquote>
+<p>이 문서는 이 채팅에서 다룬 첫 질문인 **“기존 데이터 플랫폼과 파운드리는 무엇이 다른가?”**에서 출발하여, 데이터 레이크와 온톨로지의 차이, Foundry 구성요소, 객체·액션·링크·상태 전이 구조, Odoo 제조 모듈과의 연결, 색종이 생산공장 적용 사례, AI 에이전트 연계까지 하나의 흐름으로 정리한 실무형 교재이다.</p>
+</blockquote>
+<hr/>
+<h1 id="문서-사용-안내">문서 사용 안내<a aria-label="이 절의 링크" class="heading-anchor" href="#문서-사용-안내">¶</a></h1>
+<p>이 교재는 다음 독자를 대상으로 한다.</p>
+<ul>
+<li>Palantir Foundry와 Ontology를 처음 배우는 사람</li>
+<li>Odoo ERP·제조 모듈을 도입하거나 운영하는 사람</li>
+<li>제조 데이터 플랫폼과 MES·ERP 통합을 설계하는 사람</li>
+<li>데이터 레이크를 구축했지만 실제 업무 실행으로 연결하지 못하고 있는 조직</li>
+<li>AI 에이전트가 기업 데이터를 안전하게 조회하고 행동하게 만들고 싶은 기획자</li>
+<li>색종이·문구·인쇄·가공 제조공장의 디지털 전환을 검토하는 실무자</li>
+</ul>
+<p>이 문서의 사례는 이해를 돕기 위해 만든 <strong>가상의 색종이 제조기업</strong>을 중심으로 설명한다. 실제 구축 시에는 공장별 설비, 품질 기준, 책임 체계, 제품 구조, Odoo 버전, Foundry 배포 환경을 별도로 확인해야 한다.</p>
+<blockquote>
+<p><strong>용어 주의</strong><br/>
+Palantir 제품의 화면 명칭과 기능 제공 범위는 계약, 배포 환경, 권한, 제품 업데이트에 따라 달라질 수 있다. 이 문서는 2026년 8월 기준 공개된 공식 문서의 개념과 이 채팅에서 제시된 자료를 바탕으로 작성하였다.</p>
+</blockquote>
+<hr/>
+<h1 id="목차">목차<a aria-label="이 절의 링크" class="heading-anchor" href="#목차">¶</a></h1>
+<ol type="1">
+<li><a href="#1-이-채팅에서-출발한-핵심-질문">이 채팅에서 출발한 핵심 질문</a></li>
+<li><a href="#2-기존-데이터-플랫폼과-foundry의-차이">기존 데이터 플랫폼과 Foundry의 차이</a></li>
+<li><a href="#3-데이터-레이크와-온톨로지-비교">데이터 레이크와 온톨로지 비교</a></li>
+<li><a href="#4-foundry-전체-구조와-구성요소">Foundry 전체 구조와 구성요소</a></li>
+<li><a href="#5-data-connection">Data Connection</a></li>
+<li><a href="#6-contour">Contour</a></li>
+<li><a href="#7-pipeline-builder">Pipeline Builder</a></li>
+<li><a href="#8-ontology-manager">Ontology Manager</a></li>
+<li><a href="#9-object-explorer">Object Explorer</a></li>
+<li><a href="#10-functions">Functions</a></li>
+<li><a href="#11-workshop">Workshop</a></li>
+<li><a href="#12-case-management">Case Management</a></li>
+<li><a href="#13-apollo">Apollo</a></li>
+<li><a href="#14-resource-management">Resource Management</a></li>
+<li><a href="#15-온톨로지의-핵심-구조">온톨로지의 핵심 구조</a></li>
+<li><a href="#16-판단-중심-온톨로지의-5가지-원리">판단 중심 온톨로지의 5가지 원리</a></li>
+<li><a href="#17-색종이-생산공장-사례-개요">색종이 생산공장 사례 개요</a></li>
+<li><a href="#18-색종이-공정의-odoo-구조">색종이 공정의 Odoo 구조</a></li>
+<li><a href="#19-색종이-제조-온톨로지-설계">색종이 제조 온톨로지 설계</a></li>
+<li><a href="#20-상태액션권한-설계">상태·액션·권한 설계</a></li>
+<li><a href="#21-lotserial라벨-설계">Lot·Serial·라벨 설계</a></li>
+<li><a href="#22-품질-이상과-case-처리">품질 이상과 Case 처리</a></li>
+<li><a href="#23-데이터-파이프라인과-kpi">데이터 파이프라인과 KPI</a></li>
+<li><a href="#24-workshop-운영-앱-설계">Workshop 운영 앱 설계</a></li>
+<li><a href="#25-odoo와-foundry-연동-아키텍처">Odoo와 Foundry 연동 아키텍처</a></li>
+<li><a href="#26-sqlpythonjson-예제">SQL·Python·JSON 예제</a></li>
+<li><a href="#27-aillmmcp에이전트-연결">AI·LLM·MCP·에이전트 연결</a></li>
+<li><a href="#28-구축-로드맵">구축 로드맵</a></li>
+<li><a href="#29-거버넌스보안감사">거버넌스·보안·감사</a></li>
+<li><a href="#30-테스트와-운영-전환">테스트와 운영 전환</a></li>
+<li><a href="#31-실습-과제">실습 과제</a></li>
+<li><a href="#32-핵심-용어집">핵심 용어집</a></li>
+<li><a href="#33-공식-참고자료">공식 참고자료</a></li>
+</ol>
+<hr/>
+<h1 id="1-이-채팅에서-출발한-핵심-질문">1. 이 채팅에서 출발한 핵심 질문<a aria-label="이 절의 링크" class="heading-anchor" href="#1-이-채팅에서-출발한-핵심-질문">¶</a></h1>
+<p>이 교재는 다음 질문들을 하나의 연속된 학습 과정으로 재구성한다.</p>
+<h2 id="11-첫-번째-질문">1.1 첫 번째 질문<a aria-label="이 절의 링크" class="heading-anchor" href="#11-첫-번째-질문">¶</a></h2>
+<blockquote>
+<p>기존 데이터 플랫폼과 Palantir Foundry는 무엇이 다른가?</p>
+</blockquote>
+<p>핵심 답은 다음과 같다.</p>
+<ul>
+<li>기존 데이터 플랫폼은 데이터를 <strong>수집·저장·정제·분석</strong>하는 데 강하다.</li>
+<li>Foundry는 데이터에 업무 의미를 부여하고, <strong>누가 무엇을 판단하고 어떤 행동을 할 수 있는지</strong>까지 연결한다.</li>
+<li>즉, Foundry의 차별점은 단순한 데이터 처리량이 아니라 <strong>분석 결과를 운영 행동으로 연결하는 구조</strong>에 있다.</li>
+</ul>
+<h2 id="12-두-번째-질문">1.2 두 번째 질문<a aria-label="이 절의 링크" class="heading-anchor" href="#12-두-번째-질문">¶</a></h2>
+<blockquote>
+<p>데이터 레이크와 온톨로지는 어떻게 다른가?</p>
+</blockquote>
+<ul>
+<li>데이터 레이크는 다양한 원천 데이터를 모으는 저장·처리 기반이다.</li>
+<li>온톨로지는 데이터가 현실에서 무엇을 의미하고, 서로 어떻게 연결되며, 어떤 행동의 근거가 되는지를 정의한다.</li>
+<li>둘은 경쟁 관계가 아니라 상호 보완 관계이다.</li>
+</ul>
+<h2 id="13-세-번째-질문">1.3 세 번째 질문<a aria-label="이 절의 링크" class="heading-anchor" href="#13-세-번째-질문">¶</a></h2>
+<blockquote>
+<p>Data Connection, Contour, Pipeline Builder, Ontology Manager, Object Explorer, Functions, Workshop, Case Management, Apollo, Resource Management는 각각 무엇을 하는가?</p>
+</blockquote>
+<p>이 구성요소들은 다음 전체 흐름을 만든다.</p>
+<div class="mermaid">flowchart LR
+    A[원천 시스템 연결] --&gt; B[데이터 정제·통합]
+    B --&gt; C[탐색·분석]
+    C --&gt; D[업무 객체·관계·행동 정의]
+    D --&gt; E[운영 앱과 의사결정]
+    E --&gt; F[승인·조치·상태 변경]
+    F --&gt; G[결과 추적·감사]
+    G --&gt; B</div>
+<h2 id="14-네-번째-질문">1.4 네 번째 질문<a aria-label="이 절의 링크" class="heading-anchor" href="#14-네-번째-질문">¶</a></h2>
+<blockquote>
+<p>Foundry Ontology에서 객체·액션·링크가 왜 순환 구조를 이루는가?</p>
+</blockquote>
+<ul>
+<li>객체는 현재 상태를 가진 현실의 업무 대상이다.</li>
+<li>액션은 객체의 상태를 바꾸는 행위이다.</li>
+<li>링크는 그 변화가 영향을 미치는 다른 객체를 연결한다.</li>
+<li>변화된 객체는 다시 새로운 판단의 대상이 된다.</li>
+</ul>
+<h2 id="15-다섯-번째-질문">1.5 다섯 번째 질문<a aria-label="이 절의 링크" class="heading-anchor" href="#15-다섯-번째-질문">¶</a></h2>
+<blockquote>
+<p>이 구조를 실제 제조공장, 특히 색종이 생산공정에 어떻게 적용할 수 있는가?</p>
+</blockquote>
+<p>이 문서는 색종이 제조공정을 다음과 같이 일관되게 사용한다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>판매주문
+→ 생산계획
+→ 제조오더
+→ 원재료 배합
+→ 인쇄
+→ 건조 또는 안정화
+→ 절단
+→ 추림·조합
+→ 포장
+→ 완제품 Lot
+→ 품질검사
+→ 출하</code></pre></div>
+<hr/>
+<h1 id="2-기존-데이터-플랫폼과-foundry의-차이">2. 기존 데이터 플랫폼과 Foundry의 차이<a aria-label="이 절의 링크" class="heading-anchor" href="#2-기존-데이터-플랫폼과-foundry의-차이">¶</a></h1>
+<h2 id="21-기존-데이터-플랫폼의-전형적인-구조">2.1 기존 데이터 플랫폼의 전형적인 구조<a aria-label="이 절의 링크" class="heading-anchor" href="#21-기존-데이터-플랫폼의-전형적인-구조">¶</a></h2>
+<p>일반적인 데이터 플랫폼은 다음 요소로 구성된다.</p>
+<ul>
+<li>ERP, MES, CRM, WMS, 센서, Excel, 외부 API 등 원천 시스템</li>
+<li>데이터 웨어하우스 또는 데이터 레이크</li>
+<li>ETL·ELT 파이프라인</li>
+<li>분석용 데이터 마트</li>
+<li>BI 대시보드</li>
+<li>통계·머신러닝 분석 환경</li>
+</ul>
+<p>이 구조는 매우 중요하며 Foundry도 이러한 기반 기능을 포함하거나 연결한다. 따라서 “기존 플랫폼은 낡고 Foundry만 옳다”는 식으로 이해하면 안 된다.</p>
+<p>기존 플랫폼의 일반적인 흐름은 다음과 같다.</p>
+<div class="mermaid">flowchart TD
+    A[ERP·MES·센서·파일] --&gt; B[데이터 레이크/웨어하우스]
+    B --&gt; C[정제·통합]
+    C --&gt; D[데이터 마트]
+    D --&gt; E[BI·분석]
+    E --&gt; F[보고서·회의]
+    F --&gt; G[현업이 별도 시스템에서 조치]</div>
+<p>분석 결과가 현업 실행으로 이어지려면 보통 다음 과정이 추가된다.</p>
+<ol type="1">
+<li>분석가가 이상을 발견한다.</li>
+<li>보고서를 작성한다.</li>
+<li>회의를 진행한다.</li>
+<li>책임자를 정한다.</li>
+<li>ERP나 MES에 다시 접속한다.</li>
+<li>담당자가 주문·작업·재고·품질 상태를 수정한다.</li>
+<li>결과를 별도 문서로 기록한다.</li>
+</ol>
+<p>이때 데이터 분석과 업무 실행 사이에 시간이 지연되고, 책임과 근거가 여러 시스템에 분산될 수 있다.</p>
+<h2 id="22-foundry의-관점">2.2 Foundry의 관점<a aria-label="이 절의 링크" class="heading-anchor" href="#22-foundry의-관점">¶</a></h2>
+<p>Foundry는 데이터 처리만이 아니라 다음을 연결하려는 플랫폼이다.</p>
+<ul>
+<li>현실의 업무 대상</li>
+<li>대상의 현재 상태</li>
+<li>대상 간 관계</li>
+<li>조직의 판단 기준</li>
+<li>실행 가능한 액션</li>
+<li>액션의 권한과 책임</li>
+<li>상태 변경 이력</li>
+<li>후속 영향과 결과</li>
+</ul>
+<div class="mermaid">flowchart TD
+    A[원천 데이터] --&gt; B[정제된 데이터]
+    B --&gt; C[Ontology: 객체·관계·상태]
+    C --&gt; D[분석·모델·규칙]
+    D --&gt; E[운영 앱]
+    E --&gt; F[승인·액션]
+    F --&gt; G[객체 상태 변경]
+    G --&gt; H[영향 범위 추적]
+    H --&gt; C</div>
+<h2 id="23-핵심-질문의-차이">2.3 핵심 질문의 차이<a aria-label="이 절의 링크" class="heading-anchor" href="#23-핵심-질문의-차이">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>구분</th>
+<th>기존 데이터 플랫폼</th>
+<th>Foundry·Ontology 중심</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>핵심 질문</td>
+<td>데이터를 얼마나 빠르고 많이 처리할 수 있는가?</td>
+<td>이 데이터로 무엇을 판단하고 실행할 것인가?</td>
+</tr>
+<tr class="even">
+<td>기본 모델</td>
+<td>테이블, 칼럼, 파일, 데이터셋</td>
+<td>객체, 속성, 링크, 액션, 상태</td>
+</tr>
+<tr class="odd">
+<td>대시보드</td>
+<td>현재 수치와 추세 표시</td>
+<td>상황, 영향, 선택지, 조치까지 연결</td>
+</tr>
+<tr class="even">
+<td>분석과 운영</td>
+<td>분석 후 별도 시스템에서 실행</td>
+<td>분석 결과와 운영 흐름을 연결</td>
+</tr>
+<tr class="odd">
+<td>권한</td>
+<td>누가 데이터를 볼 수 있는가</td>
+<td>누가 어떤 상태에서 어떤 액션을 할 수 있는가</td>
+</tr>
+<tr class="even">
+<td>기록</td>
+<td>수치·행·로그 중심</td>
+<td>상태 전이와 책임·근거 중심</td>
+</tr>
+<tr class="odd">
+<td>평가</td>
+<td>성능, 처리량, 비용, 확장성</td>
+<td>의사결정 품질, 실행 속도, 통제, 추적성</td>
+</tr>
+<tr class="even">
+<td>AI 활용</td>
+<td>데이터 검색·요약</td>
+<td>허용된 객체와 액션을 통한 통제된 행동</td>
+</tr>
+</tbody>
+</table>
+<h2 id="24-중요한-보정">2.4 중요한 보정<a aria-label="이 절의 링크" class="heading-anchor" href="#24-중요한-보정">¶</a></h2>
+<p>전문적으로는 다음처럼 이해해야 한다.</p>
+<ul>
+<li>데이터 레이크도 충분히 잘 설계하면 카탈로그, 품질, 계보, 권한을 갖출 수 있다.</li>
+<li>기존 ERP도 워크플로와 승인 기능을 가질 수 있다.</li>
+<li>Foundry의 장점은 개별 기능 하나가 아니라, <strong>데이터·모델·업무 객체·애플리케이션·액션·보안·감사를 같은 의미 체계로 연결하는 접근</strong>에 있다.</li>
+<li>온톨로지는 데이터 레이크를 없애는 것이 아니라, 데이터 레이크 위에 업무 의미와 실행 계층을 더한다.</li>
+</ul>
+<hr/>
+<h1 id="3-데이터-레이크와-온톨로지-비교">3. 데이터 레이크와 온톨로지 비교<a aria-label="이 절의 링크" class="heading-anchor" href="#3-데이터-레이크와-온톨로지-비교">¶</a></h1>
+<h2 id="31-데이터-레이크란-무엇인가">3.1 데이터 레이크란 무엇인가<a aria-label="이 절의 링크" class="heading-anchor" href="#31-데이터-레이크란-무엇인가">¶</a></h2>
+<p>데이터 레이크는 형식이 다른 대규모 데이터를 원형 또는 준원형 상태로 저장하는 기반이다.</p>
+<p>저장할 수 있는 예:</p>
+<ul>
+<li>관계형 데이터베이스 추출 데이터</li>
+<li>CSV·Excel</li>
+<li>로그</li>
+<li>PDF·이미지</li>
+<li>설비 센서 시계열</li>
+<li>품질검사 이미지</li>
+<li>이메일·문서</li>
+<li>외부 시장 데이터</li>
+</ul>
+<h3 id="장점">장점<a aria-label="이 절의 링크" class="heading-anchor" href="#장점">¶</a></h3>
+<ul>
+<li>대량 데이터 수집</li>
+<li>다양한 형식 수용</li>
+<li>원천 보존</li>
+<li>분석 목적에 따른 재가공</li>
+<li>머신러닝 학습 데이터 확보</li>
+<li>장기 이력 저장</li>
+</ul>
+<h3 id="위험">위험<a aria-label="이 절의 링크" class="heading-anchor" href="#위험">¶</a></h3>
+<ul>
+<li>메타데이터와 책임자가 없으면 데이터 늪이 될 수 있음</li>
+<li>동일한 고객·제품·설비가 여러 코드로 중복될 수 있음</li>
+<li>데이터의 의미를 현업이 이해하기 어려울 수 있음</li>
+<li>분석 결과가 실제 업무 행동으로 연결되지 않을 수 있음</li>
+</ul>
+<h2 id="32-온톨로지란-무엇인가">3.2 온톨로지란 무엇인가<a aria-label="이 절의 링크" class="heading-anchor" href="#32-온톨로지란-무엇인가">¶</a></h2>
+<p>Foundry 관점의 온톨로지는 조직이 다루는 현실을 다음 요소로 표현하는 운영 의미 계층이다.</p>
+<ul>
+<li>객체 유형(Object Type)</li>
+<li>객체 인스턴스(Object)</li>
+<li>속성(Property)</li>
+<li>링크(Link)</li>
+<li>액션(Action)</li>
+<li>함수와 모델(Function/Model)</li>
+<li>권한(Authorization)</li>
+<li>상태와 전이(State/Transition)</li>
+<li>업무 앱(Object View/Workshop)</li>
+</ul>
+<h2 id="33-비유">3.3 비유<a aria-label="이 절의 링크" class="heading-anchor" href="#33-비유">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>개념</th>
+<th>비유</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>데이터 레이크</td>
+<td>모든 원재료와 기록을 모아 둔 대형 창고</td>
+</tr>
+<tr class="even">
+<td>데이터 카탈로그</td>
+<td>창고 위치와 품목을 알려주는 목록</td>
+</tr>
+<tr class="odd">
+<td>데이터 모델</td>
+<td>물품을 분류하고 연결하는 설계도</td>
+</tr>
+<tr class="even">
+<td>온톨로지</td>
+<td>공장 전체의 사람·설비·제품·주문·규칙·행동을 표현한 디지털 운영체계</td>
+</tr>
+<tr class="odd">
+<td>Workshop 앱</td>
+<td>현장 작업자가 실제로 사용하는 조작 화면</td>
+</tr>
+<tr class="even">
+<td>Action</td>
+<td>승인, 중지, 재작업, 출하 보류 같은 실행 버튼</td>
+</tr>
+</tbody>
+</table>
+<h2 id="34-색종이-사례">3.4 색종이 사례<a aria-label="이 절의 링크" class="heading-anchor" href="#34-색종이-사례">¶</a></h2>
+<p>데이터 레이크에는 다음 데이터가 들어올 수 있다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>mrp_production.csv
+mrp_workorder.csv
+stock_move.csv
+stock_lot.csv
+quality_check.csv
+machine_sensor.json
+operator_shift.xlsx
+customer_claim.pdf</code></pre></div>
+<p>하지만 현업은 파일명이 아니라 다음 질문으로 업무를 본다.</p>
+<ul>
+<li>어떤 제조오더가 지연되고 있는가?</li>
+<li>어느 작업오더에서 불량이 발생했는가?</li>
+<li>어떤 원재료 Lot가 영향을 주었는가?</li>
+<li>해당 완제품 Lot는 어느 고객에게 출하되었는가?</li>
+<li>누가 생산중지 결정을 내릴 수 있는가?</li>
+<li>재작업 후 출하가 가능한가?</li>
+</ul>
+<p>온톨로지는 위 데이터를 다음 현실 객체로 바꾼다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>제조오더
+작업오더
+제품
+원재료 Lot
+완제품 Lot
+작업장
+설비
+품질검사
+품질사고
+고객주문
+담당자</code></pre></div>
+<hr/>
+<h1 id="4-foundry-전체-구조와-구성요소">4. Foundry 전체 구조와 구성요소<a aria-label="이 절의 링크" class="heading-anchor" href="#4-foundry-전체-구조와-구성요소">¶</a></h1>
+<h2 id="41-큰-흐름">4.1 큰 흐름<a aria-label="이 절의 링크" class="heading-anchor" href="#41-큰-흐름">¶</a></h2>
+<div class="mermaid">flowchart LR
+    S[Data Connection&lt;br/&gt;원천 연결] --&gt; P[Pipeline Builder&lt;br/&gt;정제·통합]
+    P --&gt; C[Contour&lt;br/&gt;탐색·분석]
+    P --&gt; O[Ontology Manager&lt;br/&gt;업무 의미 모델]
+    C --&gt; O
+    O --&gt; X[Object Explorer&lt;br/&gt;객체 탐색]
+    O --&gt; F[Functions&lt;br/&gt;계산·규칙]
+    O --&gt; W[Workshop&lt;br/&gt;운영 앱]
+    F --&gt; W
+    W --&gt; A[Action&lt;br/&gt;실행·Writeback]
+    A --&gt; O
+    W --&gt; K[Case 처리&lt;br/&gt;조사·조치]
+    AP[Apollo&lt;br/&gt;소프트웨어 배포·운영] -. 운영 .-&gt; W
+    RM[Resource Management&lt;br/&gt;컴퓨팅 사용량·비용] -. 관제 .-&gt; P</div>
+<h2 id="42-구성요소-요약">4.2 구성요소 요약<a aria-label="이 절의 링크" class="heading-anchor" href="#42-구성요소-요약">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>구성요소</th>
+<th>주요 역할</th>
+<th>색종이 제조 예</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data Connection</td>
+<td>외부 시스템과 데이터 동기화</td>
+<td>Odoo, 설비 센서, Excel 연결</td>
+</tr>
+<tr class="even">
+<td>Contour</td>
+<td>데이터 탐색·기초 분석</td>
+<td>설비별 불량률 비교</td>
+</tr>
+<tr class="odd">
+<td>Pipeline Builder</td>
+<td>정제·결합·파생 데이터 생성</td>
+<td>MO·WO·Lot·품질 데이터 결합</td>
+</tr>
+<tr class="even">
+<td>Ontology Manager</td>
+<td>객체·속성·링크·액션 정의</td>
+<td>제조오더·설비·Lot 모델링</td>
+</tr>
+<tr class="odd">
+<td>Object Explorer</td>
+<td>객체 검색과 관계 탐색</td>
+<td>불량 Lot의 영향 고객 추적</td>
+</tr>
+<tr class="even">
+<td>Functions</td>
+<td>계산·판단·비즈니스 로직</td>
+<td>납기 위험도, 품질 위험점수</td>
+</tr>
+<tr class="odd">
+<td>Workshop</td>
+<td>운영용 애플리케이션 구축</td>
+<td>생산관제·품질처리 앱</td>
+</tr>
+<tr class="even">
+<td>Case Management</td>
+<td>사건·조사·조치 과정 관리</td>
+<td>품질이상 조사 Case</td>
+</tr>
+<tr class="odd">
+<td>Apollo</td>
+<td>소프트웨어 배포와 운영</td>
+<td>여러 공장 환경에 앱 배포</td>
+</tr>
+<tr class="even">
+<td>Resource Management</td>
+<td>컴퓨팅 사용량·비용 분석</td>
+<td>프로젝트별 배치·쿼리 비용 관리</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h1 id="5-data-connection">5. Data Connection<a aria-label="이 절의 링크" class="heading-anchor" href="#5-data-connection">¶</a></h1>
+<h2 id="51-정의">5.1 정의<a aria-label="이 절의 링크" class="heading-anchor" href="#51-정의">¶</a></h2>
+<p>Data Connection은 외부 시스템이나 다른 Foundry 환경의 데이터를 Foundry로 동기화하기 위한 연결 계층이다.</p>
+<h2 id="52-연결-대상">5.2 연결 대상<a aria-label="이 절의 링크" class="heading-anchor" href="#52-연결-대상">¶</a></h2>
+<ul>
+<li>Odoo ERP</li>
+<li>MES</li>
+<li>WMS</li>
+<li>PostgreSQL·Oracle·SQL Server</li>
+<li>파일 저장소</li>
+<li>클라우드 스토리지</li>
+<li>API</li>
+<li>제조 설비 게이트웨이</li>
+<li>IoT 플랫폼</li>
+<li>다른 Foundry 인스턴스</li>
+</ul>
+<h2 id="53-핵심-개념">5.3 핵심 개념<a aria-label="이 절의 링크" class="heading-anchor" href="#53-핵심-개념">¶</a></h2>
+<ul>
+<li><strong>Source</strong>: 외부 시스템에 대한 하나의 연결</li>
+<li><strong>Sync</strong>: 원천 데이터를 Foundry 데이터셋으로 가져오는 작업</li>
+<li><strong>Batch Sync</strong>: 일정 또는 수동 실행으로 묶음 데이터를 동기화</li>
+<li><strong>Incremental Sync</strong>: 변경분만 가져오는 동기화</li>
+<li><strong>Credential</strong>: 접속 자격증명</li>
+<li><strong>Schema</strong>: 가져오는 필드와 데이터 형식</li>
+<li><strong>Freshness</strong>: 데이터가 얼마나 최신인지 나타내는 상태</li>
+</ul>
+<h2 id="54-색종이-공장-연결-설계">5.4 색종이 공장 연결 설계<a aria-label="이 절의 링크" class="heading-anchor" href="#54-색종이-공장-연결-설계">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>원천</th>
+<th>데이터</th>
+<th style="text-align: right;">주기</th>
+<th>사용 목적</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Odoo</td>
+<td>제품·BOM·MO·WO·재고·Lot</td>
+<td style="text-align: right;">5~15분</td>
+<td>생산·재고·추적</td>
+</tr>
+<tr class="even">
+<td>설비 PLC/MQTT</td>
+<td>속도·온도·압력·정지</td>
+<td style="text-align: right;">초~분</td>
+<td>이상 탐지</td>
+</tr>
+<tr class="odd">
+<td>품질검사 장비</td>
+<td>색차·치수·인쇄 결함</td>
+<td style="text-align: right;">실시간/배치</td>
+<td>품질 판정</td>
+</tr>
+<tr class="even">
+<td>Excel</td>
+<td>작업조·임시 계획</td>
+<td style="text-align: right;">일 1회</td>
+<td>보조 마스터</td>
+</tr>
+<tr class="odd">
+<td>고객 클레임</td>
+<td>유형·사진·주문번호</td>
+<td style="text-align: right;">사건 발생 시</td>
+<td>품질 Case</td>
+</tr>
+<tr class="even">
+<td>회계</td>
+<td>표준원가·실제원가</td>
+<td style="text-align: right;">일·월</td>
+<td>원가 분석</td>
+</tr>
+</tbody>
+</table>
+<h2 id="55-설계-원칙">5.5 설계 원칙<a aria-label="이 절의 링크" class="heading-anchor" href="#55-설계-원칙">¶</a></h2>
+<ol type="1">
+<li>원천 시스템의 책임자를 명확히 한다.</li>
+<li>원천 데이터는 가급적 원형에 가깝게 보존한다.</li>
+<li>수정은 원천에서 해야 하는지 Foundry Action에서 해야 하는지 결정한다.</li>
+<li>동기화 실패가 어떤 앱에 영향을 주는지 계보를 관리한다.</li>
+<li>개인정보·영업비밀·생산비밀에 대한 접근권한을 분리한다.</li>
+</ol>
+<hr/>
+<h1 id="6-contour">6. Contour<a aria-label="이 절의 링크" class="heading-anchor" href="#6-contour">¶</a></h1>
+<h2 id="61-정의">6.1 정의<a aria-label="이 절의 링크" class="heading-anchor" href="#61-정의">¶</a></h2>
+<p>Contour는 데이터셋을 포인트앤클릭 방식으로 탐색하고 변환·집계·시각화하는 분석 도구이다.</p>
+<h2 id="62-적합한-질문">6.2 적합한 질문<a aria-label="이 절의 링크" class="heading-anchor" href="#62-적합한-질문">¶</a></h2>
+<ul>
+<li>데이터에 결측치가 얼마나 있는가?</li>
+<li>설비별 불량률은?</li>
+<li>색상별 생산량은?</li>
+<li>특정 기간에 생산시간이 증가했는가?</li>
+<li>작업조별 품질 차이가 있는가?</li>
+<li>어떤 원재료 Lot에서 이상이 집중되는가?</li>
+</ul>
+<h2 id="63-색종이-예제">6.3 색종이 예제<a aria-label="이 절의 링크" class="heading-anchor" href="#63-색종이-예제">¶</a></h2>
+<p>분석 대상:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>작업오더 번호
+제품 코드
+색상
+인쇄기
+작업조
+원재료 Lot
+계획 수량
+양품 수량
+불량 수량
+작업 시간
+정지 시간</code></pre></div>
+<p>파생 지표:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>불량률 = 불량 수량 / 총 생산 수량
+시간당 생산량 = 양품 수량 / 실제 작업 시간
+설비 가동률 = 가동 시간 / 계획 시간</code></pre></div>
+<h2 id="64-contour의-한계">6.4 Contour의 한계<a aria-label="이 절의 링크" class="heading-anchor" href="#64-contour의-한계">¶</a></h2>
+<p>Contour에서 좋은 분석을 만들었다고 해서 자동으로 업무 조치가 발생하는 것은 아니다.<br/>
+다음 단계가 필요하다.</p>
+<ul>
+<li>분석 결과를 온톨로지 객체 속성으로 제공</li>
+<li>위험 상태 규칙 정의</li>
+<li>책임자와 가능한 액션 정의</li>
+<li>Workshop 화면에서 조치</li>
+<li>Action을 통해 객체 또는 외부 시스템 변경</li>
+</ul>
+<hr/>
+<h1 id="7-pipeline-builder">7. Pipeline Builder<a aria-label="이 절의 링크" class="heading-anchor" href="#7-pipeline-builder">¶</a></h1>
+<h2 id="71-정의">7.1 정의<a aria-label="이 절의 링크" class="heading-anchor" href="#71-정의">¶</a></h2>
+<p>Pipeline Builder는 원천 데이터셋을 시각적으로 정제·결합·변환하여 재사용 가능한 데이터 파이프라인을 만드는 도구이다.</p>
+<h2 id="72-전형적인-흐름">7.2 전형적인 흐름<a aria-label="이 절의 링크" class="heading-anchor" href="#72-전형적인-흐름">¶</a></h2>
+<div class="mermaid">flowchart LR
+    A[Odoo MO] --&gt; J[키 정규화]
+    B[Odoo WO] --&gt; J
+    C[재고 이동] --&gt; J
+    D[Lot] --&gt; J
+    E[품질검사] --&gt; J
+    F[설비센서] --&gt; J
+    J --&gt; T[정제·결합]
+    T --&gt; M[생산실적 데이터셋]
+    T --&gt; Q[품질추적 데이터셋]
+    T --&gt; O[Ontology 객체 원천]</div>
+<h2 id="73-주요-작업">7.3 주요 작업<a aria-label="이 절의 링크" class="heading-anchor" href="#73-주요-작업">¶</a></h2>
+<ul>
+<li>불필요한 칼럼 제거</li>
+<li>데이터 형식 변환</li>
+<li>제품코드·설비코드 표준화</li>
+<li>중복 제거</li>
+<li>MO와 WO 연결</li>
+<li>투입 Lot와 산출 Lot 연결</li>
+<li>센서 데이터를 작업시간 구간에 맞게 결합</li>
+<li>파생 지표 계산</li>
+<li>오류 행 격리</li>
+<li>증분 처리</li>
+</ul>
+<h2 id="74-색종이-공장-예">7.4 색종이 공장 예<a aria-label="이 절의 링크" class="heading-anchor" href="#74-색종이-공장-예">¶</a></h2>
+<p>원천 데이터:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>MO-260802-01 / 제품: 20색 색종이 / 계획 10,000세트
+WO-01 / 배합
+WO-02 / 인쇄-빨강
+WO-03 / 인쇄-파랑
+...
+WO-22 / 절단
+WO-23 / 추림
+WO-24 / 포장</code></pre></div>
+<p>Pipeline Builder에서는 각 작업오더를 제조오더, 설비, 작업자, 원재료 Lot, 산출 반제품 Lot와 연결한다.</p>
+<hr/>
+<h1 id="8-ontology-manager">8. Ontology Manager<a aria-label="이 절의 링크" class="heading-anchor" href="#8-ontology-manager">¶</a></h1>
+<h2 id="81-정의">8.1 정의<a aria-label="이 절의 링크" class="heading-anchor" href="#81-정의">¶</a></h2>
+<p>Ontology Manager는 조직의 업무 개념을 객체·속성·링크·액션 등으로 구성하고 관리하는 핵심 설계 도구이다.</p>
+<h2 id="82-객체-유형-예">8.2 객체 유형 예<a aria-label="이 절의 링크" class="heading-anchor" href="#82-객체-유형-예">¶</a></h2>
+<ul>
+<li>Customer</li>
+<li>SalesOrder</li>
+<li>Product</li>
+<li>BillOfMaterials</li>
+<li>ManufacturingOrder</li>
+<li>WorkOrder</li>
+<li>WorkCenter</li>
+<li>Machine</li>
+<li>MaterialLot</li>
+<li>SemiFinishedLot</li>
+<li>FinishedLot</li>
+<li>QualityCheck</li>
+<li>QualityIncident</li>
+<li>Employee</li>
+<li>Shift</li>
+<li>Shipment</li>
+</ul>
+<h2 id="83-속성-예">8.3 속성 예<a aria-label="이 절의 링크" class="heading-anchor" href="#83-속성-예">¶</a></h2>
+<p><code>ManufacturingOrder</code></p>
+<table>
+<thead>
+<tr class="header">
+<th>속성</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>mo_id</td>
+<td>제조오더 식별자</td>
+</tr>
+<tr class="even">
+<td>product_code</td>
+<td>제품 코드</td>
+</tr>
+<tr class="odd">
+<td>planned_quantity</td>
+<td>계획 수량</td>
+</tr>
+<tr class="even">
+<td>produced_quantity</td>
+<td>실제 생산량</td>
+</tr>
+<tr class="odd">
+<td>due_date</td>
+<td>납기</td>
+</tr>
+<tr class="even">
+<td>status</td>
+<td>현재 상태</td>
+</tr>
+<tr class="odd">
+<td>quality_status</td>
+<td>품질 상태</td>
+</tr>
+<tr class="even">
+<td>schedule_risk</td>
+<td>일정 위험도</td>
+</tr>
+<tr class="odd">
+<td>responsible_team</td>
+<td>책임팀</td>
+</tr>
+</tbody>
+</table>
+<h2 id="84-링크-예">8.4 링크 예<a aria-label="이 절의 링크" class="heading-anchor" href="#84-링크-예">¶</a></h2>
+<div class="mermaid">erDiagram
+    SALES_ORDER ||--o{ MANUFACTURING_ORDER : "생산을 요구"
+    MANUFACTURING_ORDER ||--o{ WORK_ORDER : "포함"
+    WORK_ORDER }o--|| WORK_CENTER : "수행"
+    WORK_ORDER }o--o{ MATERIAL_LOT : "소비"
+    WORK_ORDER ||--o{ FINISHED_LOT : "생산"
+    FINISHED_LOT ||--o{ QUALITY_CHECK : "검사"
+    FINISHED_LOT }o--o{ SHIPMENT : "출하"
+    QUALITY_INCIDENT }o--o{ FINISHED_LOT : "영향"</div>
+<h2 id="85-액션-예">8.5 액션 예<a aria-label="이 절의 링크" class="heading-anchor" href="#85-액션-예">¶</a></h2>
+<ul>
+<li>Approve Manufacturing Order</li>
+<li>Start Work Order</li>
+<li>Pause Work Order</li>
+<li>Record Scrap</li>
+<li>Request Quality Check</li>
+<li>Hold Shipment</li>
+<li>Release Shipment</li>
+<li>Create Rework Order</li>
+<li>Assign Responsible Person</li>
+<li>Close Quality Incident</li>
+</ul>
+<h2 id="86-온톨로지-설계-원칙">8.6 온톨로지 설계 원칙<a aria-label="이 절의 링크" class="heading-anchor" href="#86-온톨로지-설계-원칙">¶</a></h2>
+<ol type="1">
+<li>테이블을 그대로 객체로 복사하지 않는다.</li>
+<li>현업이 실제로 말하는 명사를 객체로 선택한다.</li>
+<li>의사결정에 필요한 상태를 우선 정의한다.</li>
+<li>링크는 단순 조회뿐 아니라 영향 범위를 설명해야 한다.</li>
+<li>액션은 권한·조건·결과를 함께 설계한다.</li>
+<li>객체의 원천 시스템과 책임 부서를 명시한다.</li>
+<li>과도하게 거대한 객체 하나에 모든 속성을 넣지 않는다.</li>
+<li>변경 이력과 감사 요구를 설계 초기에 반영한다.</li>
+</ol>
+<hr/>
+<h1 id="9-object-explorer">9. Object Explorer<a aria-label="이 절의 링크" class="heading-anchor" href="#9-object-explorer">¶</a></h1>
+<h2 id="91-정의">9.1 정의<a aria-label="이 절의 링크" class="heading-anchor" href="#91-정의">¶</a></h2>
+<p>Object Explorer는 온톨로지의 객체를 검색하고, 필터링하며, 관계를 따라가고, 객체 집합을 비교하는 도구이다.</p>
+<h2 id="92-사용-예">9.2 사용 예<a aria-label="이 절의 링크" class="heading-anchor" href="#92-사용-예">¶</a></h2>
+<p>품질담당자가 <code>FL-260802-RED-03</code>이라는 완제품 Lot를 검색한다.</p>
+<p>확인할 수 있는 정보:</p>
+<ul>
+<li>제품명</li>
+<li>생산일</li>
+<li>제조오더</li>
+<li>작업오더</li>
+<li>설비</li>
+<li>작업자</li>
+<li>원재료 Lot</li>
+<li>검사 결과</li>
+<li>현재 재고</li>
+<li>출하된 고객</li>
+<li>관련 품질사고</li>
+<li>가능한 액션</li>
+</ul>
+<h2 id="93-영향-분석">9.3 영향 분석<a aria-label="이 절의 링크" class="heading-anchor" href="#93-영향-분석">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>문제 원재료 Lot
+→ 사용 작업오더
+→ 산출 반제품 Lot
+→ 추림된 완제품 Lot
+→ 출하
+→ 고객</code></pre></div>
+<p>이 구조를 통해 리콜 또는 출하 보류 범위를 빠르게 정할 수 있다.</p>
+<hr/>
+<h1 id="10-functions">10. Functions<a aria-label="이 절의 링크" class="heading-anchor" href="#10-functions">¶</a></h1>
+<h2 id="101-정의">10.1 정의<a aria-label="이 절의 링크" class="heading-anchor" href="#101-정의">¶</a></h2>
+<p>Functions는 온톨로지 객체와 데이터를 이용해 계산, 검증, 추천, 규칙, 복잡한 비즈니스 로직을 구현하는 기능이다.</p>
+<h2 id="102-예시">10.2 예시<a aria-label="이 절의 링크" class="heading-anchor" href="#102-예시">¶</a></h2>
+<h3 id="납기-위험도">납기 위험도<a aria-label="이 절의 링크" class="heading-anchor" href="#납기-위험도">¶</a></h3>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>납기 위험도 =
+공정 지연 점수
++ 자재 부족 점수
++ 설비 고장 위험 점수
++ 품질 재검사 점수</code></pre></div>
+<h3 id="품질-위험도">품질 위험도<a aria-label="이 절의 링크" class="heading-anchor" href="#품질-위험도">¶</a></h3>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>품질 위험도 =
+색차 편차 점수 × 가중치
++ 절단 치수 편차 점수 × 가중치
++ 설비 이상 점수
++ 원재료 Lot 과거 불량 점수</code></pre></div>
+<h2 id="103-함수-결과의-활용">10.3 함수 결과의 활용<a aria-label="이 절의 링크" class="heading-anchor" href="#103-함수-결과의-활용">¶</a></h2>
+<ul>
+<li>객체의 계산 속성으로 표시</li>
+<li>Workshop에서 경고</li>
+<li>특정 액션의 실행 조건으로 사용</li>
+<li>승인 대상 자동 분류</li>
+<li>AI 에이전트의 추천 근거</li>
+<li>Case 자동 생성 조건</li>
+</ul>
+<hr/>
+<h1 id="11-workshop">11. Workshop<a aria-label="이 절의 링크" class="heading-anchor" href="#11-workshop">¶</a></h1>
+<h2 id="111-정의">11.1 정의<a aria-label="이 절의 링크" class="heading-anchor" href="#111-정의">¶</a></h2>
+<p>Workshop은 온톨로지, Functions, Actions를 조합하여 현업 사용자가 쓰는 운영 애플리케이션을 만드는 도구이다.</p>
+<h2 id="112-단순-bi와의-차이">11.2 단순 BI와의 차이<a aria-label="이 절의 링크" class="heading-anchor" href="#112-단순-bi와의-차이">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>BI 대시보드</th>
+<th>Workshop 운영 앱</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>수치 확인</td>
+<td>객체 상태 확인</td>
+</tr>
+<tr class="even">
+<td>필터·드릴다운</td>
+<td>승인·배정·중지·재작업</td>
+</tr>
+<tr class="odd">
+<td>보고</td>
+<td>업무 처리</td>
+</tr>
+<tr class="even">
+<td>읽기 중심</td>
+<td>읽기와 쓰기</td>
+</tr>
+<tr class="odd">
+<td>분석가 중심</td>
+<td>현업 운영자 중심</td>
+</tr>
+</tbody>
+</table>
+<h2 id="113-색종이-생산관리-앱">11.3 색종이 생산관리 앱<a aria-label="이 절의 링크" class="heading-anchor" href="#113-색종이-생산관리-앱">¶</a></h2>
+<p>화면 구성 예:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>[오늘의 생산현황]
+- 계획 대비 생산량
+- 지연 제조오더
+- 작업장별 대기 작업
+- 품질 위험 Lot
+- 자재 부족 예상
+
+[선택한 제조오더]
+- 제품/BOM
+- 공정 진행률
+- 작업오더 목록
+- 투입 Lot
+- 산출 Lot
+- 품질 검사
+- 설비 상태
+
+[액션]
+- 우선순위 변경
+- 작업자 배정
+- 작업 중지
+- 품질검사 요청
+- 재작업 지시
+- 출하 보류</code></pre></div>
+<hr/>
+<h1 id="12-case-management">12. Case Management<a aria-label="이 절의 링크" class="heading-anchor" href="#12-case-management">¶</a></h1>
+<h2 id="121-개념">12.1 개념<a aria-label="이 절의 링크" class="heading-anchor" href="#121-개념">¶</a></h2>
+<p>이 채팅의 자료에서 Case Management는 <strong>판단과 조사 과정을 추적하는 기능</strong>으로 제시되었다. 실제 배포에서는 독립 앱, Workshop 기반 앱, 고객별 솔루션 등으로 구현될 수 있으므로 명칭과 제공 범위를 확인해야 한다.</p>
+<h2 id="122-적합한-업무">12.2 적합한 업무<a aria-label="이 절의 링크" class="heading-anchor" href="#122-적합한-업무">¶</a></h2>
+<ul>
+<li>품질사고</li>
+<li>고객 클레임</li>
+<li>설비고장</li>
+<li>안전사고</li>
+<li>공급망 중단</li>
+<li>이상거래</li>
+<li>내부통제 위반</li>
+<li>리콜 조사</li>
+</ul>
+<h2 id="123-case의-구성">12.3 Case의 구성<a aria-label="이 절의 링크" class="heading-anchor" href="#123-case의-구성">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>예</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Case ID</td>
+<td>QI-2026-0081</td>
+</tr>
+<tr class="even">
+<td>유형</td>
+<td>인쇄 번짐</td>
+</tr>
+<tr class="odd">
+<td>심각도</td>
+<td>높음</td>
+</tr>
+<tr class="even">
+<td>상태</td>
+<td>조사 중</td>
+</tr>
+<tr class="odd">
+<td>책임자</td>
+<td>품질팀 김OO</td>
+</tr>
+<tr class="even">
+<td>관련 Lot</td>
+<td>FL-260802-03</td>
+</tr>
+<tr class="odd">
+<td>관련 설비</td>
+<td>인쇄기 2호</td>
+</tr>
+<tr class="even">
+<td>관련 원재료</td>
+<td>INK-260728-A</td>
+</tr>
+<tr class="odd">
+<td>영향 고객</td>
+<td>3개</td>
+</tr>
+<tr class="even">
+<td>임시 조치</td>
+<td>출하 보류</td>
+</tr>
+<tr class="odd">
+<td>근본 원인</td>
+<td>조사 중</td>
+</tr>
+<tr class="even">
+<td>시정 조치</td>
+<td>미정</td>
+</tr>
+<tr class="odd">
+<td>종결 조건</td>
+<td>재발방지 검증 완료</td>
+</tr>
+</tbody>
+</table>
+<h2 id="124-case-흐름">12.4 Case 흐름<a aria-label="이 절의 링크" class="heading-anchor" href="#124-case-흐름">¶</a></h2>
+<div class="mermaid">stateDiagram-v2
+    [*] --&gt; Open
+    Open --&gt; Triage
+    Triage --&gt; Investigating
+    Investigating --&gt; Containment
+    Containment --&gt; CorrectiveAction
+    CorrectiveAction --&gt; Verification
+    Verification --&gt; Closed
+    Verification --&gt; Investigating: 재발 또는 검증 실패</div>
+<hr/>
+<h1 id="13-apollo">13. Apollo<a aria-label="이 절의 링크" class="heading-anchor" href="#13-apollo">¶</a></h1>
+<h2 id="131-정의">13.1 정의<a aria-label="이 절의 링크" class="heading-anchor" href="#131-정의">¶</a></h2>
+<p>Apollo는 소프트웨어를 여러 환경에 배포하고 업그레이드하며 운영 상태를 관리하기 위한 Palantir의 지속적 배포·운영 플랫폼이다.</p>
+<h2 id="132-foundry-업무-기능과의-구분">13.2 Foundry 업무 기능과의 구분<a aria-label="이 절의 링크" class="heading-anchor" href="#132-foundry-업무-기능과의-구분">¶</a></h2>
+<ul>
+<li>Foundry: 데이터·분석·온톨로지·운영 애플리케이션</li>
+<li>Apollo: 소프트웨어 제품의 배포·업그레이드·운영 관리</li>
+</ul>
+<h2 id="133-제조기업-적용">13.3 제조기업 적용<a aria-label="이 절의 링크" class="heading-anchor" href="#133-제조기업-적용">¶</a></h2>
+<p>한국 본사, 국내 공장, 베트남 법인, 폐쇄망 공장에 서로 다른 배포 제약이 있을 수 있다.</p>
+<p>Apollo 관점에서 고려할 사항:</p>
+<ul>
+<li>환경별 릴리스 승인</li>
+<li>폐쇄망·제한망 배포</li>
+<li>버전 일관성</li>
+<li>점진적 업데이트</li>
+<li>장애 시 롤백</li>
+<li>운영 상태 확인</li>
+<li>보안 취약점 대응</li>
+</ul>
+<blockquote>
+<p>Apollo는 생산오더를 관리하는 ERP 기능이 아니다.<br/>
+Foundry 위에 만들어진 앱과 서비스, 또는 별도 소프트웨어 제품을 안정적으로 배포·운영하는 계층이다.</p>
+</blockquote>
+<hr/>
+<h1 id="14-resource-management">14. Resource Management<a aria-label="이 절의 링크" class="heading-anchor" href="#14-resource-management">¶</a></h1>
+<h2 id="141-공식-의미에-대한-보정">14.1 공식 의미에 대한 보정<a aria-label="이 절의 링크" class="heading-anchor" href="#141-공식-의미에-대한-보정">¶</a></h2>
+<p>이 채팅의 이미지에는 “시스템 가동률 및 데이터 무결성 모니터링”으로 표현되었지만, 공개된 Foundry 공식 문서에서 Resource Management의 중심은 <strong>프로젝트·온톨로지·데이터 처리 작업 등의 컴퓨팅 사용량, 비용, 사용 패턴을 가시화하고 관리하는 것</strong>이다.</p>
+<p>데이터 품질, 동기화 실패, 파이프라인 장애, 앱 상태는 각각 관련 모니터링·계보·운영 기능과 함께 관리해야 한다.</p>
+<h2 id="142-주요-관리-관점">14.2 주요 관리 관점<a aria-label="이 절의 링크" class="heading-anchor" href="#142-주요-관리-관점">¶</a></h2>
+<ul>
+<li>프로젝트별 컴퓨팅 사용량</li>
+<li>배치 처리 비용</li>
+<li>대화형 쿼리 사용량</li>
+<li>온톨로지·소스별 사용</li>
+<li>사용 계정별 집계</li>
+<li>예산과 비용 분석</li>
+<li>과도한 연산 작업 식별</li>
+</ul>
+<h2 id="143-색종이-사례">14.3 색종이 사례<a aria-label="이 절의 링크" class="heading-anchor" href="#143-색종이-사례">¶</a></h2>
+<ul>
+<li>설비 센서 데이터를 초 단위로 모두 처리할 필요가 있는가?</li>
+<li>1년 전 원시 시계열까지 매번 재계산하고 있는가?</li>
+<li>품질 분석 파이프라인이 지나치게 자주 실행되는가?</li>
+<li>개발·테스트·운영 프로젝트의 비용을 분리했는가?</li>
+<li>특정 대시보드가 과도한 쿼리를 발생시키는가?</li>
+</ul>
+<hr/>
+<h1 id="15-온톨로지의-핵심-구조">15. 온톨로지의 핵심 구조<a aria-label="이 절의 링크" class="heading-anchor" href="#15-온톨로지의-핵심-구조">¶</a></h1>
+<h2 id="151-객체object">15.1 객체(Object)<a aria-label="이 절의 링크" class="heading-anchor" href="#151-객체object">¶</a></h2>
+<p>객체는 현실의 대상이다.</p>
+<p>예:</p>
+<ul>
+<li>사람</li>
+<li>제품</li>
+<li>설비</li>
+<li>주문</li>
+<li>작업오더</li>
+<li>Lot</li>
+<li>품질사고</li>
+</ul>
+<p>객체의 핵심은 단순히 속성값을 가진다는 것이 아니라, <strong>현재 상태와 업무 맥락을 가진다</strong>는 점이다.</p>
+<h2 id="152-액션action">15.2 액션(Action)<a aria-label="이 절의 링크" class="heading-anchor" href="#152-액션action">¶</a></h2>
+<p>액션은 객체에 대해 실행할 수 있는 업무 행동이다.</p>
+<p>예:</p>
+<ul>
+<li>제조오더 승인</li>
+<li>작업 시작</li>
+<li>작업 중지</li>
+<li>출하 보류</li>
+<li>재작업 지시</li>
+</ul>
+<p>액션은 다음을 포함한다.</p>
+<ul>
+<li>실행 주체</li>
+<li>실행 조건</li>
+<li>입력값</li>
+<li>변경 대상</li>
+<li>상태 변화</li>
+<li>후속 효과</li>
+<li>감사 기록</li>
+</ul>
+<h2 id="153-링크link">15.3 링크(Link)<a aria-label="이 절의 링크" class="heading-anchor" href="#153-링크link">¶</a></h2>
+<p>링크는 객체 간 관계이다.</p>
+<p>예:</p>
+<ul>
+<li>제조오더가 작업오더를 포함한다.</li>
+<li>작업오더가 설비에서 수행된다.</li>
+<li>작업오더가 원재료 Lot를 소비한다.</li>
+<li>완제품 Lot가 고객에게 출하된다.</li>
+</ul>
+<p>링크는 영향 범위를 정의한다.</p>
+<h2 id="154-순환-구조">15.4 순환 구조<a aria-label="이 절의 링크" class="heading-anchor" href="#154-순환-구조">¶</a></h2>
+<div class="mermaid">flowchart TD
+    O[객체&lt;br/&gt;현재 상태 보유]
+    A[액션&lt;br/&gt;실행 가능한 행위]
+    L[링크&lt;br/&gt;관련 객체와 영향 범위]
+    J[판단&lt;br/&gt;정상·주의·위험]
+
+    O --&gt; J
+    J --&gt; A
+    A --&gt;|상태 변경| O
+    A --&gt;|영향 발생| L
+    L --&gt;|관련 객체 갱신| O</div>
+<h2 id="155-기존-모델과의-차이">15.5 기존 모델과의 차이<a aria-label="이 절의 링크" class="heading-anchor" href="#155-기존-모델과의-차이">¶</a></h2>
+<p>기존 데이터 모델:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>무엇을 저장할 것인가?
+어떤 테이블과 칼럼이 필요한가?
+어떤 키로 조인할 것인가?</code></pre></div>
+<p>판단 중심 온톨로지:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>무엇을 판단할 것인가?
+현재 상태는 무엇인가?
+누가 어떤 행동을 할 수 있는가?
+행동하면 어떤 객체가 바뀌는가?
+영향 범위는 어디까지인가?
+누가 어떤 근거로 판단했는가?</code></pre></div>
+<hr/>
+<h1 id="16-판단-중심-온톨로지의-5가지-원리">16. 판단 중심 온톨로지의 5가지 원리<a aria-label="이 절의 링크" class="heading-anchor" href="#16-판단-중심-온톨로지의-5가지-원리">¶</a></h1>
+<h2 id="161-스스로-질문에-답하는-구조">16.1 스스로 질문에 답하는 구조<a aria-label="이 절의 링크" class="heading-anchor" href="#161-스스로-질문에-답하는-구조">¶</a></h2>
+<p>데이터 구조 안에서 다음이 드러나야 한다.</p>
+<ul>
+<li>상황이 정상인지</li>
+<li>누가 판단해야 하는지</li>
+<li>어떤 행동이 가능한지</li>
+<li>행동 결과가 무엇인지</li>
+<li>어디까지 영향이 미치는지</li>
+</ul>
+<h3 id="예">예<a aria-label="이 절의 링크" class="heading-anchor" href="#예">¶</a></h3>
+<p>단순 값:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>인쇄기 온도 = 87℃</code></pre></div>
+<p>판단 구조:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>객체: 인쇄기 2호
+현재 온도: 87℃
+정상 범위: 60~80℃
+상태: 위험
+책임 역할: 생산관리자
+가능 액션: 작업중지, 정비요청, 작업재배정
+관련 작업오더: WO-260802-17
+영향 제조오더: MO-260802-01</code></pre></div>
+<h2 id="162-값이-아닌-상태-중심">16.2 값이 아닌 상태 중심<a aria-label="이 절의 링크" class="heading-anchor" href="#162-값이-아닌-상태-중심">¶</a></h2>
+<p>값은 관측치이고, 상태는 조직의 판단이다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>색차 ΔE = 2.8</code></pre></div>
+<p>이 값만으로는 행동을 결정하기 어렵다.</p>
+<p>상태 규칙:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">ΔE</th>
+<th>상태</th>
+<th>기본 조치</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.0~1.0</td>
+<td>정상</td>
+<td>계속 생산</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.0 초과~2.0</td>
+<td>주의</td>
+<td>표본 확대</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.0 초과~3.0</td>
+<td>위험</td>
+<td>품질승인 필요</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.0 초과</td>
+<td>중단</td>
+<td>생산중지·원인조사</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>실제 기준은 제품·고객·계약 사양에 따라 설정해야 한다.</p>
+</blockquote>
+<h2 id="163-비교가-아닌-상태-전이를-기록">16.3 비교가 아닌 상태 전이를 기록<a aria-label="이 절의 링크" class="heading-anchor" href="#163-비교가-아닌-상태-전이를-기록">¶</a></h2>
+<p>단순 비교:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>어제 불량률 1.8%
+오늘 불량률 4.6%</code></pre></div>
+<p>상태 전이:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>09:10 정상
+10:25 주의
+11:05 위험
+11:12 작업중지
+11:20 품질 Case 생성
+13:40 설비 청소 완료
+14:10 시험생산
+14:45 정상 복귀</code></pre></div>
+<p>상태 전이 기록은 다음 질문에 답한다.</p>
+<ul>
+<li>언제 문제가 시작되었는가?</li>
+<li>어떤 데이터가 원인이었는가?</li>
+<li>누가 상태를 바꾸었는가?</li>
+<li>어떤 조치가 효과가 있었는가?</li>
+<li>재발을 방지했는가?</li>
+</ul>
+<h2 id="164-액션-가능성을-포함">16.4 액션 가능성을 포함<a aria-label="이 절의 링크" class="heading-anchor" href="#164-액션-가능성을-포함">¶</a></h2>
+<p>각 상태에서 허용되는 액션을 구조화한다.</p>
+<table>
+<thead>
+<tr class="header">
+<th>작업오더 상태</th>
+<th>허용 액션</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>대기</td>
+<td>작업자 배정, 설비 배정, 일정 변경</td>
+</tr>
+<tr class="even">
+<td>준비</td>
+<td>자재 확인, 작업 시작</td>
+</tr>
+<tr class="odd">
+<td>작업 중</td>
+<td>실적 입력, 일시정지, 불량 등록</td>
+</tr>
+<tr class="even">
+<td>일시정지</td>
+<td>재개, 정비 요청, 작업 재배정</td>
+</tr>
+<tr class="odd">
+<td>품질 보류</td>
+<td>재검사, 재작업, 폐기 승인</td>
+</tr>
+<tr class="even">
+<td>완료</td>
+<td>실적 확정, 원가 마감</td>
+</tr>
+</tbody>
+</table>
+<p>“할 수 있는가, 없는가”가 데이터 구조와 권한에 의해 통제된다.</p>
+<h2 id="165-책임의-명시화">16.5 책임의 명시화<a aria-label="이 절의 링크" class="heading-anchor" href="#165-책임의-명시화">¶</a></h2>
+<p>액션에는 항상 주체와 근거가 남아야 한다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>액션: 출하 보류
+실행자: 품질팀 김OO
+시각: 2026-08-02 11:18
+근거: 색차 기준 초과, QC-260802-44
+대상: 완제품 Lot FL-260802-03
+영향: 출하 SH-260803-07
+승인자: 품질팀장 박OO</code></pre></div>
+<p>이 구조는 다음을 강화한다.</p>
+<ul>
+<li>감사 가능성</li>
+<li>내부통제</li>
+<li>업무 책임</li>
+<li>품질 추적</li>
+<li>재발 방지</li>
+<li>AI 행동의 통제</li>
+</ul>
+<hr/>
+<h1 id="17-색종이-생산공장-사례-개요">17. 색종이 생산공장 사례 개요<a aria-label="이 절의 링크" class="heading-anchor" href="#17-색종이-생산공장-사례-개요">¶</a></h1>
+<h2 id="171-가상-기업">17.1 가상 기업<a aria-label="이 절의 링크" class="heading-anchor" href="#171-가상-기업">¶</a></h2>
+<p><strong>한빛색종이㈜</strong></p>
+<ul>
+<li>제품: 단색 색종이, 10색·20색 세트, 양면 색종이, 교육용 종이</li>
+<li>공정: 배합·도공·인쇄·건조·절단·추림·포장</li>
+<li>시스템: Odoo ERP·MRP, 설비 센서, 품질검사 장비</li>
+<li>문제:
+<ul>
+<li>공정별 데이터 분산</li>
+<li>원재료 Lot와 완제품 Lot의 추적 어려움</li>
+<li>추림 공정에서 여러 색상 Lot가 결합됨</li>
+<li>불량 발생 시 영향 고객 확인 지연</li>
+<li>작업지시와 품질조치가 구두·Excel 중심</li>
+<li>ERP 데이터는 있으나 판단 기준이 시스템 밖 문서에 존재</li>
+</ul></li>
+</ul>
+<h2 id="172-공정-구조">17.2 공정 구조<a aria-label="이 절의 링크" class="heading-anchor" href="#172-공정-구조">¶</a></h2>
+<div class="mermaid">flowchart LR
+    A[원지·잉크·첨가제 입고] --&gt; B[원재료 검사]
+    B --&gt; C[배합]
+    C --&gt; D[도공/착색]
+    D --&gt; E[인쇄]
+    E --&gt; F[건조·안정화]
+    F --&gt; G[절단]
+    G --&gt; H[추림·색상 조합]
+    H --&gt; I[포장]
+    I --&gt; J[완제품 검사]
+    J --&gt; K[완제품 Lot]
+    K --&gt; L[출하]</div>
+<h2 id="173-추림-공정의-특징">17.3 추림 공정의 특징<a aria-label="이 절의 링크" class="heading-anchor" href="#173-추림-공정의-특징">¶</a></h2>
+<p>20색 색종이 세트는 여러 색상의 반제품이 결합되어 하나의 완제품이 된다.</p>
+<p>예:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>빨강 반제품 Lot R-0802-01
+파랑 반제품 Lot B-0802-02
+노랑 반제품 Lot Y-0802-01
+...
+20개 색상 Lot
+→ 추림 작업오더
+→ 20색 완제품 Lot SET20-0802-03</code></pre></div>
+<p>따라서 단순한 “하나의 투입 Lot → 하나의 산출 Lot” 구조가 아니라 <strong>다대다 계보</strong>가 필요하다.</p>
+<hr/>
+<h1 id="18-색종이-공정의-odoo-구조">18. 색종이 공정의 Odoo 구조<a aria-label="이 절의 링크" class="heading-anchor" href="#18-색종이-공정의-odoo-구조">¶</a></h1>
+<h2 id="181-기본-odoo-개념">18.1 기본 Odoo 개념<a aria-label="이 절의 링크" class="heading-anchor" href="#181-기본-odoo-개념">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>Odoo 개념</th>
+<th>색종이 사례</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Product</td>
+<td>빨강 반제품, 20색 세트</td>
+</tr>
+<tr class="even">
+<td>BoM</td>
+<td>20색 세트 구성표</td>
+</tr>
+<tr class="odd">
+<td>Operation</td>
+<td>배합, 인쇄, 절단, 추림, 포장</td>
+</tr>
+<tr class="even">
+<td>Work Center</td>
+<td>배합실, 인쇄기, 절단기, 추림라인</td>
+</tr>
+<tr class="odd">
+<td>Manufacturing Order</td>
+<td>20색 세트 10,000개 생산</td>
+</tr>
+<tr class="even">
+<td>Work Order</td>
+<td>각 공정의 작업지시</td>
+</tr>
+<tr class="odd">
+<td>Lot</td>
+<td>같은 조건으로 생산·입고된 묶음</td>
+</tr>
+<tr class="even">
+<td>Serial</td>
+<td>개별 제품 식별</td>
+</tr>
+<tr class="odd">
+<td>Quality Check</td>
+<td>색차·치수·수량 검사</td>
+</tr>
+<tr class="even">
+<td>Quality Alert</td>
+<td>품질이상</td>
+</tr>
+<tr class="odd">
+<td>Stock Move</td>
+<td>자재 투입·반제품 이동·완제품 입고</td>
+</tr>
+</tbody>
+</table>
+<h2 id="182-mo와-wo">18.2 MO와 WO<a aria-label="이 절의 링크" class="heading-anchor" href="#182-mo와-wo">¶</a></h2>
+<h3 id="제조오더mo">제조오더(MO)<a aria-label="이 절의 링크" class="heading-anchor" href="#제조오더mo">¶</a></h3>
+<p>무엇을 얼마나 생산할지 지정한다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>MO: MO-260802-01
+제품: 20색 색종이 세트
+계획수량: 10,000세트
+납기: 2026-08-05</code></pre></div>
+<h3 id="작업오더wo">작업오더(WO)<a aria-label="이 절의 링크" class="heading-anchor" href="#작업오더wo">¶</a></h3>
+<p>어떤 작업장에서 어떤 공정을 수행할지 지정한다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>WO-01 배합
+WO-02 빨강 인쇄
+WO-03 파랑 인쇄
+...
+WO-22 절단
+WO-23 추림
+WO-24 포장</code></pre></div>
+<h2 id="183-bom-설계-대안">18.3 BOM 설계 대안<a aria-label="이 절의 링크" class="heading-anchor" href="#183-bom-설계-대안">¶</a></h2>
+<h3 id="대안-a-모든-공정을-한-개의-bom에-구성">대안 A: 모든 공정을 한 개의 BOM에 구성<a aria-label="이 절의 링크" class="heading-anchor" href="#대안-a-모든-공정을-한-개의-bom에-구성">¶</a></h3>
+<p>장점:</p>
+<ul>
+<li>구조가 단순함</li>
+<li>단일 MO로 관리 가능</li>
+</ul>
+<p>단점:</p>
+<ul>
+<li>색상별 Lot 추적이 복잡</li>
+<li>공정별 반제품 재고가 불명확</li>
+<li>재작업과 부분 생산 관리가 어려움</li>
+</ul>
+<h3 id="대안-b-반제품-다단계-bom">대안 B: 반제품 다단계 BOM<a aria-label="이 절의 링크" class="heading-anchor" href="#대안-b-반제품-다단계-bom">¶</a></h3>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>잉크·원지
+→ 색상별 인쇄 반제품
+→ 절단 반제품
+→ 20색 추림 세트
+→ 포장 완제품</code></pre></div>
+<p>장점:</p>
+<ul>
+<li>색상별 Lot 추적</li>
+<li>재공품 관리</li>
+<li>불량 격리</li>
+<li>추림 투입 계보 명확</li>
+</ul>
+<p>단점:</p>
+<ul>
+<li>제품·BOM·MO 수 증가</li>
+<li>현장 입력 부담</li>
+<li>라우팅 설계 필요</li>
+</ul>
+<p>실무적으로는 추적성과 품질 중요도가 높다면 다단계 BOM이 유리하다.</p>
+<hr/>
+<h1 id="19-색종이-제조-온톨로지-설계">19. 색종이 제조 온톨로지 설계<a aria-label="이 절의 링크" class="heading-anchor" href="#19-색종이-제조-온톨로지-설계">¶</a></h1>
+<h2 id="191-객체-목록">19.1 객체 목록<a aria-label="이 절의 링크" class="heading-anchor" href="#191-객체-목록">¶</a></h2>
+<h3 id="기준-객체">기준 객체<a aria-label="이 절의 링크" class="heading-anchor" href="#기준-객체">¶</a></h3>
+<ul>
+<li>Product</li>
+<li>Material</li>
+<li>BOM</li>
+<li>WorkCenter</li>
+<li>Machine</li>
+<li>Employee</li>
+<li>Customer</li>
+<li>Supplier</li>
+</ul>
+<h3 id="거래운영-객체">거래·운영 객체<a aria-label="이 절의 링크" class="heading-anchor" href="#거래운영-객체">¶</a></h3>
+<ul>
+<li>SalesOrder</li>
+<li>PurchaseOrder</li>
+<li>ManufacturingOrder</li>
+<li>WorkOrder</li>
+<li>InventoryMove</li>
+<li>QualityCheck</li>
+<li>QualityIncident</li>
+<li>Shipment</li>
+<li>MaintenanceRequest</li>
+</ul>
+<h3 id="추적-객체">추적 객체<a aria-label="이 절의 링크" class="heading-anchor" href="#추적-객체">¶</a></h3>
+<ul>
+<li>MaterialLot</li>
+<li>InkLot</li>
+<li>PaperLot</li>
+<li>SemiFinishedLot</li>
+<li>FinishedLot</li>
+<li>PackagingLot</li>
+</ul>
+<h2 id="192-주요-링크">19.2 주요 링크<a aria-label="이 절의 링크" class="heading-anchor" href="#192-주요-링크">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>시작 객체</th>
+<th>링크</th>
+<th>대상 객체</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SalesOrder</td>
+<td>requires</td>
+<td>ManufacturingOrder</td>
+</tr>
+<tr class="even">
+<td>ManufacturingOrder</td>
+<td>contains</td>
+<td>WorkOrder</td>
+</tr>
+<tr class="odd">
+<td>WorkOrder</td>
+<td>performedAt</td>
+<td>WorkCenter</td>
+</tr>
+<tr class="even">
+<td>WorkOrder</td>
+<td>uses</td>
+<td>Machine</td>
+</tr>
+<tr class="odd">
+<td>WorkOrder</td>
+<td>consumes</td>
+<td>MaterialLot</td>
+</tr>
+<tr class="even">
+<td>WorkOrder</td>
+<td>produces</td>
+<td>SemiFinishedLot</td>
+</tr>
+<tr class="odd">
+<td>SortingWorkOrder</td>
+<td>combines</td>
+<td>SemiFinishedLot</td>
+</tr>
+<tr class="even">
+<td>SortingWorkOrder</td>
+<td>produces</td>
+<td>FinishedLot</td>
+</tr>
+<tr class="odd">
+<td>FinishedLot</td>
+<td>checkedBy</td>
+<td>QualityCheck</td>
+</tr>
+<tr class="even">
+<td>FinishedLot</td>
+<td>includedIn</td>
+<td>Shipment</td>
+</tr>
+<tr class="odd">
+<td>Shipment</td>
+<td>deliveredTo</td>
+<td>Customer</td>
+</tr>
+<tr class="even">
+<td>QualityIncident</td>
+<td>affects</td>
+<td>FinishedLot</td>
+</tr>
+<tr class="odd">
+<td>QualityIncident</td>
+<td>causedBy</td>
+<td>Machine/MaterialLot</td>
+</tr>
+</tbody>
+</table>
+<h2 id="193-다대다-lot-계보">19.3 다대다 Lot 계보<a aria-label="이 절의 링크" class="heading-anchor" href="#193-다대다-lot-계보">¶</a></h2>
+<div class="mermaid">flowchart LR
+    R[빨강 Lot] --&gt; S[추림 WO]
+    B[파랑 Lot] --&gt; S
+    Y[노랑 Lot] --&gt; S
+    G[초록 Lot] --&gt; S
+    O[기타 16색 Lot] --&gt; S
+    S --&gt; F[20색 완제품 Lot]
+    F --&gt; P1[출하 1]
+    F --&gt; P2[출하 2]</div>
+<h2 id="194-객체의-원천-시스템">19.4 객체의 원천 시스템<a aria-label="이 절의 링크" class="heading-anchor" href="#194-객체의-원천-시스템">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>객체</th>
+<th>주 원천</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Product·BOM·MO·WO</td>
+<td>Odoo</td>
+</tr>
+<tr class="even">
+<td>Machine Sensor Observation</td>
+<td>설비 플랫폼</td>
+</tr>
+<tr class="odd">
+<td>QualityCheck</td>
+<td>Odoo Quality 또는 검사장비</td>
+</tr>
+<tr class="even">
+<td>Risk Score</td>
+<td>Foundry Function</td>
+</tr>
+<tr class="odd">
+<td>QualityIncident</td>
+<td>Foundry/Workshop 또는 Odoo Quality Alert</td>
+</tr>
+<tr class="even">
+<td>Shipment</td>
+<td>Odoo</td>
+</tr>
+<tr class="odd">
+<td>Decision Record</td>
+<td>Foundry Action 이력</td>
+</tr>
+</tbody>
+</table>
+<p>원천 시스템을 명확히 해야 중복 수정과 충돌을 방지할 수 있다.</p>
+<hr/>
+<h1 id="20-상태액션권한-설계">20. 상태·액션·권한 설계<a aria-label="이 절의 링크" class="heading-anchor" href="#20-상태액션권한-설계">¶</a></h1>
+<h2 id="201-제조오더-상태">20.1 제조오더 상태<a aria-label="이 절의 링크" class="heading-anchor" href="#201-제조오더-상태">¶</a></h2>
+<div class="mermaid">stateDiagram-v2
+    [*] --&gt; Draft
+    Draft --&gt; Confirmed: 승인
+    Confirmed --&gt; Ready: 자재·설비 준비
+    Ready --&gt; InProgress: 생산 시작
+    InProgress --&gt; OnHold: 품질/설비 문제
+    OnHold --&gt; InProgress: 문제 해소
+    InProgress --&gt; QualityReview: 생산 완료
+    QualityReview --&gt; Done: 품질 승인
+    QualityReview --&gt; Rework: 재작업
+    Rework --&gt; InProgress
+    Done --&gt; [*]</div>
+<h2 id="202-상태별-액션과-역할">20.2 상태별 액션과 역할<a aria-label="이 절의 링크" class="heading-anchor" href="#202-상태별-액션과-역할">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>상태</th>
+<th>액션</th>
+<th>허용 역할</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Draft</td>
+<td>승인</td>
+<td>생산계획자</td>
+<td>Confirmed</td>
+</tr>
+<tr class="even">
+<td>Confirmed</td>
+<td>일정 확정</td>
+<td>생산관리자</td>
+<td>Ready</td>
+</tr>
+<tr class="odd">
+<td>Ready</td>
+<td>생산 시작</td>
+<td>작업반장</td>
+<td>InProgress</td>
+</tr>
+<tr class="even">
+<td>InProgress</td>
+<td>일시정지</td>
+<td>작업반장·품질담당</td>
+<td>OnHold</td>
+</tr>
+<tr class="odd">
+<td>OnHold</td>
+<td>재개</td>
+<td>생산관리자</td>
+<td>InProgress</td>
+</tr>
+<tr class="even">
+<td>QualityReview</td>
+<td>품질 승인</td>
+<td>품질책임자</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td>QualityReview</td>
+<td>재작업 지시</td>
+<td>품질책임자</td>
+<td>Rework</td>
+</tr>
+<tr class="even">
+<td>Done</td>
+<td>마감 취소</td>
+<td>제한된 관리자</td>
+<td>재검토</td>
+</tr>
+</tbody>
+</table>
+<h2 id="203-액션-정의-예">20.3 액션 정의 예<a aria-label="이 절의 링크" class="heading-anchor" href="#203-액션-정의-예">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>yaml</span><button class="copy-code" type="button">복사</button></div><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb34-1"><a aria-hidden="true" href="#cb34-1" tabindex="-1"></a><span class="fu">action</span><span class="kw">:</span><span class="at"> hold_finished_lot</span></span>
+<span id="cb34-2"><a aria-hidden="true" href="#cb34-2" tabindex="-1"></a><span class="fu">label</span><span class="kw">:</span><span class="at"> </span><span class="st">"완제품 Lot 출하 보류"</span></span>
+<span id="cb34-3"><a aria-hidden="true" href="#cb34-3" tabindex="-1"></a><span class="fu">target_object</span><span class="kw">:</span><span class="at"> FinishedLot</span></span>
+<span id="cb34-4"><a aria-hidden="true" href="#cb34-4" tabindex="-1"></a><span class="fu">allowed_roles</span><span class="kw">:</span></span>
+<span id="cb34-5"><a aria-hidden="true" href="#cb34-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> QualityManager</span></span>
+<span id="cb34-6"><a aria-hidden="true" href="#cb34-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> PlantManager</span></span>
+<span id="cb34-7"><a aria-hidden="true" href="#cb34-7" tabindex="-1"></a><span class="fu">preconditions</span><span class="kw">:</span></span>
+<span id="cb34-8"><a aria-hidden="true" href="#cb34-8" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> quality_status in ["위험", "부적합"]</span></span>
+<span id="cb34-9"><a aria-hidden="true" href="#cb34-9" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> shipment_status != "출하완료"</span></span>
+<span id="cb34-10"><a aria-hidden="true" href="#cb34-10" tabindex="-1"></a><span class="fu">required_inputs</span><span class="kw">:</span></span>
+<span id="cb34-11"><a aria-hidden="true" href="#cb34-11" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> reason_code</span></span>
+<span id="cb34-12"><a aria-hidden="true" href="#cb34-12" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> evidence_reference</span></span>
+<span id="cb34-13"><a aria-hidden="true" href="#cb34-13" tabindex="-1"></a><span class="fu">effects</span><span class="kw">:</span></span>
+<span id="cb34-14"><a aria-hidden="true" href="#cb34-14" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> FinishedLot.release_status = "보류"</span></span>
+<span id="cb34-15"><a aria-hidden="true" href="#cb34-15" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> linked Shipment.status = "보류"</span></span>
+<span id="cb34-16"><a aria-hidden="true" href="#cb34-16" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> create QualityIncident</span></span>
+<span id="cb34-17"><a aria-hidden="true" href="#cb34-17" tabindex="-1"></a><span class="fu">audit</span><span class="kw">:</span></span>
+<span id="cb34-18"><a aria-hidden="true" href="#cb34-18" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> actor</span></span>
+<span id="cb34-19"><a aria-hidden="true" href="#cb34-19" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> timestamp</span></span>
+<span id="cb34-20"><a aria-hidden="true" href="#cb34-20" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> previous_state</span></span>
+<span id="cb34-21"><a aria-hidden="true" href="#cb34-21" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> new_state</span></span>
+<span id="cb34-22"><a aria-hidden="true" href="#cb34-22" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> reason</span></span></code></pre></div>
+<h2 id="204-권한-설계">20.4 권한 설계<a aria-label="이 절의 링크" class="heading-anchor" href="#204-권한-설계">¶</a></h2>
+<p>권한은 다음 네 층으로 나누면 좋다.</p>
+<ol type="1">
+<li><strong>발견 권한</strong>: 객체가 존재한다는 것을 알 수 있는가?</li>
+<li><strong>조회 권한</strong>: 속성과 링크를 볼 수 있는가?</li>
+<li><strong>수정 권한</strong>: 속성을 바꿀 수 있는가?</li>
+<li><strong>액션 권한</strong>: 특정 상태에서 업무 행동을 할 수 있는가?</li>
+</ol>
+<hr/>
+<h1 id="21-lotserial라벨-설계">21. Lot·Serial·라벨 설계<a aria-label="이 절의 링크" class="heading-anchor" href="#21-lotserial라벨-설계">¶</a></h1>
+<h2 id="211-lot와-serial의-차이">21.1 Lot와 Serial의 차이<a aria-label="이 절의 링크" class="heading-anchor" href="#211-lot와-serial의-차이">¶</a></h2>
+<ul>
+<li><strong>Lot</strong>: 같은 조건으로 생산·입고된 복수 수량의 묶음</li>
+<li><strong>Serial</strong>: 개별 단위마다 부여하는 고유 식별자</li>
+</ul>
+<p>색종이는 일반적으로 개별 낱장마다 Serial을 부여하기보다 생산 묶음 단위 Lot를 사용하는 것이 현실적이다.</p>
+<h2 id="212-권장-추적-단위">21.2 권장 추적 단위<a aria-label="이 절의 링크" class="heading-anchor" href="#212-권장-추적-단위">¶</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th>대상</th>
+<th>권장</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>원지 롤</td>
+<td>Lot</td>
+</tr>
+<tr class="even">
+<td>잉크·안료</td>
+<td>Lot</td>
+</tr>
+<tr class="odd">
+<td>배합액</td>
+<td>Batch/Lot</td>
+</tr>
+<tr class="even">
+<td>색상별 인쇄 반제품</td>
+<td>Lot</td>
+</tr>
+<tr class="odd">
+<td>절단 반제품</td>
+<td>Lot</td>
+</tr>
+<tr class="even">
+<td>추림 완제품</td>
+<td>Lot</td>
+</tr>
+<tr class="odd">
+<td>포장 박스</td>
+<td>Lot 또는 포장단위 식별</td>
+</tr>
+<tr class="even">
+<td>고가 특수설비 부품</td>
+<td>Serial 가능</td>
+</tr>
+</tbody>
+</table>
+<h2 id="213-추림-시-lot-생성">21.3 추림 시 Lot 생성<a aria-label="이 절의 링크" class="heading-anchor" href="#213-추림-시-lot-생성">¶</a></h2>
+<p>추림 작업에서 여러 반제품 Lot를 소비하고 새로운 완제품 Lot를 생성한다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>투입 Lot:
+R-260802-01
+B-260802-02
+Y-260802-01
+...
+
+산출 Lot:
+SET20-260802-03</code></pre></div>
+<p>완제품 Lot는 투입된 모든 색상 Lot와 연결되어야 한다.</p>
+<h2 id="214-라벨-구성">21.4 라벨 구성<a aria-label="이 절의 링크" class="heading-anchor" href="#214-라벨-구성">¶</a></h2>
+<h3 id="완제품-lot-라벨-권장-항목">완제품 Lot 라벨 권장 항목<a aria-label="이 절의 링크" class="heading-anchor" href="#완제품-lot-라벨-권장-항목">¶</a></h3>
+<ul>
+<li>회사명</li>
+<li>제품명</li>
+<li>제품 코드</li>
+<li>완제품 Lot 번호</li>
+<li>제조일자</li>
+<li>포장일자</li>
+<li>수량</li>
+<li>제조오더</li>
+<li>추림 작업오더</li>
+<li>품질 상태</li>
+<li>유효한 경우 유통기한</li>
+<li>QR 또는 바코드</li>
+<li>검사 이력 조회 URL 또는 내부 식별자</li>
+</ul>
+<h3 id="qr에-넣을-정보">QR에 넣을 정보<a aria-label="이 절의 링크" class="heading-anchor" href="#qr에-넣을-정보">¶</a></h3>
+<p>QR에 모든 정보를 직접 넣기보다 식별키 또는 안전한 내부 URL을 넣는 방식이 좋다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>https://internal.example/lot/SET20-260802-03</code></pre></div>
+<p>권한이 있는 사용자는 다음을 조회한다.</p>
+<ul>
+<li>투입 원재료 Lot</li>
+<li>공정 이력</li>
+<li>검사 결과</li>
+<li>담당 작업자</li>
+<li>설비</li>
+<li>출하 이력</li>
+<li>품질 Case</li>
+</ul>
+<hr/>
+<h1 id="22-품질-이상과-case-처리">22. 품질 이상과 Case 처리<a aria-label="이 절의 링크" class="heading-anchor" href="#22-품질-이상과-case-처리">¶</a></h1>
+<h2 id="221-품질-이상-시나리오">22.1 품질 이상 시나리오<a aria-label="이 절의 링크" class="heading-anchor" href="#221-품질-이상-시나리오">¶</a></h2>
+<ul>
+<li>빨강 색종이의 색차 기준 초과</li>
+<li>절단 치수 편차</li>
+<li>인쇄 번짐</li>
+<li>20색 세트에서 특정 색상 누락</li>
+<li>포장 수량 오류</li>
+<li>원지 표면 결함</li>
+<li>고객 클레임</li>
+</ul>
+<h2 id="222-자동-감지">22.2 자동 감지<a aria-label="이 절의 링크" class="heading-anchor" href="#222-자동-감지">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>품질검사 결과 입력
+→ Function이 기준과 비교
+→ 상태: 정상/주의/위험/부적합
+→ 위험 이상이면 QualityIncident 생성
+→ 관련 Lot 출하 보류
+→ 품질책임자에게 할당</code></pre></div>
+<h2 id="223-근본-원인-추적">22.3 근본 원인 추적<a aria-label="이 절의 링크" class="heading-anchor" href="#223-근본-원인-추적">¶</a></h2>
+<div class="mermaid">flowchart TD
+    Q[불량 완제품 Lot] --&gt; W[추림 작업오더]
+    W --&gt; S[색상별 반제품 Lot]
+    S --&gt; P[인쇄 작업오더]
+    P --&gt; M[인쇄기]
+    P --&gt; I[잉크 Lot]
+    P --&gt; E[작업자/작업조]
+    Q --&gt; C[출하 고객]</div>
+<h2 id="224-조치-구분">22.4 조치 구분<a aria-label="이 절의 링크" class="heading-anchor" href="#224-조치-구분">¶</a></h2>
+<ul>
+<li><strong>Containment</strong>: 추가 출하를 막는 임시 조치</li>
+<li><strong>Correction</strong>: 현재 불량품을 수정·재작업</li>
+<li><strong>Corrective Action</strong>: 근본 원인을 제거</li>
+<li><strong>Preventive Action</strong>: 유사 공정의 잠재 위험 방지</li>
+<li><strong>Verification</strong>: 조치의 효과 확인</li>
+</ul>
+<hr/>
+<h1 id="23-데이터-파이프라인과-kpi">23. 데이터 파이프라인과 KPI<a aria-label="이 절의 링크" class="heading-anchor" href="#23-데이터-파이프라인과-kpi">¶</a></h1>
+<h2 id="231-주요-데이터셋">23.1 주요 데이터셋<a aria-label="이 절의 링크" class="heading-anchor" href="#231-주요-데이터셋">¶</a></h2>
+<ol type="1">
+<li><code>dim_product</code></li>
+<li><code>dim_machine</code></li>
+<li><code>dim_work_center</code></li>
+<li><code>fact_manufacturing_order</code></li>
+<li><code>fact_work_order</code></li>
+<li><code>fact_material_consumption</code></li>
+<li><code>fact_lot_genealogy</code></li>
+<li><code>fact_quality_check</code></li>
+<li><code>fact_machine_event</code></li>
+<li><code>fact_shipment</code></li>
+</ol>
+<h2 id="232-kpi">23.2 KPI<a aria-label="이 절의 링크" class="heading-anchor" href="#232-kpi">¶</a></h2>
+<h3 id="생산">생산<a aria-label="이 절의 링크" class="heading-anchor" href="#생산">¶</a></h3>
+<ul>
+<li>계획 대비 생산 달성률</li>
+<li>시간당 생산량</li>
+<li>작업오더 지연률</li>
+<li>제조 리드타임</li>
+<li>작업장 대기시간</li>
+</ul>
+<h3 id="품질">품질<a aria-label="이 절의 링크" class="heading-anchor" href="#품질">¶</a></h3>
+<ul>
+<li>공정별 불량률</li>
+<li>First Pass Yield</li>
+<li>재작업률</li>
+<li>폐기율</li>
+<li>고객 클레임률</li>
+<li>품질 Case 평균 종결시간</li>
+</ul>
+<h3 id="설비">설비<a aria-label="이 절의 링크" class="heading-anchor" href="#설비">¶</a></h3>
+<ul>
+<li>가동률</li>
+<li>고장시간</li>
+<li>평균 수리시간</li>
+<li>정지 원인별 시간</li>
+<li>속도 손실</li>
+</ul>
+<h3 id="재고lot">재고·Lot<a aria-label="이 절의 링크" class="heading-anchor" href="#재고lot">¶</a></h3>
+<ul>
+<li>원재료 체류일수</li>
+<li>재공품 재고</li>
+<li>Lot 추적 완전성</li>
+<li>출하 보류 수량</li>
+<li>유효기간 임박 수량</li>
+</ul>
+<h3 id="원가">원가<a aria-label="이 절의 링크" class="heading-anchor" href="#원가">¶</a></h3>
+<ul>
+<li>표준 대비 실제 투입량</li>
+<li>자재 수율</li>
+<li>불량 손실원가</li>
+<li>재작업 원가</li>
+<li>작업장별 가공원가</li>
+</ul>
+<h2 id="233-kpi에서-액션으로">23.3 KPI에서 액션으로<a aria-label="이 절의 링크" class="heading-anchor" href="#233-kpi에서-액션으로">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>불량률 4.8% 표시</code></pre></div>
+<p>에서 끝나지 않고:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>상태: 위험
+영향 Lot: 3개
+영향 출하: 2건
+추천 액션: 출하 보류
+실행 권한: 품질관리자
+근거: QC 기준 Q-RED-01 초과</code></pre></div>
+<p>로 연결해야 한다.</p>
+<hr/>
+<h1 id="24-workshop-운영-앱-설계">24. Workshop 운영 앱 설계<a aria-label="이 절의 링크" class="heading-anchor" href="#24-workshop-운영-앱-설계">¶</a></h1>
+<h2 id="241-생산관제-화면">24.1 생산관제 화면<a aria-label="이 절의 링크" class="heading-anchor" href="#241-생산관제-화면">¶</a></h2>
+<h3 id="상단">상단<a aria-label="이 절의 링크" class="heading-anchor" href="#상단">¶</a></h3>
+<ul>
+<li>오늘 계획</li>
+<li>실제 생산</li>
+<li>지연 MO</li>
+<li>위험 WO</li>
+<li>자재 부족</li>
+<li>품질 보류</li>
+</ul>
+<h3 id="중앙">중앙<a aria-label="이 절의 링크" class="heading-anchor" href="#중앙">¶</a></h3>
+<ul>
+<li>공정별 칸반</li>
+<li>작업장 부하</li>
+<li>설비 상태</li>
+<li>Lot 흐름</li>
+</ul>
+<h3 id="우측-패널">우측 패널<a aria-label="이 절의 링크" class="heading-anchor" href="#우측-패널">¶</a></h3>
+<ul>
+<li>선택 객체 상세</li>
+<li>원인 요약</li>
+<li>관련 객체</li>
+<li>가능한 액션</li>
+</ul>
+<h2 id="242-품질-앱">24.2 품질 앱<a aria-label="이 절의 링크" class="heading-anchor" href="#242-품질-앱">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>[위험 Lot 목록]
+[검사 결과 추세]
+[연관 설비·원재료]
+[영향 고객/출하]
+[Case 타임라인]
+[액션: 보류·재검사·재작업·폐기·해제]</code></pre></div>
+<h2 id="243-현장-태블릿-화면">24.3 현장 태블릿 화면<a aria-label="이 절의 링크" class="heading-anchor" href="#243-현장-태블릿-화면">¶</a></h2>
+<p>현장에서는 복잡한 대시보드보다 다음이 중요하다.</p>
+<ul>
+<li>현재 작업</li>
+<li>작업지시</li>
+<li>투입 Lot 스캔</li>
+<li>생산수량 입력</li>
+<li>불량수량 입력</li>
+<li>작업중지 사유</li>
+<li>품질검사 호출</li>
+<li>완료 버튼</li>
+</ul>
+<hr/>
+<h1 id="25-odoo와-foundry-연동-아키텍처">25. Odoo와 Foundry 연동 아키텍처<a aria-label="이 절의 링크" class="heading-anchor" href="#25-odoo와-foundry-연동-아키텍처">¶</a></h1>
+<h2 id="251-역할-분담">25.1 역할 분담<a aria-label="이 절의 링크" class="heading-anchor" href="#251-역할-분담">¶</a></h2>
+<h3 id="odoo">Odoo<a aria-label="이 절의 링크" class="heading-anchor" href="#odoo">¶</a></h3>
+<ul>
+<li>주문</li>
+<li>구매</li>
+<li>재고</li>
+<li>BOM</li>
+<li>MO·WO</li>
+<li>Lot</li>
+<li>회계</li>
+<li>원가</li>
+<li>기본 품질</li>
+<li>트랜잭션 기록</li>
+</ul>
+<h3 id="foundry">Foundry<a aria-label="이 절의 링크" class="heading-anchor" href="#foundry">¶</a></h3>
+<ul>
+<li>다수 시스템 통합</li>
+<li>온톨로지</li>
+<li>관계·영향 분석</li>
+<li>고급 분석·모델</li>
+<li>운영 앱</li>
+<li>조직 간 공통 상황판</li>
+<li>통제된 액션</li>
+<li>AI 에이전트 도구</li>
+</ul>
+<h2 id="252-권장-원칙">25.2 권장 원칙<a aria-label="이 절의 링크" class="heading-anchor" href="#252-권장-원칙">¶</a></h2>
+<blockquote>
+<p>Odoo는 거래와 재고의 기준 시스템(System of Record), Foundry는 통합 판단과 운영 조정의 시스템(System of Operational Intelligence)으로 역할을 나눌 수 있다.</p>
+</blockquote>
+<p>단, 어떤 객체의 최종 원천이 어디인지 명확해야 한다.</p>
+<h2 id="253-연동-흐름">25.3 연동 흐름<a aria-label="이 절의 링크" class="heading-anchor" href="#253-연동-흐름">¶</a></h2>
+<div class="mermaid">flowchart LR
+    O[Odoo ERP/MRP] --&gt;|API·DB 추출·이벤트| D[Data Connection]
+    D --&gt; P[Pipeline Builder]
+    P --&gt; T[Ontology]
+    T --&gt; W[Workshop/Agent]
+    W --&gt; A[승인된 Action]
+    A --&gt; I[Integration Service]
+    I --&gt;|검증된 API 호출| O
+    O --&gt;|변경 결과| D</div>
+<h2 id="254-writeback-주의">25.4 Writeback 주의<a aria-label="이 절의 링크" class="heading-anchor" href="#254-writeback-주의">¶</a></h2>
+<p>Foundry에서 Odoo로 상태를 변경할 때 다음을 지켜야 한다.</p>
+<ul>
+<li>Odoo의 업무 규칙을 우회하지 않는다.</li>
+<li>Odoo 권한과 승인 로직을 존중한다.</li>
+<li>중복 호출 방지를 위한 idempotency key를 사용한다.</li>
+<li>실패 시 재시도와 보상 처리를 설계한다.</li>
+<li>Foundry와 Odoo 양쪽에 추적 ID를 남긴다.</li>
+<li>직접 DB UPDATE보다 공식 API나 Odoo 서버 메서드를 사용한다.</li>
+<li>테스트 환경에서 충분히 검증한다.</li>
+</ul>
+<hr/>
+<h1 id="26-sqlpythonjson-예제">26. SQL·Python·JSON 예제<a aria-label="이 절의 링크" class="heading-anchor" href="#26-sqlpythonjson-예제">¶</a></h1>
+<h2 id="261-sql-작업오더별-불량률">26.1 SQL: 작업오더별 불량률<a aria-label="이 절의 링크" class="heading-anchor" href="#261-sql-작업오더별-불량률">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>sql</span><button class="copy-code" type="button">복사</button></div><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb43-1"><a aria-hidden="true" href="#cb43-1" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb43-2"><a aria-hidden="true" href="#cb43-2" tabindex="-1"></a>    wo.workorder_id,</span>
+<span id="cb43-3"><a aria-hidden="true" href="#cb43-3" tabindex="-1"></a>    wo.manufacturing_order_id,</span>
+<span id="cb43-4"><a aria-hidden="true" href="#cb43-4" tabindex="-1"></a>    wo.product_code,</span>
+<span id="cb43-5"><a aria-hidden="true" href="#cb43-5" tabindex="-1"></a>    wo.machine_id,</span>
+<span id="cb43-6"><a aria-hidden="true" href="#cb43-6" tabindex="-1"></a>    wo.good_qty,</span>
+<span id="cb43-7"><a aria-hidden="true" href="#cb43-7" tabindex="-1"></a>    wo.defect_qty,</span>
+<span id="cb43-8"><a aria-hidden="true" href="#cb43-8" tabindex="-1"></a>    <span class="cf">CASE</span></span>
+<span id="cb43-9"><a aria-hidden="true" href="#cb43-9" tabindex="-1"></a>        <span class="cf">WHEN</span> (wo.good_qty <span class="op">+</span> wo.defect_qty) <span class="op">=</span> <span class="dv">0</span> <span class="cf">THEN</span> <span class="kw">NULL</span></span>
+<span id="cb43-10"><a aria-hidden="true" href="#cb43-10" tabindex="-1"></a>        <span class="cf">ELSE</span> wo.defect_qty <span class="op">*</span> <span class="fl">1.0</span></span>
+<span id="cb43-11"><a aria-hidden="true" href="#cb43-11" tabindex="-1"></a>             <span class="op">/</span> (wo.good_qty <span class="op">+</span> wo.defect_qty)</span>
+<span id="cb43-12"><a aria-hidden="true" href="#cb43-12" tabindex="-1"></a>    <span class="cf">END</span> <span class="kw">AS</span> defect_rate</span>
+<span id="cb43-13"><a aria-hidden="true" href="#cb43-13" tabindex="-1"></a><span class="kw">FROM</span> fact_work_order wo;</span></code></pre></div>
+<h2 id="262-sql-완제품-lot의-투입-lot-계보">26.2 SQL: 완제품 Lot의 투입 Lot 계보<a aria-label="이 절의 링크" class="heading-anchor" href="#262-sql-완제품-lot의-투입-lot-계보">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>sql</span><button class="copy-code" type="button">복사</button></div><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb44-1"><a aria-hidden="true" href="#cb44-1" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb44-2"><a aria-hidden="true" href="#cb44-2" tabindex="-1"></a>    output_lot.finished_lot_id,</span>
+<span id="cb44-3"><a aria-hidden="true" href="#cb44-3" tabindex="-1"></a>    input_lot.material_lot_id,</span>
+<span id="cb44-4"><a aria-hidden="true" href="#cb44-4" tabindex="-1"></a>    <span class="kw">link</span>.workorder_id,</span>
+<span id="cb44-5"><a aria-hidden="true" href="#cb44-5" tabindex="-1"></a>    <span class="kw">link</span>.consumed_quantity</span>
+<span id="cb44-6"><a aria-hidden="true" href="#cb44-6" tabindex="-1"></a><span class="kw">FROM</span> fact_lot_genealogy <span class="kw">link</span></span>
+<span id="cb44-7"><a aria-hidden="true" href="#cb44-7" tabindex="-1"></a><span class="kw">JOIN</span> dim_finished_lot output_lot</span>
+<span id="cb44-8"><a aria-hidden="true" href="#cb44-8" tabindex="-1"></a>  <span class="kw">ON</span> output_lot.finished_lot_id <span class="op">=</span> <span class="kw">link</span>.output_lot_id</span>
+<span id="cb44-9"><a aria-hidden="true" href="#cb44-9" tabindex="-1"></a><span class="kw">JOIN</span> dim_material_lot input_lot</span>
+<span id="cb44-10"><a aria-hidden="true" href="#cb44-10" tabindex="-1"></a>  <span class="kw">ON</span> input_lot.material_lot_id <span class="op">=</span> <span class="kw">link</span>.input_lot_id</span>
+<span id="cb44-11"><a aria-hidden="true" href="#cb44-11" tabindex="-1"></a><span class="kw">WHERE</span> output_lot.finished_lot_id <span class="op">=</span> <span class="st">'SET20-260802-03'</span>;</span></code></pre></div>
+<h2 id="263-python-품질-상태-계산">26.3 Python: 품질 상태 계산<a aria-label="이 절의 링크" class="heading-anchor" href="#263-python-품질-상태-계산">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>python</span><button class="copy-code" type="button">복사</button></div><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a aria-hidden="true" href="#cb45-1" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb45-2"><a aria-hidden="true" href="#cb45-2" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
+<span id="cb45-3"><a aria-hidden="true" href="#cb45-3" tabindex="-1"></a></span>
+<span id="cb45-4"><a aria-hidden="true" href="#cb45-4" tabindex="-1"></a></span>
+<span id="cb45-5"><a aria-hidden="true" href="#cb45-5" tabindex="-1"></a><span class="kw">class</span> QualityStatus(<span class="bu">str</span>, Enum):</span>
+<span id="cb45-6"><a aria-hidden="true" href="#cb45-6" tabindex="-1"></a>    NORMAL <span class="op">=</span> <span class="st">"정상"</span></span>
+<span id="cb45-7"><a aria-hidden="true" href="#cb45-7" tabindex="-1"></a>    CAUTION <span class="op">=</span> <span class="st">"주의"</span></span>
+<span id="cb45-8"><a aria-hidden="true" href="#cb45-8" tabindex="-1"></a>    RISK <span class="op">=</span> <span class="st">"위험"</span></span>
+<span id="cb45-9"><a aria-hidden="true" href="#cb45-9" tabindex="-1"></a>    STOP <span class="op">=</span> <span class="st">"중단 필요"</span></span>
+<span id="cb45-10"><a aria-hidden="true" href="#cb45-10" tabindex="-1"></a></span>
+<span id="cb45-11"><a aria-hidden="true" href="#cb45-11" tabindex="-1"></a></span>
+<span id="cb45-12"><a aria-hidden="true" href="#cb45-12" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb45-13"><a aria-hidden="true" href="#cb45-13" tabindex="-1"></a><span class="kw">class</span> ColorQualityRule:</span>
+<span id="cb45-14"><a aria-hidden="true" href="#cb45-14" tabindex="-1"></a>    caution_threshold: <span class="bu">float</span> <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb45-15"><a aria-hidden="true" href="#cb45-15" tabindex="-1"></a>    risk_threshold: <span class="bu">float</span> <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb45-16"><a aria-hidden="true" href="#cb45-16" tabindex="-1"></a>    stop_threshold: <span class="bu">float</span> <span class="op">=</span> <span class="fl">3.0</span></span>
+<span id="cb45-17"><a aria-hidden="true" href="#cb45-17" tabindex="-1"></a></span>
+<span id="cb45-18"><a aria-hidden="true" href="#cb45-18" tabindex="-1"></a></span>
+<span id="cb45-19"><a aria-hidden="true" href="#cb45-19" tabindex="-1"></a><span class="kw">def</span> classify_delta_e(</span>
+<span id="cb45-20"><a aria-hidden="true" href="#cb45-20" tabindex="-1"></a>    delta_e: <span class="bu">float</span>,</span>
+<span id="cb45-21"><a aria-hidden="true" href="#cb45-21" tabindex="-1"></a>    rule: ColorQualityRule <span class="op">=</span> ColorQualityRule(),</span>
+<span id="cb45-22"><a aria-hidden="true" href="#cb45-22" tabindex="-1"></a>) <span class="op">-&gt;</span> QualityStatus:</span>
+<span id="cb45-23"><a aria-hidden="true" href="#cb45-23" tabindex="-1"></a>    <span class="cf">if</span> delta_e <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb45-24"><a aria-hidden="true" href="#cb45-24" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"delta_e는 0 이상이어야 합니다."</span>)</span>
+<span id="cb45-25"><a aria-hidden="true" href="#cb45-25" tabindex="-1"></a></span>
+<span id="cb45-26"><a aria-hidden="true" href="#cb45-26" tabindex="-1"></a>    <span class="cf">if</span> delta_e <span class="op">&lt;=</span> rule.caution_threshold:</span>
+<span id="cb45-27"><a aria-hidden="true" href="#cb45-27" tabindex="-1"></a>        <span class="cf">return</span> QualityStatus.NORMAL</span>
+<span id="cb45-28"><a aria-hidden="true" href="#cb45-28" tabindex="-1"></a>    <span class="cf">if</span> delta_e <span class="op">&lt;=</span> rule.risk_threshold:</span>
+<span id="cb45-29"><a aria-hidden="true" href="#cb45-29" tabindex="-1"></a>        <span class="cf">return</span> QualityStatus.CAUTION</span>
+<span id="cb45-30"><a aria-hidden="true" href="#cb45-30" tabindex="-1"></a>    <span class="cf">if</span> delta_e <span class="op">&lt;=</span> rule.stop_threshold:</span>
+<span id="cb45-31"><a aria-hidden="true" href="#cb45-31" tabindex="-1"></a>        <span class="cf">return</span> QualityStatus.RISK</span>
+<span id="cb45-32"><a aria-hidden="true" href="#cb45-32" tabindex="-1"></a>    <span class="cf">return</span> QualityStatus.STOP</span></code></pre></div>
+<h2 id="264-python-odoo-json-2-api-호출-구조-예">26.4 Python: Odoo JSON-2 API 호출 구조 예<a aria-label="이 절의 링크" class="heading-anchor" href="#264-python-odoo-json-2-api-호출-구조-예">¶</a></h2>
+<p>아래 코드는 구조를 설명하기 위한 예시이며, 실제 URL·헤더·모델·권한은 조직 환경에서 확인해야 한다. Odoo 외부 API는 요금제와 배포 방식에 따라 사용 가능 범위가 다를 수 있다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>python</span><button class="copy-code" type="button">복사</button></div><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a aria-hidden="true" href="#cb46-1" tabindex="-1"></a><span class="im">from</span> __future__ <span class="im">import</span> annotations</span>
+<span id="cb46-2"><a aria-hidden="true" href="#cb46-2" tabindex="-1"></a></span>
+<span id="cb46-3"><a aria-hidden="true" href="#cb46-3" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb46-4"><a aria-hidden="true" href="#cb46-4" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Any</span>
+<span id="cb46-5"><a aria-hidden="true" href="#cb46-5" tabindex="-1"></a></span>
+<span id="cb46-6"><a aria-hidden="true" href="#cb46-6" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb46-7"><a aria-hidden="true" href="#cb46-7" tabindex="-1"></a></span>
+<span id="cb46-8"><a aria-hidden="true" href="#cb46-8" tabindex="-1"></a></span>
+<span id="cb46-9"><a aria-hidden="true" href="#cb46-9" tabindex="-1"></a><span class="kw">class</span> OdooApiError(<span class="pp">RuntimeError</span>):</span>
+<span id="cb46-10"><a aria-hidden="true" href="#cb46-10" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb46-11"><a aria-hidden="true" href="#cb46-11" tabindex="-1"></a></span>
+<span id="cb46-12"><a aria-hidden="true" href="#cb46-12" tabindex="-1"></a></span>
+<span id="cb46-13"><a aria-hidden="true" href="#cb46-13" tabindex="-1"></a><span class="kw">class</span> OdooJson2Client:</span>
+<span id="cb46-14"><a aria-hidden="true" href="#cb46-14" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, base_url: <span class="bu">str</span>, api_key: <span class="bu">str</span>, timeout: <span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb46-15"><a aria-hidden="true" href="#cb46-15" tabindex="-1"></a>        <span class="va">self</span>.base_url <span class="op">=</span> base_url.rstrip(<span class="st">"/"</span>)</span>
+<span id="cb46-16"><a aria-hidden="true" href="#cb46-16" tabindex="-1"></a>        <span class="va">self</span>.api_key <span class="op">=</span> api_key</span>
+<span id="cb46-17"><a aria-hidden="true" href="#cb46-17" tabindex="-1"></a>        <span class="va">self</span>.timeout <span class="op">=</span> timeout</span>
+<span id="cb46-18"><a aria-hidden="true" href="#cb46-18" tabindex="-1"></a></span>
+<span id="cb46-19"><a aria-hidden="true" href="#cb46-19" tabindex="-1"></a>    <span class="kw">def</span> call(</span>
+<span id="cb46-20"><a aria-hidden="true" href="#cb46-20" tabindex="-1"></a>        <span class="va">self</span>,</span>
+<span id="cb46-21"><a aria-hidden="true" href="#cb46-21" tabindex="-1"></a>        model: <span class="bu">str</span>,</span>
+<span id="cb46-22"><a aria-hidden="true" href="#cb46-22" tabindex="-1"></a>        method: <span class="bu">str</span>,</span>
+<span id="cb46-23"><a aria-hidden="true" href="#cb46-23" tabindex="-1"></a>        payload: <span class="bu">dict</span>[<span class="bu">str</span>, Any],</span>
+<span id="cb46-24"><a aria-hidden="true" href="#cb46-24" tabindex="-1"></a>    ) <span class="op">-&gt;</span> <span class="bu">dict</span>[<span class="bu">str</span>, Any]:</span>
+<span id="cb46-25"><a aria-hidden="true" href="#cb46-25" tabindex="-1"></a>        url <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>base_url<span class="sc">}</span><span class="ss">/json/2/</span><span class="sc">{</span>model<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb46-26"><a aria-hidden="true" href="#cb46-26" tabindex="-1"></a>        headers <span class="op">=</span> {</span>
+<span id="cb46-27"><a aria-hidden="true" href="#cb46-27" tabindex="-1"></a>            <span class="st">"Authorization"</span>: <span class="ss">f"bearer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>api_key<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb46-28"><a aria-hidden="true" href="#cb46-28" tabindex="-1"></a>            <span class="st">"Content-Type"</span>: <span class="st">"application/json"</span>,</span>
+<span id="cb46-29"><a aria-hidden="true" href="#cb46-29" tabindex="-1"></a>        }</span>
+<span id="cb46-30"><a aria-hidden="true" href="#cb46-30" tabindex="-1"></a></span>
+<span id="cb46-31"><a aria-hidden="true" href="#cb46-31" tabindex="-1"></a>        response <span class="op">=</span> requests.post(</span>
+<span id="cb46-32"><a aria-hidden="true" href="#cb46-32" tabindex="-1"></a>            url,</span>
+<span id="cb46-33"><a aria-hidden="true" href="#cb46-33" tabindex="-1"></a>            json<span class="op">=</span>payload,</span>
+<span id="cb46-34"><a aria-hidden="true" href="#cb46-34" tabindex="-1"></a>            headers<span class="op">=</span>headers,</span>
+<span id="cb46-35"><a aria-hidden="true" href="#cb46-35" tabindex="-1"></a>            timeout<span class="op">=</span><span class="va">self</span>.timeout,</span>
+<span id="cb46-36"><a aria-hidden="true" href="#cb46-36" tabindex="-1"></a>        )</span>
+<span id="cb46-37"><a aria-hidden="true" href="#cb46-37" tabindex="-1"></a></span>
+<span id="cb46-38"><a aria-hidden="true" href="#cb46-38" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> response.ok:</span>
+<span id="cb46-39"><a aria-hidden="true" href="#cb46-39" tabindex="-1"></a>            <span class="cf">raise</span> OdooApiError(</span>
+<span id="cb46-40"><a aria-hidden="true" href="#cb46-40" tabindex="-1"></a>                <span class="ss">f"Odoo API 오류: status=</span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">, "</span></span>
+<span id="cb46-41"><a aria-hidden="true" href="#cb46-41" tabindex="-1"></a>                <span class="ss">f"body=</span><span class="sc">{</span>response<span class="sc">.</span>text[:<span class="dv">500</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb46-42"><a aria-hidden="true" href="#cb46-42" tabindex="-1"></a>            )</span>
+<span id="cb46-43"><a aria-hidden="true" href="#cb46-43" tabindex="-1"></a></span>
+<span id="cb46-44"><a aria-hidden="true" href="#cb46-44" tabindex="-1"></a>        <span class="cf">return</span> response.json()</span>
+<span id="cb46-45"><a aria-hidden="true" href="#cb46-45" tabindex="-1"></a></span>
+<span id="cb46-46"><a aria-hidden="true" href="#cb46-46" tabindex="-1"></a></span>
+<span id="cb46-47"><a aria-hidden="true" href="#cb46-47" tabindex="-1"></a><span class="kw">def</span> hold_manufacturing_order(</span>
+<span id="cb46-48"><a aria-hidden="true" href="#cb46-48" tabindex="-1"></a>    client: OdooJson2Client,</span>
+<span id="cb46-49"><a aria-hidden="true" href="#cb46-49" tabindex="-1"></a>    manufacturing_order_id: <span class="bu">int</span>,</span>
+<span id="cb46-50"><a aria-hidden="true" href="#cb46-50" tabindex="-1"></a>    reason: <span class="bu">str</span>,</span>
+<span id="cb46-51"><a aria-hidden="true" href="#cb46-51" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="bu">dict</span>[<span class="bu">str</span>, Any]:</span>
+<span id="cb46-52"><a aria-hidden="true" href="#cb46-52" tabindex="-1"></a>    <span class="co"># 실제 구현에서는 사용자 정의 서버 메서드 또는</span></span>
+<span id="cb46-53"><a aria-hidden="true" href="#cb46-53" tabindex="-1"></a>    <span class="co"># 검증된 업무 액션을 호출하는 방식이 바람직하다.</span></span>
+<span id="cb46-54"><a aria-hidden="true" href="#cb46-54" tabindex="-1"></a>    <span class="cf">return</span> client.call(</span>
+<span id="cb46-55"><a aria-hidden="true" href="#cb46-55" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"mrp.production"</span>,</span>
+<span id="cb46-56"><a aria-hidden="true" href="#cb46-56" tabindex="-1"></a>        method<span class="op">=</span><span class="st">"write"</span>,</span>
+<span id="cb46-57"><a aria-hidden="true" href="#cb46-57" tabindex="-1"></a>        payload<span class="op">=</span>{</span>
+<span id="cb46-58"><a aria-hidden="true" href="#cb46-58" tabindex="-1"></a>            <span class="st">"ids"</span>: [manufacturing_order_id],</span>
+<span id="cb46-59"><a aria-hidden="true" href="#cb46-59" tabindex="-1"></a>            <span class="st">"vals"</span>: {</span>
+<span id="cb46-60"><a aria-hidden="true" href="#cb46-60" tabindex="-1"></a>                <span class="st">"x_foundry_hold"</span>: <span class="va">True</span>,</span>
+<span id="cb46-61"><a aria-hidden="true" href="#cb46-61" tabindex="-1"></a>                <span class="st">"x_foundry_hold_reason"</span>: reason,</span>
+<span id="cb46-62"><a aria-hidden="true" href="#cb46-62" tabindex="-1"></a>            },</span>
+<span id="cb46-63"><a aria-hidden="true" href="#cb46-63" tabindex="-1"></a>        },</span>
+<span id="cb46-64"><a aria-hidden="true" href="#cb46-64" tabindex="-1"></a>    )</span>
+<span id="cb46-65"><a aria-hidden="true" href="#cb46-65" tabindex="-1"></a></span>
+<span id="cb46-66"><a aria-hidden="true" href="#cb46-66" tabindex="-1"></a></span>
+<span id="cb46-67"><a aria-hidden="true" href="#cb46-67" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb46-68"><a aria-hidden="true" href="#cb46-68" tabindex="-1"></a>    client <span class="op">=</span> OdooJson2Client(</span>
+<span id="cb46-69"><a aria-hidden="true" href="#cb46-69" tabindex="-1"></a>        base_url<span class="op">=</span>os.environ[<span class="st">"ODOO_BASE_URL"</span>],</span>
+<span id="cb46-70"><a aria-hidden="true" href="#cb46-70" tabindex="-1"></a>        api_key<span class="op">=</span>os.environ[<span class="st">"ODOO_API_KEY"</span>],</span>
+<span id="cb46-71"><a aria-hidden="true" href="#cb46-71" tabindex="-1"></a>    )</span></code></pre></div>
+<h2 id="265-action-요청-json">26.5 Action 요청 JSON<a aria-label="이 절의 링크" class="heading-anchor" href="#265-action-요청-json">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>json</span><button class="copy-code" type="button">복사</button></div><pre class="sourceCode json"><code class="sourceCode json"><span id="cb47-1"><a aria-hidden="true" href="#cb47-1" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb47-2"><a aria-hidden="true" href="#cb47-2" tabindex="-1"></a>  <span class="dt">"actionType"</span><span class="fu">:</span> <span class="st">"HoldFinishedLot"</span><span class="fu">,</span></span>
+<span id="cb47-3"><a aria-hidden="true" href="#cb47-3" tabindex="-1"></a>  <span class="dt">"target"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb47-4"><a aria-hidden="true" href="#cb47-4" tabindex="-1"></a>    <span class="dt">"objectType"</span><span class="fu">:</span> <span class="st">"FinishedLot"</span><span class="fu">,</span></span>
+<span id="cb47-5"><a aria-hidden="true" href="#cb47-5" tabindex="-1"></a>    <span class="dt">"primaryKey"</span><span class="fu">:</span> <span class="st">"SET20-260802-03"</span></span>
+<span id="cb47-6"><a aria-hidden="true" href="#cb47-6" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb47-7"><a aria-hidden="true" href="#cb47-7" tabindex="-1"></a>  <span class="dt">"inputs"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb47-8"><a aria-hidden="true" href="#cb47-8" tabindex="-1"></a>    <span class="dt">"reasonCode"</span><span class="fu">:</span> <span class="st">"COLOR_DELTA_EXCEEDED"</span><span class="fu">,</span></span>
+<span id="cb47-9"><a aria-hidden="true" href="#cb47-9" tabindex="-1"></a>    <span class="dt">"evidenceId"</span><span class="fu">:</span> <span class="st">"QC-260802-44"</span><span class="fu">,</span></span>
+<span id="cb47-10"><a aria-hidden="true" href="#cb47-10" tabindex="-1"></a>    <span class="dt">"comment"</span><span class="fu">:</span> <span class="st">"빨강 색상 ΔE 기준 초과"</span></span>
+<span id="cb47-11"><a aria-hidden="true" href="#cb47-11" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb47-12"><a aria-hidden="true" href="#cb47-12" tabindex="-1"></a>  <span class="dt">"requestedBy"</span><span class="fu">:</span> <span class="st">"quality.manager@example.com"</span><span class="fu">,</span></span>
+<span id="cb47-13"><a aria-hidden="true" href="#cb47-13" tabindex="-1"></a>  <span class="dt">"correlationId"</span><span class="fu">:</span> <span class="st">"fdry-20260802-000812"</span></span>
+<span id="cb47-14"><a aria-hidden="true" href="#cb47-14" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h2 id="266-odoo-화면-xml-예">26.6 Odoo 화면 XML 예<a aria-label="이 절의 링크" class="heading-anchor" href="#266-odoo-화면-xml-예">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>xml</span><button class="copy-code" type="button">복사</button></div><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb48-1"><a aria-hidden="true" href="#cb48-1" tabindex="-1"></a>&lt;<span class="kw">record</span><span class="ot"> id=</span><span class="st">"view_mrp_production_form_foundry"</span><span class="ot"> model=</span><span class="st">"ir.ui.view"</span>&gt;</span>
+<span id="cb48-2"><a aria-hidden="true" href="#cb48-2" tabindex="-1"></a>    &lt;<span class="kw">field</span><span class="ot"> name=</span><span class="st">"name"</span>&gt;mrp.production.form.foundry&lt;/<span class="kw">field</span>&gt;</span>
+<span id="cb48-3"><a aria-hidden="true" href="#cb48-3" tabindex="-1"></a>    &lt;<span class="kw">field</span><span class="ot"> name=</span><span class="st">"model"</span>&gt;mrp.production&lt;/<span class="kw">field</span>&gt;</span>
+<span id="cb48-4"><a aria-hidden="true" href="#cb48-4" tabindex="-1"></a>    &lt;<span class="kw">field</span><span class="ot"> name=</span><span class="st">"inherit_id"</span><span class="ot"> ref=</span><span class="st">"mrp.mrp_production_form_view"</span>/&gt;</span>
+<span id="cb48-5"><a aria-hidden="true" href="#cb48-5" tabindex="-1"></a>    &lt;<span class="kw">field</span><span class="ot"> name=</span><span class="st">"arch"</span><span class="ot"> type=</span><span class="st">"xml"</span>&gt;</span>
+<span id="cb48-6"><a aria-hidden="true" href="#cb48-6" tabindex="-1"></a>        &lt;<span class="kw">xpath</span><span class="ot"> expr=</span><span class="st">"//sheet"</span><span class="ot"> position=</span><span class="st">"inside"</span>&gt;</span>
+<span id="cb48-7"><a aria-hidden="true" href="#cb48-7" tabindex="-1"></a>            &lt;<span class="kw">group</span><span class="ot"> string=</span><span class="st">"Foundry 연계"</span>&gt;</span>
+<span id="cb48-8"><a aria-hidden="true" href="#cb48-8" tabindex="-1"></a>                &lt;<span class="kw">field</span><span class="ot"> name=</span><span class="st">"x_foundry_risk_status"</span><span class="ot"> readonly=</span><span class="st">"1"</span>/&gt;</span>
+<span id="cb48-9"><a aria-hidden="true" href="#cb48-9" tabindex="-1"></a>                &lt;<span class="kw">field</span><span class="ot"> name=</span><span class="st">"x_foundry_hold"</span><span class="ot"> readonly=</span><span class="st">"1"</span>/&gt;</span>
+<span id="cb48-10"><a aria-hidden="true" href="#cb48-10" tabindex="-1"></a>                &lt;<span class="kw">field</span><span class="ot"> name=</span><span class="st">"x_foundry_hold_reason"</span><span class="ot"> readonly=</span><span class="st">"1"</span>/&gt;</span>
+<span id="cb48-11"><a aria-hidden="true" href="#cb48-11" tabindex="-1"></a>                &lt;<span class="kw">field</span><span class="ot"> name=</span><span class="st">"x_foundry_correlation_id"</span><span class="ot"> readonly=</span><span class="st">"1"</span>/&gt;</span>
+<span id="cb48-12"><a aria-hidden="true" href="#cb48-12" tabindex="-1"></a>            &lt;/<span class="kw">group</span>&gt;</span>
+<span id="cb48-13"><a aria-hidden="true" href="#cb48-13" tabindex="-1"></a>        &lt;/<span class="kw">xpath</span>&gt;</span>
+<span id="cb48-14"><a aria-hidden="true" href="#cb48-14" tabindex="-1"></a>    &lt;/<span class="kw">field</span>&gt;</span>
+<span id="cb48-15"><a aria-hidden="true" href="#cb48-15" tabindex="-1"></a>&lt;/<span class="kw">record</span>&gt;</span></code></pre></div>
+<hr/>
+<h1 id="27-aillmmcp에이전트-연결">27. AI·LLM·MCP·에이전트 연결<a aria-label="이 절의 링크" class="heading-anchor" href="#27-aillmmcp에이전트-연결">¶</a></h1>
+<h2 id="271-단순-챗봇과-운영-에이전트의-차이">27.1 단순 챗봇과 운영 에이전트의 차이<a aria-label="이 절의 링크" class="heading-anchor" href="#271-단순-챗봇과-운영-에이전트의-차이">¶</a></h2>
+<p>단순 챗봇:</p>
+<ul>
+<li>문서 검색</li>
+<li>질문 답변</li>
+<li>요약</li>
+<li>설명</li>
+</ul>
+<p>운영 에이전트:</p>
+<ul>
+<li>객체 조회</li>
+<li>상태 판단</li>
+<li>영향 분석</li>
+<li>선택지 제안</li>
+<li>승인 요청</li>
+<li>허용된 액션 실행</li>
+<li>결과 확인</li>
+</ul>
+<h2 id="272-ontology가-필요한-이유">27.2 Ontology가 필요한 이유<a aria-label="이 절의 링크" class="heading-anchor" href="#272-ontology가-필요한-이유">¶</a></h2>
+<p>LLM에 원시 테이블을 직접 제공하면 다음 문제가 생길 수 있다.</p>
+<ul>
+<li>테이블과 칼럼의 의미 오해</li>
+<li>잘못된 조인</li>
+<li>권한 범위 초과</li>
+<li>실행 가능한 행동과 불가능한 행동 혼동</li>
+<li>책임 없는 자동 실행</li>
+</ul>
+<p>Ontology는 AI에게 다음을 제공한다.</p>
+<ul>
+<li>사용할 수 있는 객체</li>
+<li>객체 간 관계</li>
+<li>현재 상태</li>
+<li>허용된 함수</li>
+<li>허용된 액션</li>
+<li>권한</li>
+<li>감사 가능한 실행 경로</li>
+</ul>
+<h2 id="273-ai-생산관리자-예">27.3 AI 생산관리자 예<a aria-label="이 절의 링크" class="heading-anchor" href="#273-ai-생산관리자-예">¶</a></h2>
+<p>사용자 질문:</p>
+<blockquote>
+<p>내일 납기인 색종이 주문 중 위험한 것은 무엇인가?</p>
+</blockquote>
+<p>에이전트 흐름:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>1. SalesOrder 객체 조회
+2. 납기 내일 조건 적용
+3. 연결된 ManufacturingOrder 조회
+4. 일정·자재·설비·품질 위험 계산
+5. 위험 주문과 근거 제시
+6. 가능한 액션 제안
+7. 사용자의 승인 후 Action 실행</code></pre></div>
+<p>응답 예:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>위험 주문은 SO-24018입니다.
+
+근거:
+- 추림 작업오더 3시간 지연
+- 파랑 반제품 Lot 품질 재검사 중
+- 포장라인 가동률 저하
+- 예상 완료시각이 출하 마감보다 2시간 늦음
+
+가능한 조치:
+1. 포장라인 2호로 재배정
+2. 파랑 Lot 대체 승인 요청
+3. 고객 출하시간 조정 요청
+
+현재 사용자는 1번 조치의 승인 권한이 있습니다.</code></pre></div>
+<h2 id="274-mcp-관점">27.4 MCP 관점<a aria-label="이 절의 링크" class="heading-anchor" href="#274-mcp-관점">¶</a></h2>
+<p>MCP 또는 유사한 도구 연결 계층을 사용할 경우 다음 도구를 노출할 수 있다.</p>
+<ul>
+<li><code>search_manufacturing_orders</code></li>
+<li><code>get_lot_genealogy</code></li>
+<li><code>calculate_schedule_risk</code></li>
+<li><code>create_quality_incident</code></li>
+<li><code>request_shipment_hold</code></li>
+<li><code>assign_work_order</code></li>
+</ul>
+<p>원칙:</p>
+<ul>
+<li>원시 SQL 실행 권한보다 의미가 명확한 도구를 제공한다.</li>
+<li>읽기 도구와 쓰기 도구를 분리한다.</li>
+<li>쓰기 작업은 승인·권한·검증을 거친다.</li>
+<li>도구 호출과 결과를 기록한다.</li>
+<li>위험한 액션은 사람의 승인을 요구한다.</li>
+</ul>
+<hr/>
+<h1 id="28-구축-로드맵">28. 구축 로드맵<a aria-label="이 절의 링크" class="heading-anchor" href="#28-구축-로드맵">¶</a></h1>
+<h2 id="281-0단계-문제-정의">28.1 0단계: 문제 정의<a aria-label="이 절의 링크" class="heading-anchor" href="#281-0단계-문제-정의">¶</a></h2>
+<p>기술 도입 전에 다음을 정한다.</p>
+<ul>
+<li>어떤 의사결정을 개선할 것인가?</li>
+<li>현재 시간이 가장 많이 걸리는 판단은 무엇인가?</li>
+<li>어떤 오류가 반복되는가?</li>
+<li>누가 책임자인가?</li>
+<li>조치 결과를 어디에 기록하는가?</li>
+</ul>
+<p>색종이 공장 우선 과제 예:</p>
+<ol type="1">
+<li>Lot 추적시간 단축</li>
+<li>품질이상 출하 차단</li>
+<li>납기 위험 조기 경보</li>
+<li>작업오더 실적 정확도 향상</li>
+</ol>
+<h2 id="282-1단계-데이터-연결">28.2 1단계: 데이터 연결<a aria-label="이 절의 링크" class="heading-anchor" href="#282-1단계-데이터-연결">¶</a></h2>
+<ul>
+<li>Odoo 핵심 테이블·API</li>
+<li>설비 데이터</li>
+<li>품질검사 데이터</li>
+<li>고객 클레임</li>
+<li>코드 표준화</li>
+</ul>
+<p>산출물:</p>
+<ul>
+<li>데이터 소스 목록</li>
+<li>원천 책임자</li>
+<li>갱신 주기</li>
+<li>품질 기준</li>
+<li>접근권한</li>
+</ul>
+<h2 id="283-2단계-최소-온톨로지">28.3 2단계: 최소 온톨로지<a aria-label="이 절의 링크" class="heading-anchor" href="#283-2단계-최소-온톨로지">¶</a></h2>
+<p>첫 MVP 객체:</p>
+<ul>
+<li>ManufacturingOrder</li>
+<li>WorkOrder</li>
+<li>Machine</li>
+<li>MaterialLot</li>
+<li>FinishedLot</li>
+<li>QualityCheck</li>
+<li>Shipment</li>
+</ul>
+<p>첫 링크:</p>
+<ul>
+<li>MO–WO</li>
+<li>WO–Machine</li>
+<li>WO–MaterialLot</li>
+<li>WO–FinishedLot</li>
+<li>FinishedLot–QualityCheck</li>
+<li>FinishedLot–Shipment</li>
+</ul>
+<h2 id="284-3단계-첫-운영-앱">28.4 3단계: 첫 운영 앱<a aria-label="이 절의 링크" class="heading-anchor" href="#284-3단계-첫-운영-앱">¶</a></h2>
+<p>권장 첫 앱:</p>
+<blockquote>
+<p>품질이상 Lot 영향 분석 및 출하 보류 앱</p>
+</blockquote>
+<p>이유:</p>
+<ul>
+<li>가치가 명확함</li>
+<li>객체·링크·액션을 모두 활용</li>
+<li>품질·생산·물류 부서 협업</li>
+<li>ROI 측정 가능</li>
+<li>AI 연계 전 통제 구조 검증 가능</li>
+</ul>
+<h2 id="285-4단계-확장">28.5 4단계: 확장<a aria-label="이 절의 링크" class="heading-anchor" href="#285-4단계-확장">¶</a></h2>
+<ul>
+<li>납기 위험</li>
+<li>설비 예방정비</li>
+<li>원가 분석</li>
+<li>구매 위험</li>
+<li>생산계획 최적화</li>
+<li>AI 에이전트</li>
+</ul>
+<hr/>
+<h1 id="29-거버넌스보안감사">29. 거버넌스·보안·감사<a aria-label="이 절의 링크" class="heading-anchor" href="#29-거버넌스보안감사">¶</a></h1>
+<h2 id="291-데이터-소유권">29.1 데이터 소유권<a aria-label="이 절의 링크" class="heading-anchor" href="#291-데이터-소유권">¶</a></h2>
+<p>각 객체와 속성에 대해 다음을 정한다.</p>
+<ul>
+<li>데이터 소유 부서</li>
+<li>입력 책임자</li>
+<li>승인 책임자</li>
+<li>품질 기준</li>
+<li>보존 기간</li>
+<li>민감도</li>
+<li>원천 시스템</li>
+</ul>
+<h2 id="292-최소-권한">29.2 최소 권한<a aria-label="이 절의 링크" class="heading-anchor" href="#292-최소-권한">¶</a></h2>
+<ul>
+<li>작업자는 자기 작업장 정보만 수정</li>
+<li>품질담당자는 품질 상태와 보류 액션 수행</li>
+<li>생산관리자는 일정·작업배정 변경</li>
+<li>영업은 고객과 납기 영향 조회</li>
+<li>회계는 원가 정보 조회</li>
+<li>관리자도 모든 액션을 무제한 수행하지 않도록 통제</li>
+</ul>
+<h2 id="293-ai-보안">29.3 AI 보안<a aria-label="이 절의 링크" class="heading-anchor" href="#293-ai-보안">¶</a></h2>
+<ul>
+<li>에이전트는 사용자의 권한을 상속</li>
+<li>비공개 속성은 도구 결과에서 제외</li>
+<li>쓰기 액션은 사전 조건 검증</li>
+<li>중요 조치는 사람 승인</li>
+<li>모든 도구 호출 감사</li>
+<li>모델의 설명과 실제 규칙을 구분</li>
+<li>추천 근거 데이터를 함께 표시</li>
+</ul>
+<h2 id="294-감사-항목">29.4 감사 항목<a aria-label="이 절의 링크" class="heading-anchor" href="#294-감사-항목">¶</a></h2>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>누가
+언제
+어떤 객체를
+어떤 이전 상태에서
+무슨 근거로
+어떤 액션을 실행하여
+어떤 새 상태로 바꾸었고
+어떤 관련 객체에 영향을 주었는가</code></pre></div>
+<hr/>
+<h1 id="30-테스트와-운영-전환">30. 테스트와 운영 전환<a aria-label="이 절의 링크" class="heading-anchor" href="#30-테스트와-운영-전환">¶</a></h1>
+<h2 id="301-데이터-테스트">30.1 데이터 테스트<a aria-label="이 절의 링크" class="heading-anchor" href="#301-데이터-테스트">¶</a></h2>
+<ul>
+<li>MO와 WO 연결 누락 여부</li>
+<li>Lot 계보 완전성</li>
+<li>수량 합계 일치</li>
+<li>중복 객체</li>
+<li>시간대 변환</li>
+<li>코드 매핑</li>
+<li>결측치</li>
+<li>동기화 지연</li>
+</ul>
+<h2 id="302-온톨로지-테스트">30.2 온톨로지 테스트<a aria-label="이 절의 링크" class="heading-anchor" href="#302-온톨로지-테스트">¶</a></h2>
+<ul>
+<li>객체 식별키 유일성</li>
+<li>링크 방향과 카디널리티</li>
+<li>잘못된 순환 링크</li>
+<li>상태 규칙</li>
+<li>액션 사전 조건</li>
+<li>권한</li>
+<li>삭제·병합 영향</li>
+</ul>
+<h2 id="303-업무-시나리오-테스트">30.3 업무 시나리오 테스트<a aria-label="이 절의 링크" class="heading-anchor" href="#303-업무-시나리오-테스트">¶</a></h2>
+<h3 id="시나리오-a">시나리오 A<a aria-label="이 절의 링크" class="heading-anchor" href="#시나리오-a">¶</a></h3>
+<p>정상 생산 → 검사 통과 → 출하</p>
+<h3 id="시나리오-b">시나리오 B<a aria-label="이 절의 링크" class="heading-anchor" href="#시나리오-b">¶</a></h3>
+<p>품질 위험 → 출하 보류 → 재검사 통과 → 보류 해제</p>
+<h3 id="시나리오-c">시나리오 C<a aria-label="이 절의 링크" class="heading-anchor" href="#시나리오-c">¶</a></h3>
+<p>원재료 Lot 결함 → 관련 완제품 Lot 추적 → 고객 영향 분석</p>
+<h3 id="시나리오-d">시나리오 D<a aria-label="이 절의 링크" class="heading-anchor" href="#시나리오-d">¶</a></h3>
+<p>설비 고장 → 작업중지 → 다른 설비 재배정 → 납기 재계산</p>
+<h2 id="304-병행-운영">30.4 병행 운영<a aria-label="이 절의 링크" class="heading-anchor" href="#304-병행-운영">¶</a></h2>
+<p>초기에는 다음처럼 운영한다.</p>
+<ul>
+<li>Odoo 기존 절차 유지</li>
+<li>Foundry 분석·추천 병행</li>
+<li>액션은 승인 후 실행</li>
+<li>결과 비교</li>
+<li>오류 수정</li>
+<li>단계적으로 자동화 확대</li>
+</ul>
+<hr/>
+<h1 id="31-실습-과제">31. 실습 과제<a aria-label="이 절의 링크" class="heading-anchor" href="#31-실습-과제">¶</a></h1>
+<h2 id="실습-1-객체-찾기">실습 1: 객체 찾기<a aria-label="이 절의 링크" class="heading-anchor" href="#실습-1-객체-찾기">¶</a></h2>
+<p>색종이 공장의 명사를 30개 적고 다음으로 분류한다.</p>
+<ul>
+<li>객체</li>
+<li>속성</li>
+<li>링크</li>
+<li>액션</li>
+<li>상태</li>
+</ul>
+<h2 id="실습-2-lot-계보">실습 2: Lot 계보<a aria-label="이 절의 링크" class="heading-anchor" href="#실습-2-lot-계보">¶</a></h2>
+<p>20색 세트 하나가 20개 색상 Lot를 투입한다고 가정하고 다대다 계보를 설계한다.</p>
+<h2 id="실습-3-상태-모델">실습 3: 상태 모델<a aria-label="이 절의 링크" class="heading-anchor" href="#실습-3-상태-모델">¶</a></h2>
+<p>품질검사 객체의 상태를 설계한다.</p>
+<p>예:</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>대기 → 검사 중 → 정상/주의/부적합 → 재검사 → 종결</code></pre></div>
+<h2 id="실습-4-액션-규칙">실습 4: 액션 규칙<a aria-label="이 절의 링크" class="heading-anchor" href="#실습-4-액션-규칙">¶</a></h2>
+<p><code>출하 보류</code> 액션에 대해 작성한다.</p>
+<ul>
+<li>실행 역할</li>
+<li>사전 조건</li>
+<li>입력값</li>
+<li>변경 대상</li>
+<li>후속 효과</li>
+<li>감사 필드</li>
+</ul>
+<h2 id="실습-5-workshop-화면">실습 5: Workshop 화면<a aria-label="이 절의 링크" class="heading-anchor" href="#실습-5-workshop-화면">¶</a></h2>
+<p>종이에 다음 화면을 그린다.</p>
+<ul>
+<li>위험 Lot 목록</li>
+<li>선택 Lot 상세</li>
+<li>영향 출하</li>
+<li>관련 원재료</li>
+<li>상태 전이</li>
+<li>가능한 액션</li>
+</ul>
+<h2 id="실습-6-ai-에이전트">실습 6: AI 에이전트<a aria-label="이 절의 링크" class="heading-anchor" href="#실습-6-ai-에이전트">¶</a></h2>
+<p>다음 질문에 답하기 위해 에이전트가 호출해야 할 도구 순서를 설계한다.</p>
+<blockquote>
+<p>오늘 생산 중단이 필요한 작업은 무엇이며, 어떤 주문에 영향을 주는가?</p>
+</blockquote>
+<hr/>
+<h1 id="32-핵심-용어집">32. 핵심 용어집<a aria-label="이 절의 링크" class="heading-anchor" href="#32-핵심-용어집">¶</a></h1>
+<table>
+<thead>
+<tr class="header">
+<th>용어</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data Lake</td>
+<td>다양한 원천 데이터를 대규모로 저장하는 기반</td>
+</tr>
+<tr class="even">
+<td>Dataset</td>
+<td>분석·처리를 위한 데이터 단위</td>
+</tr>
+<tr class="odd">
+<td>Pipeline</td>
+<td>데이터를 정제·결합·변환하는 처리 흐름</td>
+</tr>
+<tr class="even">
+<td>Ontology</td>
+<td>현실의 업무 객체·관계·행동을 표현하는 의미·운영 계층</td>
+</tr>
+<tr class="odd">
+<td>Object Type</td>
+<td>객체의 유형</td>
+</tr>
+<tr class="even">
+<td>Object</td>
+<td>특정 업무 대상의 인스턴스</td>
+</tr>
+<tr class="odd">
+<td>Property</td>
+<td>객체가 가진 속성</td>
+</tr>
+<tr class="even">
+<td>Link</td>
+<td>객체 간 관계</td>
+</tr>
+<tr class="odd">
+<td>Action</td>
+<td>객체를 생성·수정·연결하거나 외부 효과를 발생시키는 업무 행동</td>
+</tr>
+<tr class="even">
+<td>Function</td>
+<td>계산·판단·비즈니스 로직</td>
+</tr>
+<tr class="odd">
+<td>State</td>
+<td>객체의 현재 업무 상태</td>
+</tr>
+<tr class="even">
+<td>Transition</td>
+<td>상태가 다른 상태로 바뀌는 사건</td>
+</tr>
+<tr class="odd">
+<td>Workshop</td>
+<td>온톨로지 기반 운영 앱 구축 도구</td>
+</tr>
+<tr class="even">
+<td>Object Explorer</td>
+<td>온톨로지 객체를 검색·분석하는 도구</td>
+</tr>
+<tr class="odd">
+<td>Data Connection</td>
+<td>외부 시스템 데이터를 동기화하는 기능</td>
+</tr>
+<tr class="even">
+<td>Contour</td>
+<td>데이터셋 탐색·분석 도구</td>
+</tr>
+<tr class="odd">
+<td>Pipeline Builder</td>
+<td>시각적 데이터 파이프라인 구축 도구</td>
+</tr>
+<tr class="even">
+<td>Apollo</td>
+<td>소프트웨어 배포·업그레이드·운영 플랫폼</td>
+</tr>
+<tr class="odd">
+<td>Resource Management</td>
+<td>Foundry 컴퓨팅 사용량·비용·자원 가시화 기능</td>
+</tr>
+<tr class="even">
+<td>MO</td>
+<td>Manufacturing Order, 제조오더</td>
+</tr>
+<tr class="odd">
+<td>WO</td>
+<td>Work Order, 작업오더</td>
+</tr>
+<tr class="even">
+<td>BOM</td>
+<td>Bill of Materials, 자재명세서</td>
+</tr>
+<tr class="odd">
+<td>Lot</td>
+<td>동일 조건의 생산·입고 묶음 식별</td>
+</tr>
+<tr class="even">
+<td>Serial</td>
+<td>개별 단위의 고유 식별</td>
+</tr>
+<tr class="odd">
+<td>Writeback</td>
+<td>앱의 액션 결과를 객체 또는 원천 시스템에 반영하는 것</td>
+</tr>
+<tr class="even">
+<td>System of Record</td>
+<td>거래와 기준 데이터를 최종적으로 보유하는 시스템</td>
+</tr>
+<tr class="odd">
+<td>Agent</td>
+<td>도구를 이용해 조회·판단·행동하는 AI 실행 주체</td>
+</tr>
+<tr class="even">
+<td>MCP</td>
+<td>모델과 외부 도구·데이터를 연결하기 위한 표준화된 도구 연결 방식</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h1 id="33-공식-참고자료">33. 공식 참고자료<a aria-label="이 절의 링크" class="heading-anchor" href="#33-공식-참고자료">¶</a></h1>
+<p>아래 자료는 제품 기능과 용어를 확인하기 위한 공식 문서이다. 기능은 지속적으로 변경될 수 있으므로 실제 구축 시 최신 문서를 다시 확인한다.</p>
+<h2 id="palantir">Palantir<a aria-label="이 절의 링크" class="heading-anchor" href="#palantir">¶</a></h2>
+<ol type="1">
+<li><a href="https://palantir.com/docs/foundry/">Foundry Documentation</a></li>
+<li><a href="https://palantir.com/docs/foundry/data-connection/overview/">Data Connection Overview</a></li>
+<li><a href="https://palantir.com/docs/foundry/data-connection/core-concepts/">Data Connection Core Concepts</a></li>
+<li><a href="https://palantir.com/docs/foundry/object-explorer/overview/">Object Explorer Overview</a></li>
+<li><a href="https://palantir.com/docs/foundry/workshop/overview/">Workshop Overview</a></li>
+<li><a href="https://palantir.com/docs/foundry/workshop/actions-use/">Use Actions in Workshop</a></li>
+<li><a href="https://palantir.com/docs/foundry/object-link-types/create-object-type/">Create an Object Type</a></li>
+<li><a href="https://palantir.com/docs/foundry/functions/use-functions/">Use Functions in the Platform</a></li>
+<li><a href="https://palantir.com/docs/foundry/resource-management/overview/">Resource Management Overview</a></li>
+<li><a href="https://palantir.com/docs/foundry/resource-management/analysis/">Resource Management Analysis</a></li>
+<li><a href="https://palantir.com/docs/apollo/core/introduction/">Apollo Introduction</a></li>
+<li><a href="https://palantir.com/docs/apollo/apollo-getting-started/getting-started-with-apollo/">Apollo Getting Started</a></li>
+<li><a href="https://www.palantir.com/platforms/ontology/">Palantir Ontology</a></li>
+</ol>
+<h2 id="odoo-1">Odoo<a aria-label="이 절의 링크" class="heading-anchor" href="#odoo-1">¶</a></h2>
+<ol type="1">
+<li><a href="https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/manufacturing.html">Odoo 19 Manufacturing</a></li>
+<li><a href="https://www.odoo.com/documentation/saas-19.3/applications/inventory_and_mrp/manufacturing/basic_setup/manufacturing_work_orders.html">Manufacturing Orders and Work Orders</a></li>
+<li><a href="https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/manufacturing/basic_setup/bill_configuration.html">Bill of Materials</a></li>
+<li><a href="https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/manufacturing/workflows/manufacture_lots_serials.html">Manufacture with Lots and Serial Numbers</a></li>
+<li><a href="https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/manufacturing/shop_floor/shop_floor_overview.html">Shop Floor Overview</a></li>
+<li><a href="https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/quality.html">Odoo Quality</a></li>
+<li><a href="https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/quality/quality_management/quality_checks.html">Quality Checks</a></li>
+<li><a href="https://www.odoo.com/documentation/19.0/developer/reference/external_api.html">External JSON-2 API</a></li>
+<li><a href="https://www.odoo.com/documentation/19.0/developer/reference/external_rpc_api.html">External RPC API</a></li>
+</ol>
+<hr/>
+<h1 id="맺음말">맺음말<a aria-label="이 절의 링크" class="heading-anchor" href="#맺음말">¶</a></h1>
+<p>기존 데이터 플랫폼은 데이터를 모으고 분석할 수 있게 만든다.<br/>
+Foundry Ontology는 여기에 한 걸음 더 나아가 다음을 묻는다.</p>
+<blockquote>
+<p>이 데이터가 현실의 어떤 대상을 의미하는가?<br/>
+그 대상은 지금 어떤 상태인가?<br/>
+누가 어떤 근거로 판단해야 하는가?<br/>
+지금 실행 가능한 행동은 무엇인가?<br/>
+행동하면 어떤 대상에 영향이 미치는가?<br/>
+그 결정과 결과를 어떻게 추적할 것인가?</p>
+</blockquote>
+<p>색종이 제조공장에서 이러한 질문은 다음과 같이 구체화된다.</p>
+<div class="code-wrap"><div class="code-toolbar"><span>text</span><button class="copy-code" type="button">복사</button></div><pre class="text"><code>어떤 원재료 Lot가
+어떤 작업오더와 설비를 거쳐
+어떤 색상 반제품 Lot가 되었고,
+어떤 추림 작업에서
+어떤 완제품 Lot에 포함되어
+어느 고객에게 출하되었는가?
+
+품질 문제가 발생했을 때
+누가 출하를 보류할 수 있고,
+어떤 근거로 결정했으며,
+어떤 재작업과 검증을 거쳐
+다시 정상 상태로 돌아왔는가?</code></pre></div>
+<p>이 질문에 데이터 구조 자체가 답하고, 사용자가 그 자리에서 책임 있는 행동을 할 수 있게 만드는 것이 <strong>판단 중심 온톨로지</strong>의 핵심이다.</p>
+<hr/>
+<p><strong>문서 끝</strong></p>
+
+      </section>
+    </article>
+  </main>
+</div>
+
+<button class="back-top" type="button" aria-label="맨 위로">↑</button>
+
+<script>
+(() => {
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.overlay');
+  const toggle = document.querySelector('.mobile-toggle');
+  const back = document.querySelector('.back-top');
+  const search = document.getElementById('toc-search');
+  const links = [...document.querySelectorAll('.toc-link')];
+
+  function closeMenu() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+  });
+  overlay.addEventListener('click', closeMenu);
+
+  links.forEach(link => link.addEventListener('click', () => {
+    if (window.innerWidth <= 980) closeMenu();
+  }));
+
+  search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    links.forEach(link => {
+      link.style.display =
+        !q || link.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  });
+
+  const sections = links
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+  function setActive() {
+    let current = sections[0];
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= 125) current = section;
+      else break;
+    }
+    links.forEach(link => link.classList.remove('active'));
+    if (!current) return;
+    const active = links.find(
+      link => link.getAttribute('href') === '#' + current.id
+    );
+    if (active) {
+      active.classList.add('active');
+      const toc = document.getElementById('toc');
+      const top = active.offsetTop;
+      if (top < toc.scrollTop || top > toc.scrollTop + toc.clientHeight - 80) {
+        toc.scrollTo({top:Math.max(0,top-80),behavior:'smooth'});
+      }
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    setActive();
+    back.classList.toggle('show', window.scrollY > 650);
+  }, {passive:true});
+
+  back.addEventListener('click', () =>
+    window.scrollTo({top:0,behavior:'smooth'})
+  );
+
+  document.querySelectorAll('.copy-code').forEach(button => {
+    button.addEventListener('click', async () => {
+      const code = button.closest('.code-wrap').querySelector('code').innerText;
+      try {
+        await navigator.clipboard.writeText(code);
+        button.textContent = '복사됨';
+        setTimeout(() => button.textContent = '복사', 1200);
+      } catch {
+        button.textContent = '복사 실패';
+      }
+    });
+  });
+
+  setActive();
+})();
+</script>
+
+<script type="module">
+try {
+  const mermaid = await import(
+    'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs'
+  );
+  mermaid.default.initialize({
+    startOnLoad:true,
+    theme:'base',
+    securityLevel:'loose',
+    themeVariables:{
+      primaryColor:'#eef4f8',
+      primaryTextColor:'#102a43',
+      primaryBorderColor:'#246b9e',
+      lineColor:'#6b7d8d',
+      secondaryColor:'#f7f0e6',
+      tertiaryColor:'#ffffff',
+      fontFamily:'Pretendard, Noto Sans KR, Malgun Gothic, sans-serif'
+    }
+  });
+} catch (error) {
+  console.warn('Mermaid 도식은 인터넷 연결 시 표시됩니다.', error);
+}
+</script>
+</body>
+</html>
