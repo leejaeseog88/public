@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>공유 문서</title>
+<style>
+/* 한 줄 목록: 노란 표지 아래에 문서 행을 쌓는 단일 열 구성 (밝은 테마 고정) */
+:root {
+  color-scheme: light;
+  --ink: #1F2430;
+  --muted: #5F6672;
+  --line: #E4DED0;
+  --paper: #F7F5EF;
+  --card: #FFFFFF;
+  --yellow: #E8B931;
+  --navy: #23395B;
+  --serif: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", "Times New Roman", serif;
+  --sans: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; word-break: keep-all; }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 20px; }
+.cover { background: var(--yellow); border-radius: 20px; padding: 32px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
+.cover-top { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+.cover h1 { font-family: var(--serif); font-size: 40px; line-height: 1.2; margin: 0; letter-spacing: -0.5px; }
+.cover p { margin: 0; font-size: 15px; }
+.tools { display: flex; gap: 8px; }
+.tools input { flex: 1; min-width: 0; height: 42px; border: 2px solid var(--ink); border-radius: 10px; padding: 0 12px; font: inherit; font-size: 15px; background: #FFFDF6; color: var(--ink); }
+.tools button { height: 42px; border: 2px solid var(--ink); border-radius: 10px; padding: 0 14px; font: inherit; font-size: 14px; font-weight: 700; background: var(--ink); color: var(--yellow); cursor: pointer; white-space: nowrap; }
+.tools input:focus-visible, .tools button:focus-visible, .doc:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+.group { display: flex; flex-direction: column; gap: 8px; }
+.group h2 { font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; margin: 8px 4px 0; }
+.doc { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; color: var(--ink); text-decoration: none; }
+.doc:hover { border-color: var(--navy); }
+.doc-title { font-size: 17px; font-weight: 700; line-height: 1.45; min-width: 0; }
+.doc-arrow { grid-row: span 2; font-size: 20px; color: var(--navy); }
+.doc-meta { font-size: 13px; color: var(--muted); min-width: 0; overflow-wrap: anywhere; display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.badge { background: #FBF1CF; color: #6A4E00; border-radius: 6px; padding: 0 6px; font-weight: 700; }
+.status { font-size: 14px; color: var(--muted); margin: 0 4px; }
+.status[hidden] { display: none; }
+.empty { background: var(--card); border: 1px dashed var(--line); border-radius: 14px; padding: 20px; color: var(--muted); font-size: 15px; }
+.foot { font-size: 13px; color: var(--muted); margin: 8px 4px 0; display: flex; flex-direction: column; gap: 2px; }
+.foot a { color: var(--navy); }
+@media (max-width: 480px) { .cover h1 { font-size: 34px; } .cover { padding: 28px 18px 20px; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="cover">
+    <div class="cover-top"><span>leejaeseog88 · public</span><span id="count">불러오는 중</span></div>
+    <h1>공유 문서</h1>
+    <p>이 저장소에 올린 HTML 문서가 여기에 자동으로 모입니다.</p>
+    <div class="tools">
+      <input id="q" type="search" placeholder="제목이나 파일 이름으로 찾기" aria-label="문서 찾기" autocomplete="off">
+      <button id="refresh" type="button">새로고침</button>
+    </div>
+  </header>
+  <p id="status" class="status" role="status" hidden></p>
+  <section id="list" aria-label="문서 목록"></section>
+  <div class="foot">
+    <span>파일을 올리면 1~2분 뒤 목록에 나타납니다. 목록은 10분마다 새로 확인합니다.</span>
+    <span>저장소: <a href="https://github.com/leejaeseog88/public">github.com/leejaeseog88/public</a></span>
+  </div>
+</main>
+<script>
+(function () {
+  'use strict';
+  var OWNER = 'leejaeseog88', REPO = 'public', BRANCH = 'main';
+  var CACHE_KEY = 'public-index:v1';
+  var TTL = 10 * 60 * 1000;
+  var BIG = 3 * 1024 * 1024;
+  var listEl = document.getElementById('list');
+  var statusEl = document.getElementById('status');
+  var countEl = document.getElementById('count');
+  var qEl = document.getElementById('q');
+  var refreshBtn = document.getElementById('refresh');
+  var state = { files: [], titles: {}, at: 0 };
+
+  function storage() { try { return window.localStorage; } catch (e) { return null; } }
+  function readCache() {
+    var s = storage(); if (!s) return null;
+    try { return JSON.parse(s.getItem(CACHE_KEY) || 'null'); } catch (e) { return null; }
+  }
+  function writeCache() {
+    var s = storage(); if (!s) return;
+    try { s.setItem(CACHE_KEY, JSON.stringify(state)); } catch (e) { /* 저장 불가 */ }
+  }
+
+  function fmtSize(b) { return b >= 1048576 ? (b / 1048576).toFixed(1) + 'MB' : Math.max(1, Math.round(b / 1024)) + 'KB'; }
+  function fallbackName(path) { return path.split('/').pop().replace(/\.html?$/i, '').replace(/[_-]+/g, ' ').trim(); }
+  function href(path) { return path.split('/').map(encodeURIComponent).join('/'); }
+  function setStatus(msg) { statusEl.textContent = msg || ''; statusEl.hidden = !msg; }
+
+  function isDoc(t) {
+    if (t.type !== 'blob' || !/\.html?$/i.test(t.path)) return false;
+    if (t.path.toLowerCase() === 'index.html' || t.path.toLowerCase() === '404.html') return false;
+    return !/(^|\/)[._]/.test(t.path);
+  }
+
+  function fetchTree() {
+    var url = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/git/trees/' + BRANCH + '?recursive=1';
+    return fetch(url, { headers: { Accept: 'application/vnd.github+json' } }).then(function (r) {
+      if (r.status === 403 || r.status === 429) {
+        var err = new Error('rate'); err.rate = true; err.reset = Number(r.headers.get('x-ratelimit-reset')) || 0; throw err;
+      }
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      return (j.tree || []).filter(isDoc).map(function (t) { return { path: t.path, sha: t.sha, size: t.size || 0 }; });
+    });
+  }
+
+  function extractTitle(s) {
+    var m = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(s);
+    if (!m) return null;
+    var d = document.createElement('textarea');
+    d.innerHTML = m[1];
+    return d.value.replace(/\s+/g, ' ').trim() || null;
+  }
+
+  /* 큰 파일도 앞부분만 읽고 끊어서 <title>을 가져온다 */
+  function fetchTitle(path) {
+    return fetch(href(path), { headers: { Range: 'bytes=0-32767' } }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      if (!r.body || !r.body.getReader || typeof TextDecoder === 'undefined') return r.text().then(extractTitle);
+      var reader = r.body.getReader(), dec = new TextDecoder('utf-8'), buf = '';
+      function pump() {
+        return reader.read().then(function (res) {
+          if (res.value) buf += dec.decode(res.value, { stream: true });
+          var t = extractTitle(buf);
+          if (t !== null || res.done || buf.length > 65536) {
+            try { reader.cancel(); } catch (e) { /* 무시 */ }
+            return t;
+          }
+          return pump();
+        });
+      }
+      return pump();
+    });
+  }
+
+  function titleOf(f) { var t = state.titles[f.sha]; return t ? t : fallbackName(f.path); }
+
+  function render() {
+    var q = qEl.value.trim().toLowerCase();
+    var files = state.files.slice().sort(function (a, b) {
+      var da = a.path.indexOf('/') < 0 ? '' : a.path.replace(/\/[^/]*$/, '');
+      var db = b.path.indexOf('/') < 0 ? '' : b.path.replace(/\/[^/]*$/, '');
+      if (da !== db) return da.localeCompare(db, 'ko');
+      return titleOf(a).localeCompare(titleOf(b), 'ko');
+    }).filter(function (f) { return !q || (titleOf(f) + ' ' + f.path).toLowerCase().indexOf(q) !== -1; });
+
+    countEl.textContent = '문서 ' + state.files.length + '개';
+    listEl.textContent = '';
+    if (!files.length) {
+      var e = document.createElement('p');
+      e.className = 'empty';
+      e.textContent = state.files.length ? '찾는 문서가 없어요. 다른 낱말로 찾아보세요.' : '아직 올라온 HTML 문서가 없어요.';
+      listEl.appendChild(e);
+      return;
+    }
+    var groups = {}, order = [];
+    files.forEach(function (f) {
+      var dir = f.path.indexOf('/') < 0 ? '' : f.path.replace(/\/[^/]*$/, '');
+      if (!groups[dir]) { groups[dir] = []; order.push(dir); }
+      groups[dir].push(f);
+    });
+    var showHeads = order.length > 1 || order[0] !== '';
+    order.forEach(function (dir) {
+      var g = document.createElement('div');
+      g.className = 'group';
+      if (showHeads) {
+        var h = document.createElement('h2');
+        h.textContent = dir ? dir + '/' : '기본 폴더';
+        g.appendChild(h);
+      }
+      groups[dir].forEach(function (f) {
+        var a = document.createElement('a');
+        a.className = 'doc';
+        a.href = href(f.path);
+        var t = document.createElement('span'); t.className = 'doc-title'; t.textContent = titleOf(f);
+        var arrow = document.createElement('span'); arrow.className = 'doc-arrow'; arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '→';
+        var m = document.createElement('span'); m.className = 'doc-meta';
+        var p = document.createElement('span'); p.textContent = f.path;
+        var s = document.createElement('span'); s.textContent = fmtSize(f.size);
+        m.appendChild(p); m.appendChild(s);
+        if (f.size >= BIG) { var b = document.createElement('span'); b.className = 'badge'; b.textContent = '큰 파일'; m.appendChild(b); }
+        a.appendChild(t); a.appendChild(arrow); a.appendChild(m);
+        g.appendChild(a);
+      });
+      listEl.appendChild(g);
+    });
+  }
+
+  function loadTitles() {
+    var todo = state.files.filter(function (f) { return !(f.sha in state.titles); });
+    var i = 0, running = 0, LIMIT = 3;
+    return new Promise(function (done) {
+      function next() {
+        if (i >= todo.length && running === 0) { done(); return; }
+        while (running < LIMIT && i < todo.length) {
+          (function (f) {
+            running++;
+            fetchTitle(f.path).then(function (t) { state.titles[f.sha] = t || ''; })
+              .catch(function () { /* 다음 방문 때 다시 시도 */ })
+              .then(function () { running--; render(); writeCache(); next(); });
+          })(todo[i++]);
+        }
+      }
+      next();
+    });
+  }
+
+  function refresh(force) {
+    var cached = state.files.length > 0;
+    if (!force && cached && Date.now() - state.at < TTL) { setStatus(''); return loadTitles(); }
+    setStatus(cached ? '' : '문서 목록을 불러오는 중이에요.');
+    refreshBtn.disabled = true;
+    return fetchTree().then(function (files) {
+      var keep = {};
+      files.forEach(function (f) { if (f.sha in state.titles) keep[f.sha] = state.titles[f.sha]; });
+      state.files = files; state.titles = keep; state.at = Date.now();
+      writeCache(); render(); setStatus('');
+      return loadTitles();
+    }).catch(function (err) {
+      var msg;
+      if (err && err.rate) {
+        var when = err.reset ? new Date(err.reset * 1000) : null;
+        msg = 'GitHub 조회 한도(1시간 60회)에 걸렸어요.' + (when ? ' ' + String(when.getHours()).padStart(2, '0') + ':' + String(when.getMinutes()).padStart(2, '0') + ' 이후 다시 열어 주세요.' : ' 잠시 뒤 다시 열어 주세요.');
+      } else {
+        msg = '문서 목록을 불러오지 못했어요. 인터넷 연결을 확인하고 새로고침을 눌러 주세요.';
+      }
+      if (cached) msg += ' 지금은 마지막으로 저장된 목록을 보여 드려요.';
+      setStatus(msg);
+      if (!cached) render();
+    }).then(function () { refreshBtn.disabled = false; });
+  }
+
+  qEl.addEventListener('input', render);
+  refreshBtn.addEventListener('click', function () { refresh(true); });
+
+  var c = readCache();
+  if (c && Array.isArray(c.files)) { state.files = c.files; state.titles = c.titles || {}; state.at = c.at || 0; render(); }
+  window.__indexReady = refresh(false);
+})();
+</script>
+</body>
+</html>
